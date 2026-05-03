@@ -4,9 +4,11 @@
   "description": "Wapify WhatsApp Business SaaS",
   "main": "api/index.js",
   "scripts": {
-    "start": "node api/index.js",
+    "start": "node database/migrate.js && node database/seed.js && node api/index.js",
     "dev": "nodemon api/index.js",
-    "vercel-build": "echo 'No build step needed for this project'"
+    "migrate": "node database/migrate.js",
+    "seed": "node database/seed.js",
+    "vercel-build": "echo 'No build step needed'"
   },
   "dependencies": {
     "express": "^4.18.2",
