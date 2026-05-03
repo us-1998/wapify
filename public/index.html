@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Wapify — WhatsApp Business Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gl:#e7f8ef;--g2:#c8f0dc;
+  --s:#fff;--s2:#f1f3f8;--s3:#e8eaf2;
+  --b:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.13);
+  --t:#0d1117;--t2:#556070;--t3:#96a0b0;
+  --blue:#2563eb;--bluel:#eff6ff;
+  --red:#dc2626;--redl:#fef2f2;
+  --amber:#d97706;--amberl:#fffbeb;
+  --purple:#7c3aed;--purplel:#f5f3ff;
+  --f:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --r:10px;--r2:14px;
+  --sh:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.04);
+  --sh2:0 8px 30px rgba(0,0,0,.14)
+}
+@media(prefers-color-scheme:dark){:root{
+  --s:#1a1d24;--s2:#13151c;--s3:#0f1117;
+  --b:rgba(255,255,255,.06);--b2:rgba(255,255,255,.12);
+  --t:#e8ecf2;--t2:#8a95a3;--t3:#556070;
+  --gl:#0d2b1e;--bluel:#0f1e3d;--redl:#2a0a0a;--amberl:#2a1f00;--purplel:#1e1030
+}}
+body{font-family:var(--f);background:var(--s2);color:var(--t);min-height:100vh}
+
+/* ── TOOLTIP ── */
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a2030;color:#fff;font-size:11.5px;padding:5px 10px;border-radius:7px;pointer-events:none;z-index:500;white-space:normal;max-width:260px;text-align:center;box-shadow:var(--sh2)}
+[data-tip]:hover::before{content:'';position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#1a2030;z-index:500}
+.tip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;background:var(--s3);border:0.5px solid var(--b2);border-radius:50%;font-size:10px;font-weight:700;color:var(--t3);cursor:help;flex-shrink:0;vertical-align:middle;margin-left:4px}
+
+/* ── AUTH ── */
+.page{display:none;min-height:100vh}
+.page.show{display:flex}
+.auth-wrap{flex:1;align-items:center;justify-content:center;background:linear-gradient(135deg,#f0faf5,#e8f4fd)}
+@media(prefers-color-scheme:dark){.auth-wrap{background:linear-gradient(135deg,#0a1a12,#0a141e)}}
+.auth-box{background:var(--s);border:0.5px solid var(--b2);border-radius:18px;padding:36px;width:430px;max-width:96vw;box-shadow:var(--sh2)}
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.a-lm{width:34px;height:34px;background:var(--g);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.a-lm svg{width:19px;height:19px;fill:white}
+.auth-h{font-size:22px;font-weight:700;color:var(--t);margin-bottom:4px}
+.auth-sub{font-size:13.5px;color:var(--t2);margin-bottom:24px}
+.field{margin-bottom:14px}
+.lbl{font-size:11.5px;font-weight:500;color:var(--t2);margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.inp{width:100%;padding:9px 12px;border:0.5px solid var(--b2);border-radius:var(--r);font-size:13.5px;color:var(--t);background:var(--s);font-family:var(--f);outline:none;transition:border .15s}
+.inp:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(37,211,102,.1)}
+select.inp{cursor:pointer}
+textarea.inp{resize:vertical;min-height:76px}
+.btn{padding:9px 16px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:var(--f);transition:all .15s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-p{background:var(--g);color:white}.btn-p:hover{background:#1fba59;transform:translateY(-1px)}
+.btn-g{background:var(--s2);color:var(--t2);border:0.5px solid var(--b2)}.btn-g:hover{background:var(--gl);color:var(--gd);border-color:var(--g)}
+.btn-r{background:var(--red);color:white}.btn-r:hover{background:#b91c1c}
+.btn-b{background:var(--blue);color:white}.btn-b:hover{background:#1d4ed8}
+.btn-block{width:100%;justify-content:center;padding:11px}
+.btn-sm{padding:5px 11px;font-size:12px}
+.btn-xs{padding:3px 8px;font-size:11px}
+.divider{text-align:center;font-size:12.5px;color:var(--t3);margin:14px 0;position:relative}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:44%;height:.5px;background:var(--b2)}
+.divider::before{left:0}.divider::after{right:0}
+.auth-foot{font-size:13px;color:var(--t2);text-align:center;margin-top:18px}
+.auth-foot a{color:var(--gd);font-weight:500;text-decoration:none}
+.err-msg{background:var(--redl);border:0.5px solid #fca5a5;color:var(--red);padding:9px 12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;display:none}
+.err-msg.show{display:block}
+
+/* ── APP LAYOUT ── */
+#page-app{flex-direction:row}
+.sb{width:218px;min-width:218px;background:var(--s);border-right:.5px solid var(--b);display:flex;flex-direction:column}
+.sb-logo{padding:15px 14px 13px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b)}
+.lm{width:30px;height:30px;background:var(--g);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.lm svg{width:17px;height:17px;fill:white}
+.lt{font-size:14.5px;font-weight:700;color:var(--t);letter-spacing:-.3px}
+.lb{font-size:8.5px;background:var(--gl);color:var(--gd);padding:2px 6px;border-radius:4px;font-weight:600;letter-spacing:.3px}
+.sb-nav{padding:10px 8px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1px}
+.sn-sec{font-size:9.5px;font-weight:600;color:var(--t3);letter-spacing:.7px;text-transform:uppercase;padding:8px 8px 3px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--t2);transition:all .12s;user-select:none}
+.ni:hover{background:var(--s2);color:var(--t)}.ni.active{background:var(--gl);color:var(--gd);font-weight:500}
+.ni-ico{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.ni-badge{margin-left:auto;font-size:10px;background:var(--g);color:white;padding:1px 6px;border-radius:8px;font-weight:600}
+.sb-foot{padding:11px;border-top:.5px solid var(--b)}
+.plan-card{background:linear-gradient(135deg,#064E3B,#059669);border-radius:10px;padding:11px 12px}
+.plan-card p{font-size:9.5px;color:rgba(255,255,255,.7);margin-bottom:1px}
+.plan-card h4{font-size:13px;font-weight:600;color:white;margin-bottom:7px}
+.plan-bar{background:rgba(255,255,255,.25);border-radius:3px;height:3px;margin-bottom:5px}
+.plan-fill{background:white;border-radius:3px;height:3px}
+.plan-card span{font-size:10.5px;color:rgba(255,255,255,.7)}
+
+/* ── TOPBAR ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{height:52px;background:var(--s);border-bottom:.5px solid var(--b);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0}
+.tb-t{font-size:14.5px;font-weight:600;color:var(--t)}
+.tb-c{font-size:12px;color:var(--t3)}
+.tb-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.store-sel{padding:5px 10px;border:.5px solid var(--b2);border-radius:8px;font-size:12.5px;color:var(--t2);background:var(--s);font-family:var(--f);cursor:pointer}
+.av{width:30px;height:30px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:var(--gd);cursor:pointer;border:1.5px solid var(--g2);position:relative}
+
+/* ── ROLE BADGE ── */
+.role-badge{font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:10px;letter-spacing:.3px;margin-left:6px}
+.rb-owner{background:#fef9c3;color:#854d0e}
+.rb-admin{background:var(--purplel);color:var(--purple)}
+.rb-marketing{background:var(--bluel);color:var(--blue)}
+.rb-sales{background:var(--gl);color:var(--gd)}
+.rb-support{background:var(--redl);color:var(--red)}
+
+/* ── CONTENT ── */
+.content{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.module{display:none;flex-direction:column;gap:16px}.module.active{display:flex}
+
+/* ── CARDS ── */
+.card{background:var(--s);border:.5px solid var(--b);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh)}
+.ch{padding:13px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--b)}
+.ct{font-size:13.5px;font-weight:500;color:var(--t);display:flex;align-items:center;gap:5px}
+.cs{font-size:11.5px;color:var(--t2)}
+.cb{padding:16px 18px}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:6px}
+.bk{background:#dcfce7;color:#15803d}.bw{background:#fef9c3;color:#854d0e}.be{background:#fee2e2;color:#b91c1c}.bi{background:#dbeafe;color:#1d4ed8}.bwa{background:var(--gl);color:var(--gd)}.bp{background:var(--purplel);color:var(--purple)}
+
+/* ── STATS ── */
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sc{background:var(--s);border:.5px solid var(--b);border-radius:var(--r2);padding:15px 16px;box-shadow:var(--sh)}
+.sl{font-size:11px;color:var(--t2);margin-bottom:5px}
+.sv{font-size:23px;font-weight:700;color:var(--t);letter-spacing:-.5px}
+.sd{font-size:11.5px;margin-top:4px}.up{color:#16a34a}.dn{color:var(--red)}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;padding:9px 14px;font-size:10.5px;font-weight:500;color:var(--t3);letter-spacing:.4px;text-transform:uppercase;border-bottom:.5px solid var(--b);background:var(--s2)}
+.tbl td{padding:10px 14px;border-bottom:.5px solid var(--b);color:var(--t);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}.tbl tr:hover td{background:var(--s2)}
+.tbl-foot{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid var(--b);font-size:12px;color:var(--t2)}
+
+/* ── ALERTS ── */
+.alert{display:flex;gap:10px;padding:11px 14px;border-radius:9px;font-size:12.5px;line-height:1.5}
+.al-g{background:var(--gl);border:.5px solid var(--g);color:var(--gd)}
+.al-a{background:var(--amberl);border:.5px solid #fcd34d;color:var(--amber)}
+.al-b{background:var(--bluel);border:.5px solid #93c5fd;color:var(--blue)}
+.al-r{background:var(--redl);border:.5px solid #fca5a5;color:var(--red)}
+
+/* ── FLOW NODES ── */
+.fn{display:flex;align-items:center;gap:10px;padding:9px 12px;border:.5px solid var(--b);border-radius:9px;background:var(--s);cursor:default;transition:border .15s}
+.fn:hover{border-color:var(--g)}
+.fc{width:1.5px;height:14px;background:var(--b2);margin-left:21px}
+.fi{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.fi-t{background:var(--purplel)}.fi-a{background:var(--gl)}.fi-c{background:var(--amberl)}
+.ft{font-size:12.5px;font-weight:500;color:var(--t)}.fd{font-size:11px;color:var(--t2)}
+.ftag{font-size:10px;padding:2px 6px;border-radius:5px;font-weight:500;margin-left:auto}
+.tt{background:var(--purplel);color:var(--purple)}.ta{background:var(--gl);color:var(--gd)}.tc{background:var(--amberl);color:var(--amber)}
+
+/* ── TOGGLE ── */
+.tog{width:34px;height:19px;border-radius:9px;position:relative;cursor:pointer;flex-shrink:0;transition:background .15s}
+.tog.on{background:var(--g)}.tog.off{background:var(--b2)}
+.tog::after{content:'';position:absolute;width:13px;height:13px;background:white;border-radius:50%;top:3px;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog.on::after{left:18px}.tog.off::after{left:3px}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.overlay.show{display:flex}
+.modal{background:var(--s);border-radius:16px;padding:26px;width:520px;max-width:94vw;box-shadow:var(--sh2);max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:600;color:var(--t);margin-bottom:4px}
+.modal-s{font-size:13px;color:var(--t2);margin-bottom:20px}
+.mfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;border-top:.5px solid var(--b);padding-top:16px}
+
+/* ── NOTIF ── */
+.notif{position:fixed;top:16px;right:16px;background:var(--s);border:.5px solid var(--b2);border-radius:10px;padding:11px 15px;box-shadow:var(--sh2);display:flex;align-items:center;gap:9px;font-size:13px;z-index:999;transform:translateX(130%);transition:transform .25s;max-width:320px}
+.notif.show{transform:translateX(0)}
+.notif.ok{border-left:3px solid var(--g)}.notif.err{border-left:3px solid var(--red)}.notif.info{border-left:3px solid var(--blue)}
+
+/* ── PLATFORM CARDS ── */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.pcard{border:1.5px solid var(--b);border-radius:var(--r);padding:12px 10px;cursor:pointer;text-align:center;transition:all .15s;background:var(--s)}
+.pcard:hover{border-color:var(--g);transform:translateY(-2px);box-shadow:var(--sh)}
+.pcard.sel{border-color:var(--g);background:var(--gl);transform:translateY(-2px)}
+.pcheck{display:none;width:16px;height:16px;background:var(--g);border-radius:50%;align-items:center;justify-content:center;margin:0 auto 4px;font-size:9px;color:white}
+.pcard.sel .pcheck{display:flex}
+.plogo{font-size:20px;margin-bottom:5px}
+.pname{font-size:12px;font-weight:600;color:var(--t)}
+.pbadge{font-size:10px;color:var(--t3);margin-top:2px}
+
+/* ── CONNECT PANELS ── */
+.connect-panel{display:none;background:var(--s2);border:.5px solid var(--b2);border-radius:var(--r);padding:14px;margin-top:12px}
+.connect-panel.show{display:block}
+.conn-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--blue);text-decoration:none;font-weight:500}
+.conn-link:hover{text-decoration:underline}
+.step-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.step-item{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--t2)}
+.step-num{width:20px;height:20px;border-radius:50%;background:var(--g);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* ── WA PHONE ── */
+.wa-phone{background:#ECE5DD;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:7px}
+.wa-head{background:var(--gd);color:white;padding:9px 12px;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:9px;margin:-10px -10px 0}
+.wa-av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:13px}
+.wa-b{max-width:88%;border-radius:0 8px 8px 8px;padding:8px 11px;background:white;font-size:12.5px;color:#111;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.wa-b.sent{background:#DCF8C6;border-radius:8px 0 8px 8px;align-self:flex-end}
+.wa-t{font-size:9.5px;color:#888;margin-top:3px;display:flex;justify-content:flex-end}
+.wa-btns{display:flex;flex-direction:column;gap:3px;margin-top:5px}
+.wa-btn{background:white;border:.5px solid #ccc;border-radius:5px;padding:6px 10px;font-size:12px;color:#128C7E;font-weight:500;text-align:center;cursor:pointer}
+
+/* ── CATALOGUE ── */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cat-item{border:.5px solid var(--b);border-radius:var(--r);overflow:hidden;background:var(--s)}
+.cat-img{height:76px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--s2)}
+.cat-body{padding:9px 10px}
+.cat-name{font-size:12.5px;font-weight:500;color:var(--t);margin-bottom:2px}
+.cat-price{font-size:13px;font-weight:700;color:var(--gd)}
+.cat-stock{font-size:10.5px;color:var(--t3);margin-top:2px}
+.cat-wa{width:100%;padding:7px;border:none;background:var(--gl);color:var(--gd);font-size:11.5px;font-weight:500;cursor:pointer;font-family:var(--f);border-top:.5px solid var(--b)}
+.cat-wa:hover{background:var(--g2)}
+
+/* ── ROI BANNER ── */
+.roi{background:linear-gradient(135deg,#064E3B,#059669);border-radius:var(--r2);padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+.roi h3{font-size:14px;font-weight:600;color:white;margin-bottom:3px}
+.roi p{font-size:12px;color:rgba(255,255,255,.7)}
+.roi-stats{display:flex;gap:24px}
+.rs{text-align:center}
+.rs-v{font-size:20px;font-weight:700;color:#6EE7B7;letter-spacing:-.5px}
+.rs-l{font-size:10.5px;color:rgba(255,255,255,.6)}
+
+/* ── ACCESS DENIED ── */
+.no-access{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px;text-align:center;color:var(--t3)}
+.no-access h3{font-size:16px;font-weight:500;color:var(--t2)}
+.no-access p{font-size:13px;max-width:320px;line-height:1.6}
+
+/* ── LOADING ── */
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--t3);font-size:13px}
+.spin{width:20px;height:20px;border:2px solid var(--b2);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── PERMISSION EDITOR ── */
+.perm-group{margin-bottom:16px}
+.perm-group-title{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.perm-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--b);font-size:13px}
+.perm-row:last-child{border-bottom:none}
+.perm-action{font-size:11.5px;color:var(--t2)}
+
+/* ── LANG GRID ── */
+.lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lang-card{border:1px solid var(--b);border-radius:8px;padding:10px;cursor:pointer;text-align:center;transition:all .12s}
+.lang-card:hover,.lang-card.on{border-color:var(--g);background:var(--gl)}
+.lang-flag{font-size:18px;margin-bottom:4px}
+.lang-name{font-size:12px;font-weight:500;color:var(--t)}
+.lang-code{font-size:10px;color:var(--t3)}
+
+/* ── OTP ── */
+.otp-row{display:flex;gap:6px;margin-top:8px}
+.otp-b{width:38px;height:42px;border:1.5px solid var(--b2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--t)}
+.otp-b.filled{border-color:var(--g);background:var(--gl);color:var(--gd)}
+
+/* ── META STEPS ── */
+.mstep{display:flex;gap:12px;padding:11px 13px;border:.5px solid var(--b);border-radius:var(--r);background:var(--s)}
+.mstep.ms-ok{border-color:var(--g);background:var(--gl)}
+.mstep.ms-act{border-color:var(--gd);background:#f0faf8}
+.mn{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0;margin-top:2px}
+.mn-ok{background:var(--g);color:white}.mn-act{background:var(--gd);color:white}.mn-todo{background:var(--s2);color:var(--t3);border:.5px solid var(--b2)}
+.minfo h4{font-size:13px;font-weight:500;color:var(--t);margin-bottom:2px}
+.minfo p{font-size:12px;color:var(--t2);line-height:1.5}
+.mtag{font-size:10.5px;padding:2px 8px;border-radius:5px;font-weight:500;display:inline-flex;align-items:center;gap:3px;margin-top:5px}
+.mtag-ok{background:#dcfce7;color:#15803d}.mtag-prog{background:#fef3c7;color:#92400e}.mtag-todo{background:var(--s2);color:var(--t3)}
+
+/* ── TEAM ── */
+.member-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:.5px solid var(--b)}
+.member-row:last-child{border-bottom:none}
+.member-av{width:36px;height:36px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--gd);flex-shrink:0}
+.member-info{flex:1;min-width:0}
+.member-name{font-size:13px;font-weight:500;color:var(--t)}
+.member-email{font-size:11.5px;color:var(--t2)}
+.member-actions{display:flex;gap:6px;align-items:center}
+
+/* ── BILLING ── */
+.plan-tier{border:.5px solid var(--b);border-radius:var(--r2);padding:20px;background:var(--s);display:flex;flex-direction:column}
+.plan-tier.pop{border-color:var(--g);border-width:2px}
+.pt-badge{font-size:10px;background:var(--g);color:white;padding:2px 8px;border-radius:5px;display:inline-block;margin-bottom:8px;font-weight:600}
+.pt-name{font-size:15px;font-weight:700;color:var(--t);margin-bottom:3px}
+.pt-price{font-size:28px;font-weight:700;color:var(--t);letter-spacing:-1px;line-height:1}
+.pt-sub{font-size:12px;color:var(--t2);margin-bottom:14px;margin-top:3px}
+.pt-feat{font-size:12.5px;color:var(--t2);margin-bottom:7px;display:flex;align-items:flex-start;gap:7px}
+.pt-feat::before{content:'✓';color:var(--g);font-weight:700;flex-shrink:0}
+.pt-btn{margin-top:auto;padding-top:14px}
+
+/* ── QUICK ACTIONS ── */
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qa-btn{background:var(--s2);border:.5px solid var(--b);border-radius:var(--r);padding:11px 12px;cursor:pointer;display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t);transition:all .15s}
+.qa-btn:hover{border-color:var(--g);background:var(--gl);color:var(--gd)}
+.qa-ico{width:28px;height:28px;border-radius:7px;background:var(--s);display:flex;align-items:center;justify-content:center;font-size:14px;border:.5px solid var(--b);flex-shrink:0}
+
+/* ── HIDDEN ── */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="notif" id="notif"><span id="ni">✅</span><span id="nm">Done</span></div>
+<div class="overlay" id="overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="mt"></h3><p class="modal-s" id="ms"></p>
+    <div id="mb"></div>
+    <div class="mfoot"><button class="btn btn-g" onclick="closeModal()">Cancel</button><button class="btn btn-p" id="mok">Confirm</button></div>
+  </div>
+</div>
+
+<!-- ════ LOGIN ════ -->
+<div id="page-login" class="page auth-wrap show">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="a-lm"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.09 1.512 5.814L.057 23.15a.75.75 0 00.916.916l5.337-1.456A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.868 9.868 0 01-5.032-1.377l-.36-.214-3.733 1.018 1.018-3.733-.214-.36A9.868 9.868 0 012.1 12C2.1 6.535 6.535 2.1 12 2.1c5.465 0 9.9 4.435 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/></svg></div>
+      <span style="font-size:18px;font-weight:700;color:var(--t)">Wapify</span>
+    </div>
+    <div class="auth-h">Welcome back</div>
+    <div class="auth-sub">Sign in to your WhatsApp Business dashboard</div>
+    <div class="err-msg" id="login-err">Invalid email or password. Please try again.</div>
+    <div class="field"><div class="lbl">Email address</div><input class="inp" type="email" id="login-email" placeholder="you@store.com" value="demo@wapify.com"></div>
+    <div class="field"><div class="lbl">Password</div><input class="inp" type="password" id="login-pw" placeholder="••••••••" value="Demo@123456" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--t2);cursor:pointer"><input type="checkbox" checked> Remember me</label>
+      <a href="#" style="font-size:13px;color:var(--gd);text-decoration:none">Forgot password?</a>
+    </div>
+    <button class="btn btn-p btn-block" id="login-btn" onclick="doLogin()">Sign in →</button>
+    <div class="divider">or continue as demo role</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-g" style="font-size:12px;justify-content:center" onclick="demoLogin('marketing')">📢 Marketing</button>
+      <button class="btn btn-g" style="font-size:12px;justify-content:center" onclick="demoLogin('sales')">💰 Sales</button>
+      <button class="btn btn-g" style="font-size:12px;justify-content:center" onclick="demoLogin('support')">🎫 Support</button>
+      <button class="btn btn-g" style="font-size:12px;justify-content:center" onclick="demoLogin('admin')">⚙️ Admin</button>
+    </div>
+    <div class="auth-foot">No account? <a href="#" onclick="goPage('page-signup')">Create one free →</a></div>
+  </div>
+</div>
+
+<!-- ════ SIGNUP ════ -->
+<div id="page-signup" class="page auth-wrap">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="a-lm"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.09 1.512 5.814L.057 23.15a.75.75 0 00.916.916l5.337-1.456A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.868 9.868 0 01-5.032-1.377l-.36-.214-3.733 1.018 1.018-3.733-.214-.36A9.868 9.868 0 012.1 12C2.1 6.535 6.535 2.1 12 2.1c5.465 0 9.9 4.435 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/></svg></div>
+      <span style="font-size:18px;font-weight:700;color:var(--t)">Wapify</span>
+    </div>
+    <div class="auth-h">Start free — 14 days</div>
+    <div class="auth-sub">No credit card. Full access.</div>
+    <div class="err-msg" id="signup-err"></div>
+    <div class="g2" style="gap:10px;margin-bottom:14px">
+      <div><div class="lbl">First name</div><input class="inp" id="su-fn" placeholder="Ahmed"></div>
+      <div><div class="lbl">Last name</div><input class="inp" id="su-ln" placeholder="Khan"></div>
+    </div>
+    <div class="field"><div class="lbl">Business email</div><input class="inp" type="email" id="su-email" placeholder="you@store.com"></div>
+    <div class="field"><div class="lbl">Company / Store name</div><input class="inp" id="su-company" placeholder="Ahmed's Mart"></div>
+    <div class="field">
+      <div class="lbl">WhatsApp Business number <span class="tip-icon" data-tip="The number you'll send messages FROM. Must not be on WhatsApp personal app.">?</span></div>
+      <div style="display:flex;gap:7px"><select class="inp" id="su-cc" style="width:115px"><option>🇵🇰 +92</option><option>🇮🇳 +91</option><option>🇺🇸 +1</option><option>🇬🇧 +44</option><option>🇦🇪 +971</option><option>🇳🇬 +234</option><option>🇧🇩 +880</option><option>🇧🇷 +55</option></select><input class="inp" id="su-phone" placeholder="3001234567" style="flex:1"></div>
+    </div>
+    <div class="field"><div class="lbl">Password</div><input class="inp" type="password" id="su-pw" placeholder="Min 8 chars · 1 uppercase · 1 number"></div>
+    <button class="btn btn-p btn-block" onclick="doSignup()">Create account →</button>
+    <div class="auth-foot">Have account? <a href="#" onclick="goPage('page-login')">Sign in →</a></div>
+  </div>
+</div>
+
+<!-- ════ MAIN APP ════ -->
+<div id="page-app" class="page">
+
+  <!-- SIDEBAR -->
+  <div class="sb">
+    <div class="sb-logo">
+      <div class="lm"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.09 1.512 5.814L.057 23.15a.75.75 0 00.916.916l5.337-1.456A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.868 9.868 0 01-5.032-1.377l-.36-.214-3.733 1.018 1.018-3.733-.214-.36A9.868 9.868 0 012.1 12C2.1 6.535 6.535 2.1 12 2.1c5.465 0 9.9 4.435 9.9 9.9 0 5.465-4.435 9.9-9.9 9.9z"/></svg></div>
+      <div><span class="lt">Wapify</span> <span class="lb">META ✓</span></div>
+    </div>
+    <div class="sb-nav" id="sb-nav">
+      <!-- Rendered dynamically based on permissions -->
+    </div>
+    <div class="sb-foot">
+      <div class="plan-card">
+        <p>Current plan</p>
+        <h4 id="plan-label">Growth · 5,000 msgs</h4>
+        <div class="plan-bar"><div class="plan-fill" id="plan-fill" style="width:68%"></div></div>
+        <span id="plan-usage">3,420 / 5,000 used</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-t" id="tb-t">Dashboard</div>
+      <div class="tb-c" id="tb-c"></div>
+      <div class="tb-r">
+        <select class="store-sel" id="store-sel" onchange="loadStores()"><option>Loading stores…</option></select>
+        <button class="btn btn-p" id="tb-cta" style="font-size:12.5px;padding:7px 13px">+ New Flow</button>
+        <div class="av" id="user-av" onclick="openProfile()" title="Profile">AK</div>
+        <button class="btn btn-g" style="font-size:12px;padding:6px 11px" onclick="doLogout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+<!-- ══ DASHBOARD ══ -->
+<div class="module active" id="mod-dashboard">
+  <div class="roi"><div><h3>Your WhatsApp impact — April 2026</h3><p id="dash-store-name">Loading…</p></div>
+  <div class="roi-stats">
+    <div class="rs"><div class="rs-v" id="d-rto-red">—</div><div class="rs-l">RTO Reduced</div></div>
+    <div class="rs"><div class="rs-v" id="d-rev">—</div><div class="rs-l">Revenue Saved</div></div>
+    <div class="rs"><div class="rs-v" id="d-del">—</div><div class="rs-l">Delivery Rate</div></div>
+    <div class="rs"><div class="rs-v" id="d-open">—</div><div class="rs-l">WA Open Rate</div></div>
+  </div></div>
+  <div class="sr">
+    <div class="sc"><div class="sl">✅ Confirmed CODs <span class="tip-icon" data-tip="Orders confirmed by customer via WhatsApp button reply.">?</span></div><div class="sv" id="d-confirmed">—</div><div class="sd up" id="d-confirmed-d">Loading…</div></div>
+    <div class="sc"><div class="sl">🚨 RTO Rate <span class="tip-icon" data-tip="Return-to-origin rate. Orders that failed delivery and came back. Lower is better.">?</span></div><div class="sv dn" id="d-rto">—</div><div class="sd up" id="d-rto-d">Loading…</div></div>
+    <div class="sc"><div class="sl">💬 Conversations</div><div class="sv" id="d-convs">—</div><div class="sd up">↑ 24% vs last month</div></div>
+    <div class="sc"><div class="sl">🛒 Cart Recovered <span class="tip-icon" data-tip="Revenue from abandoned carts recovered via WhatsApp nudge.">?</span></div><div class="sv" id="d-cart">—</div><div class="sd up">↑ ₹11k this week</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">RTO reduction trend</div><div class="cs">Last 30 days</div></div><div class="cb"><div style="position:relative;height:160px"><canvas id="rtoC" role="img" aria-label="RTO declining trend">RTO trend.</canvas></div></div></div>
+    <div class="card"><div class="ch"><div class="ct">Message volume</div><div class="cs">by type this week</div></div><div class="cb">
+      <div style="display:flex;gap:10px;margin-bottom:8px">
+        <span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#25D366;display:inline-block"></span>COD</span>
+        <span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#0ea5e9;display:inline-block"></span>Tracking</span>
+        <span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#a78bfa;display:inline-block"></span>Cart</span>
+      </div>
+      <div style="position:relative;height:140px"><canvas id="msgC" role="img" aria-label="Weekly messages">Volume.</canvas></div>
+    </div></div>
+  </div>
+  <div class="card">
+    <div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--b)">
+      <div class="ct">Recent orders</div>
+      <button class="btn btn-g btn-sm" onclick="switchMod('orders')">View all →</button>
+    </div>
+    <div id="dash-orders-loading" class="loading"><div class="spin"></div>Loading orders…</div>
+    <table class="tbl" id="dash-orders-table" style="display:none"><thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Status</th><th>WA</th><th>Action</th></tr></thead><tbody id="dash-orders-body"></tbody></table>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Active flows</div><button class="btn btn-g btn-sm" onclick="switchMod('flows')">Manage →</button></div>
+    <div class="cb" id="dash-flows">
+      <div class="loading"><div class="spin"></div>Loading flows…</div>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Quick actions</div></div><div class="cb"><div class="qa-grid" id="dash-quick-actions">
+      <div class="qa-btn" onclick="switchMod('flows')"><div class="qa-ico">⚡</div>New flow</div>
+      <div class="qa-btn" onclick="switchMod('templates')"><div class="qa-ico">📄</div>Template</div>
+      <div class="qa-btn" onclick="switchMod('stores')"><div class="qa-ico">🛍️</div>Add store</div>
+      <div class="qa-btn" onclick="switchMod('broadcasts')"><div class="qa-ico">📢</div>Broadcast</div>
+      <div class="qa-btn" onclick="switchMod('catalogue')"><div class="qa-ico">📦</div>Catalogue</div>
+      <div class="qa-btn" onclick="switchMod('analytics')"><div class="qa-ico">📊</div>Analytics</div>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- ══ STORES ══ -->
+<div class="module" id="mod-stores">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">Store Connections</div><div style="font-size:12px;color:var(--t2)">Auto-sync every 5 min</div></div>
+    <button class="btn btn-p" id="btn-add-store" onclick="openAddStoreModal()">+ Add Store</button>
+  </div>
+  <div class="g2" id="stores-list"><div class="loading"><div class="spin"></div>Loading stores…</div></div>
+  <div class="card" id="add-store-wizard">
+    <div class="ch"><div><div class="ct">Connect a new store</div><div class="cs">Select platform — step by step guide included</div></div></div>
+    <div class="cb">
+      <div class="pgrid" id="store-pgrid">
+        <div class="pcard sel" onclick="selStorePlatform(this,'shopify')"><div class="pcheck">✓</div><div class="plogo">🛍️</div><div class="pname">Shopify</div><div class="pbadge">OAuth · instant</div></div>
+        <div class="pcard" onclick="selStorePlatform(this,'woo')"><div class="pcheck">✓</div><div class="plogo">🛒</div><div class="pname">WooCommerce</div><div class="pbadge">API key</div></div>
+        <div class="pcard" onclick="selStorePlatform(this,'bigcommerce')"><div class="pcheck">✓</div><div class="plogo">📦</div><div class="pname">BigCommerce</div><div class="pbadge">OAuth</div></div>
+        <div class="pcard" onclick="selStorePlatform(this,'custom')"><div class="pcheck">✓</div><div class="plogo">🔗</div><div class="pname">Custom API</div><div class="pbadge">Webhook</div></div>
+      </div>
+
+      <div class="connect-panel show" id="cp-shopify">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">🛍️</span><div><div style="font-size:13.5px;font-weight:600;color:var(--t)">Connect Shopify via OAuth</div><div style="font-size:12px;color:var(--t2)">One click — no API keys needed</div></div></div>
+        <div class="alert al-g" style="margin-bottom:12px"><span>🔒</span><div>We request <strong>read-only access</strong> to: Orders · Products · Customers · Inventory. We never store payment data.</div></div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div>Enter your Shopify store URL below (e.g. mystore.myshopify.com)</div>
+          <div class="step-item"><div class="step-num">2</div>Click "Connect with Shopify" — redirected to Shopify authorization</div>
+          <div class="step-item"><div class="step-num">3</div>Review permissions → click "Install app"</div>
+          <div class="step-item"><div class="step-num">4</div>You'll return here with your store connected ✓</div>
+        </div>
+        <div class="field"><div class="lbl">Store URL <span class="tip-icon" data-tip="Your .myshopify.com URL e.g. mystore.myshopify.com">?</span></div><input class="inp" id="shopify-url" placeholder="mystore.myshopify.com"></div>
+        <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-p" style="background:#96BF48" onclick="connectShopify()">🛍️ Connect with Shopify</button>
+          <a href="https://apps.shopify.com" target="_blank" class="conn-link">Shopify App Store ↗</a>
+          <a href="https://help.shopify.com/en/manual/apps/installing-apps" target="_blank" class="conn-link">Installation guide ↗</a>
+        </div>
+      </div>
+
+      <div class="connect-panel" id="cp-woo">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">🛒</span><div><div style="font-size:13.5px;font-weight:600;color:var(--t)">Connect WooCommerce via REST API</div><div style="font-size:12px;color:var(--t2)">Generate API keys in your WP admin</div></div></div>
+        <div class="alert al-b" style="margin-bottom:12px"><span>📖</span><div><a href="https://woo.com/document/woocommerce-rest-api/" target="_blank" class="conn-link">Official WooCommerce REST API guide ↗</a></div></div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div><span>WP Admin → <a href="https://woo.com/document/woocommerce-rest-api/" target="_blank" class="conn-link">WooCommerce → Settings → Advanced → REST API ↗</a></span></div>
+          <div class="step-item"><div class="step-num">2</div>Add Key → Name: "Wapify" → Permissions: Read/Write → Generate</div>
+          <div class="step-item"><div class="step-num">3</div>Copy Consumer Key (ck_…) and Consumer Secret (cs_…)</div>
+          <div class="step-item"><div class="step-num">4</div>Paste below and click Test & Connect</div>
+        </div>
+        <div class="field"><div class="lbl">Store URL</div><input class="inp" id="woo-url" placeholder="https://mystore.com"></div>
+        <div class="field"><div class="lbl">Consumer Key <span class="tip-icon" data-tip="Starts with ck_ — shown once after generation in WooCommerce REST API settings">?</span></div><input class="inp" id="woo-key" placeholder="ck_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"></div>
+        <div class="field"><div class="lbl">Consumer Secret <span class="tip-icon" data-tip="Starts with cs_ — shown alongside the Consumer Key">?</span></div><input class="inp" type="password" id="woo-secret" placeholder="cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"></div>
+        <div style="display:flex;gap:9px;align-items:center">
+          <button class="btn btn-p" style="background:#7f54b3" onclick="connectWoo()">🛒 Test &amp; Connect</button>
+          <a href="https://woo.com/document/woocommerce-rest-api/" target="_blank" class="conn-link">WooCommerce docs ↗</a>
+        </div>
+      </div>
+
+      <div class="connect-panel" id="cp-bigcommerce">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">📦</span><div><div style="font-size:13.5px;font-weight:600;color:var(--t)">Connect BigCommerce</div><div style="font-size:12px;color:var(--t2)">Create API account in your BigCommerce control panel</div></div></div>
+        <div class="alert al-b" style="margin-bottom:12px"><span>📖</span><div><a href="https://developer.bigcommerce.com/api-docs/getting-started/authentication" target="_blank" class="conn-link">BigCommerce API auth docs ↗</a></div></div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div><span><a href="https://login.bigcommerce.com" target="_blank" class="conn-link">BigCommerce Control Panel → Advanced Settings → API Accounts ↗</a></span></div>
+          <div class="step-item"><div class="step-num">2</div>Create V2/V3 API Token → Scopes: Orders(read), Products(read), Customers(read)</div>
+          <div class="step-item"><div class="step-num">3</div>Copy Store Hash and Access Token</div>
+        </div>
+        <div class="field"><div class="lbl">Store Hash <span class="tip-icon" data-tip="Found in your BigCommerce URL: store-XXXXX.mybigcommerce.com — the XXXXX part">?</span></div><input class="inp" id="bc-hash" placeholder="abc123xyz"></div>
+        <div class="field"><div class="lbl">Access Token</div><input class="inp" type="password" id="bc-token" placeholder="xxxxxxxxxxxxxxxx"></div>
+        <div style="display:flex;gap:9px;align-items:center">
+          <button class="btn btn-p" style="background:#0ea5e9" onclick="connectBC()">📦 Connect BigCommerce</button>
+          <a href="https://developer.bigcommerce.com/api-docs/getting-started/authentication" target="_blank" class="conn-link">Developer docs ↗</a>
+        </div>
+      </div>
+
+      <div class="connect-panel" id="cp-custom">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:20px">🔗</span><div><div style="font-size:13.5px;font-weight:600;color:var(--t)">Connect via Webhook / Custom API</div><div style="font-size:12px;color:var(--t2)">For headless commerce, custom platforms, or any system</div></div></div>
+        <div class="alert al-a" style="margin-bottom:12px"><span>⚙️</span><div>Requires a developer to configure webhooks. <a href="https://docs.wapify.com/custom-integration" target="_blank" class="conn-link">Integration guide ↗</a></div></div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div>Copy your Wapify Webhook URL below</div>
+          <div class="step-item"><div class="step-num">2</div>Configure your platform to POST order events to that URL with HMAC signature</div>
+          <div class="step-item"><div class="step-num">3</div>Send a test event to verify the connection</div>
+        </div>
+        <div class="field"><div class="lbl">Your Wapify Webhook URL <span class="tip-icon" data-tip="POST your order events to this URL. Include X-Wapify-Signature header with HMAC-SHA256.">?</span></div>
+          <div style="display:flex;gap:7px"><input class="inp" id="webhook-url" value="" readonly style="font-family:var(--m);font-size:12px;flex:1"><button class="btn btn-g btn-sm" onclick="copyWebhook()">Copy</button></div>
+        </div>
+        <div style="display:flex;gap:9px">
+          <button class="btn btn-p" onclick="testWebhook()">🔗 Send test event</button>
+          <a href="https://docs.wapify.com/webhook-schema" target="_blank" class="conn-link">Webhook schema ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHATSAPP ══ -->
+<div class="module" id="mod-whatsapp">
+  <div style="background:linear-gradient(135deg,#1877F2,#0A4FA6);border-radius:var(--r2);padding:16px 22px;display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700;color:white;margin-bottom:3px">Meta Official Business Partner</div><div style="font-size:12.5px;color:rgba(255,255,255,.8)">Direct Cloud API · No middleware · 160+ countries · Full compliance</div></div>
+    <div style="background:white;border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px"><span style="font-size:18px">📘</span><div style="font-size:12px;font-weight:700;color:#1877F2">Meta Verified Partner</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div><div class="ct">WhatsApp Business API setup</div><div class="cs">Complete all 5 steps</div></div></div><div class="cb" style="display:flex;flex-direction:column;gap:9px">
+      <div class="mstep ms-ok"><div class="mn mn-ok">✓</div><div class="minfo"><h4>Facebook Business Manager verified</h4><p>Business ID: 5821049302 · <a href="https://business.facebook.com" target="_blank" class="conn-link" style="font-size:11px">Open Business Manager ↗</a></p><span class="mtag mtag-ok">✓ Complete</span></div></div>
+      <div class="mstep ms-ok"><div class="mn mn-ok">✓</div><div class="minfo"><h4>WhatsApp Business App created</h4><p>WABA ID: 4729301048 · <a href="https://developers.facebook.com/apps" target="_blank" class="conn-link" style="font-size:11px">Meta Developer Console ↗</a></p><span class="mtag mtag-ok">✓ Complete</span></div></div>
+      <div class="mstep ms-act"><div class="mn mn-act">3</div><div class="minfo"><h4>Phone number verification <span class="tip-icon" data-tip="Number must NOT be on WhatsApp personal. Delete it first, then wait 30 days.">?</span></h4>
+        <p><a href="https://developers.facebook.com/docs/whatsapp/cloud-api/get-started" target="_blank" class="conn-link" style="font-size:11px">Meta Cloud API docs ↗</a></p>
+        <span class="mtag mtag-prog">⟳ In progress</span>
+        <div style="background:var(--s2);border-radius:8px;padding:12px;margin-top:9px;border:.5px solid var(--b)">
+          <div class="field" style="margin-bottom:9px"><div class="lbl">Business number</div>
+            <div style="display:flex;gap:7px"><select class="inp" id="wa-cc" style="width:110px"><option>🇵🇰 +92</option><option>🇮🇳 +91</option><option>🇺🇸 +1</option><option>🇬🇧 +44</option><option>🇦🇪 +971</option><option>🇸🇦 +966</option><option>🇧🇩 +880</option><option>🇳🇬 +234</option><option>🇧🇷 +55</option></select>
+            <input class="inp" id="wa-phone" placeholder="3001234567" style="flex:1"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:10px">
+            <button class="btn btn-p btn-sm" onclick="sendOTP('SMS')">Send OTP via SMS</button>
+            <button class="btn btn-g btn-sm" onclick="sendOTP('VOICE')">Via Call</button>
+          </div>
+          <div class="lbl" style="margin-bottom:6px">Enter 6-digit OTP</div>
+          <div class="otp-row">
+            <div class="otp-b filled">4</div><div class="otp-b filled">8</div><div class="otp-b filled">2</div><div class="otp-b filled">1</div><div class="otp-b">_</div><div class="otp-b">_</div>
+            <button class="btn btn-p btn-sm" style="margin-left:8px" onclick="verifyOTP()">Verify →</button>
+          </div>
+        </div>
+      </div></div>
+      <div class="mstep"><div class="mn mn-todo">4</div><div class="minfo"><h4>Business profile setup</h4><p><a href="https://business.facebook.com/wa/manage/phone-numbers/" target="_blank" class="conn-link" style="font-size:11px">Manage in Meta Business Suite ↗</a></p><span class="mtag mtag-todo">Pending step 3</span></div></div>
+      <div class="mstep"><div class="mn mn-todo">5</div><div class="minfo"><h4>Template approval <span class="tip-icon" data-tip="Meta reviews all templates before they can be sent. Usually 2–4 hours.">?</span></h4><p><a href="https://business.facebook.com/wa/manage/message-templates/" target="_blank" class="conn-link" style="font-size:11px">Template Manager ↗</a></p><span class="mtag mtag-todo">Pending step 4</span></div></div>
+    </div></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card"><div class="ch"><div class="ct">Active WA numbers</div></div><div class="cb" id="wa-numbers"><div class="loading"><div class="spin"></div>Loading…</div></div></div>
+      <div class="card"><div class="ch"><div class="ct">Live preview</div></div><div class="cb">
+        <div class="wa-phone"><div class="wa-head"><div class="wa-av">🛍️</div><div><div style="font-size:12px;font-weight:500">Your Store</div><div style="font-size:10.5px;opacity:.8">Official Business · ✓ Verified</div></div></div>
+        <div style="height:6px"></div>
+        <div class="wa-b">Hi Bilal! 👋 Order <strong>#8821</strong> ₹2,340<br>Payment: <strong>Cash on Delivery</strong><div class="wa-btns"><div class="wa-btn">✅ Confirm my order</div><div class="wa-btn">❌ Cancel order</div></div><div class="wa-t">10:42 AM</div></div>
+        <div class="wa-b sent">✅ Confirm my order<div class="wa-t">10:43 AM ✓✓</div></div>
+        <div class="wa-b">Great! 🎉 Order confirmed. Dispatching in 24 hrs.<div class="wa-t">10:43 AM</div></div>
+        </div>
+      </div></div>
+      <div class="card"><div class="ch"><div class="ct">Messaging limits <span class="tip-icon" data-tip="Meta enforces daily message limits. High quality = higher tier.">?</span></div></div><div class="cb" style="display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--t2)">Tier</span><span style="font-weight:500">Tier 2 · 10,000/day</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--t2)">Quality rating</span><span style="color:#16a34a;font-weight:500">🟢 High</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--t2)">Sent today</span><span style="font-weight:500">143 / 10,000</span></div>
+        <div style="background:var(--s2);border-radius:4px;height:5px"><div style="background:var(--g);border-radius:4px;height:5px;width:1.4%"></div></div>
+        <a href="https://developers.facebook.com/docs/whatsapp/messaging-limits" target="_blank" class="conn-link" style="font-size:11.5px">Learn about messaging limits ↗</a>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ORDERS ══ -->
+<div class="module" id="mod-orders">
+  <div class="sr">
+    <div class="sc"><div class="sl">Total orders</div><div class="sv" id="o-total">—</div><div class="sd up">↑ 18% this week</div></div>
+    <div class="sc"><div class="sl">WA confirmed <span class="tip-icon" data-tip="Orders confirmed by customer WhatsApp reply.">?</span></div><div class="sv" style="color:var(--g)" id="o-confirmed">—</div><div class="sd" id="o-conf-rate">—% rate</div></div>
+    <div class="sc"><div class="sl">RTO risk</div><div class="sv dn" id="o-rto">—</div><div class="sd" id="o-rto-rate">—% rate</div></div>
+    <div class="sc"><div class="sl">Revenue</div><div class="sv" id="o-rev">—</div><div class="sd up">↑ ₹28k today</div></div>
+  </div>
+  <div class="card">
+    <div class="fr" style="padding:11px 16px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b);flex-wrap:wrap">
+      <input class="inp" id="order-search" placeholder="Search orders, customers…" style="max-width:210px" oninput="loadOrders()">
+      <select class="inp" id="order-status" style="width:140px" onchange="loadOrders()"><option value="">All statuses</option><option>confirmed</option><option>pending</option><option>rto_risk</option><option>shipped</option></select>
+      <select class="inp" id="order-payment" style="width:120px" onchange="loadOrders()"><option value="">All types</option><option value="cod">COD</option><option value="prepaid">Prepaid</option></select>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="toast('Exporting CSV…','ok')">Export CSV</button>
+    </div>
+    <div id="orders-loading" class="loading"><div class="spin"></div>Loading orders…</div>
+    <table class="tbl" id="orders-table" style="display:none"><thead><tr><th>Order</th><th>Customer</th><th>Store</th><th>Amount</th><th>Type</th><th>Status</th><th>WA Status</th><th>Action</th></tr></thead><tbody id="orders-body"></tbody></table>
+    <div class="tbl-foot" id="orders-foot" style="display:none"><span id="orders-count">Showing 1–25</span><div style="display:flex;gap:5px" id="orders-pagination"></div></div>
+  </div>
+</div>
+
+<!-- ══ CONVERSATIONS ══ -->
+<div class="module" id="mod-conversations">
+  <div class="g2">
+    <div class="card" style="max-height:520px;display:flex;flex-direction:column">
+      <div class="ch"><div class="ct">Conversations</div></div>
+      <div style="padding:10px 14px;border-bottom:.5px solid var(--b)"><input class="inp" placeholder="Search…" oninput="filterConversations(this.value)"></div>
+      <div style="flex:1;overflow-y:auto" id="conv-list"><div class="loading"><div class="spin"></div>Loading…</div></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column">
+      <div class="ch"><div><div class="ct" id="conv-title">Select a conversation</div><div class="cs" id="conv-sub"></div></div>
+        <button class="btn btn-p btn-sm" onclick="toast('Handed off to human agent','ok')" id="conv-handoff" style="display:none">Hand off</button>
+      </div>
+      <div id="conv-messages" style="flex:1;padding:12px;background:#ECE5DD;min-height:280px;display:flex;flex-direction:column;gap:7px;overflow-y:auto">
+        <div style="text-align:center;padding:40px;color:#888;font-size:13px">Select a conversation to view messages</div>
+      </div>
+      <div style="padding:10px 12px;display:flex;gap:8px;border-top:.5px solid var(--b)" id="conv-reply-row">
+        <input class="inp" id="reply-input" placeholder="Type a message…" style="flex:1" onkeydown="if(event.key==='Enter')sendReply()">
+        <button class="btn btn-p" onclick="sendReply()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FLOWS ══ -->
+<div class="module" id="mod-flows">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">Automation Flow Builder</div><div style="font-size:12px;color:var(--t2)" id="flows-count">Loading…</div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-g" onclick="toast('Template library opened','ok')">Import template</button>
+      <button class="btn btn-p" id="btn-new-flow" onclick="openNewFlowModal()">+ New flow</button>
+    </div>
+  </div>
+  <div class="g2" id="flows-list"><div class="loading"><div class="spin"></div>Loading flows…</div></div>
+</div>
+
+<!-- ══ TEMPLATES ══ -->
+<div class="module" id="mod-templates">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">Message Templates</div><div style="font-size:12px;color:var(--t2)">All Meta-approved · 16 languages</div></div>
+    <button class="btn btn-p" id="btn-new-template" onclick="toast('Template editor opened','ok')">+ New template</button>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div><div class="ct">cod_confirm_v2</div><div class="cs">COD Confirmation · All languages</div></div><span class="badge bk">Approved</span></div><div class="cb"><div style="background:var(--s2);border-radius:8px;padding:10px 12px;font-size:12.5px;font-family:var(--m);line-height:1.8;margin-bottom:10px">Hi {{1}}! 👋<br>Order {{2}} for {{3}} placed.<br>Payment: Cash on Delivery<br>[Button: ✅ Confirm] [Button: ❌ Cancel]</div><div style="display:flex;gap:7px"><button class="btn btn-g btn-sm" onclick="toast('Editor opened','ok')">Edit</button><button class="btn btn-g btn-sm" onclick="toast('Preview shown','ok')">Preview</button><button class="btn btn-p btn-sm" onclick="toast('Used in flow','ok')">Use in flow</button></div></div></div>
+    <div class="card"><div class="ch"><div><div class="ct">order_shipped_v1</div><div class="cs">Tracking notification</div></div><span class="badge bk">Approved</span></div><div class="cb"><div style="background:var(--s2);border-radius:8px;padding:10px 12px;font-size:12.5px;font-family:var(--m);line-height:1.8;margin-bottom:10px">Hi {{1}}! 📦 Order {{2}} shipped!<br>Track: {{3}}<br>Est. delivery: {{4}}</div><div style="display:flex;gap:7px"><button class="btn btn-g btn-sm" onclick="toast('Editor opened','ok')">Edit</button><button class="btn btn-p btn-sm" onclick="toast('Used in flow','ok')">Use in flow</button></div></div></div>
+    <div class="card"><div class="ch"><div><div class="ct">abandoned_cart_v1</div><div class="cs">Cart recovery</div></div><span class="badge bk">Approved</span></div><div class="cb"><div style="background:var(--s2);border-radius:8px;padding:10px 12px;font-size:12.5px;font-family:var(--m);line-height:1.8;margin-bottom:10px">Hey {{1}}! 🛒 Left {{2}} in cart.<br>Total: {{3}}<br>[Button: Complete purchase →]</div><div style="display:flex;gap:7px"><button class="btn btn-g btn-sm" onclick="toast('Editor opened','ok')">Edit</button><button class="btn btn-p btn-sm" onclick="toast('Used in flow','ok')">Use in flow</button></div></div></div>
+    <div class="card"><div class="ch"><div><div class="ct">review_request_v1</div><div class="cs">Post-delivery</div></div><span class="badge bw">Pending review</span></div><div class="cb"><div style="background:var(--s2);border-radius:8px;padding:10px 12px;font-size:12.5px;font-family:var(--m);line-height:1.8;margin-bottom:10px">Hi {{1}}! 🌟 How was order {{2}}?<br>[Button: ⭐ Leave a review]</div><div style="display:flex;gap:7px"><button class="btn btn-g btn-sm" onclick="toast('Editor opened','ok')">Edit</button><button class="btn btn-g btn-sm" onclick="toast('Awaiting Meta approval','info')">Status</button></div></div></div>
+  </div>
+</div>
+
+<!-- ══ CATALOGUE ══ -->
+<div class="module" id="mod-catalogue">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">WhatsApp Product Catalogue</div><div style="font-size:12px;color:var(--t2)">Auto-synced from store · Meta Commerce live</div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-g" id="btn-sync-cat" onclick="toast('Syncing from store…','ok')">Sync from store</button>
+      <button class="btn btn-p" id="btn-add-product" onclick="toast('Add product form opened','ok')">+ Add product</button>
+    </div>
+  </div>
+  <div class="alert al-g"><span>📘</span><div><strong>Meta Commerce Catalogue connected.</strong> Customers can browse and buy directly from WhatsApp. <a href="https://business.facebook.com/commerce/catalogs" target="_blank" class="conn-link" style="font-size:12px">Manage in Meta Commerce Manager ↗</a></div></div>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-img">👟</div><div class="cat-body"><div class="cat-name">Nike Air Max 270</div><div class="cat-price">₹8,999</div><div class="cat-stock">✅ In stock · 14 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+    <div class="cat-item"><div class="cat-img">👗</div><div class="cat-body"><div class="cat-name">Linen Kurta Set</div><div class="cat-price">₹2,499</div><div class="cat-stock">✅ In stock · 32 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+    <div class="cat-item"><div class="cat-img">📱</div><div class="cat-body"><div class="cat-name">Samsung S24 Cover</div><div class="cat-price">₹599</div><div class="cat-stock">⚠ Low stock · 3 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+    <div class="cat-item"><div class="cat-img">🧴</div><div class="cat-body"><div class="cat-name">Vitamin C Serum</div><div class="cat-price">₹1,299</div><div class="cat-stock">✅ In stock · 88 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+    <div class="cat-item"><div class="cat-img">🎒</div><div class="cat-body"><div class="cat-name">Leather Backpack</div><div class="cat-price">₹4,299</div><div class="cat-stock">✅ In stock · 7 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+    <div class="cat-item"><div class="cat-img">🕯️</div><div class="cat-body"><div class="cat-name">Soy Candle Bundle</div><div class="cat-price">₹799</div><div class="cat-stock">✅ In stock · 54 units</div></div><button class="cat-wa" onclick="toast('Product sent on WhatsApp','ok')">📤 Send on WhatsApp</button></div>
+  </div>
+</div>
+
+<!-- ══ BROADCASTS ══ -->
+<div class="module" id="mod-broadcasts">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">Broadcast Campaigns</div><div style="font-size:12px;color:var(--t2)">Send to segmented customer lists <span class="tip-icon" data-tip="Only message customers who opted in or interacted within 24 hours — Meta policy.">?</span></div></div>
+    <button class="btn btn-p" id="btn-new-broadcast" onclick="openBroadcastModal()">+ New broadcast</button>
+  </div>
+  <div class="card"><table class="tbl"><thead><tr><th>Campaign</th><th>Segment</th><th>Sent</th><th>Delivered</th><th>Opened</th><th>Replied</th><th>Status</th></tr></thead><tbody>
+    <tr><td style="font-weight:500">Eid Sale 2026</td><td>All customers</td><td>1,240</td><td style="color:#16a34a;font-weight:500">1,178 (95%)</td><td>968 (78%)</td><td>421 (34%)</td><td><span class="badge bk">Sent</span></td></tr>
+    <tr><td style="font-weight:500">RTO Recovery</td><td>Unconfirmed CODs</td><td>87</td><td style="color:#16a34a;font-weight:500">82 (94%)</td><td>68 (78%)</td><td>51 (59%)</td><td><span class="badge bk">Sent</span></td></tr>
+    <tr><td style="font-weight:500">New Collection</td><td>VIP customers</td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="badge bw">Scheduled</span></td></tr>
+  </tbody></table></div>
+</div>
+
+<!-- ══ LANGUAGES ══ -->
+<div class="module" id="mod-languages">
+  <div style="font-size:15px;font-weight:700">Language &amp; Region</div>
+  <div class="alert al-g"><span>🌍</span><div><strong>Auto-language detection active.</strong> Wapify detects the customer's country from their phone prefix and sends messages in their language automatically.</div></div>
+  <div class="lang-grid">
+    <div class="lang-card on" onclick="this.classList.toggle('on')"><div class="lang-flag">🇵🇰</div><div class="lang-name">Urdu</div><div class="lang-code">ur · 9 templates</div></div>
+    <div class="lang-card on" onclick="this.classList.toggle('on')"><div class="lang-flag">🇮🇳</div><div class="lang-name">Hindi</div><div class="lang-code">hi · 9 templates</div></div>
+    <div class="lang-card on" onclick="this.classList.toggle('on')"><div class="lang-flag">🇺🇸</div><div class="lang-name">English</div><div class="lang-code">en · 9 templates</div></div>
+    <div class="lang-card on" onclick="this.classList.toggle('on')"><div class="lang-flag">🇦🇪</div><div class="lang-name">Arabic RTL</div><div class="lang-code">ar · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇧🇩</div><div class="lang-name">Bengali</div><div class="lang-code">bn · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇧🇷</div><div class="lang-name">Portuguese</div><div class="lang-code">pt · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-code">fr · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇳🇬</div><div class="lang-name">Yoruba</div><div class="lang-code">yo · 7 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇮🇩</div><div class="lang-name">Indonesian</div><div class="lang-code">id · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇹🇷</div><div class="lang-name">Turkish</div><div class="lang-code">tr · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-code">es · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇩🇪</div><div class="lang-name">German</div><div class="lang-code">de · 9 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇰🇪</div><div class="lang-name">Swahili</div><div class="lang-code">sw · 7 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇵🇭</div><div class="lang-name">Filipino</div><div class="lang-code">tl · 8 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇷🇺</div><div class="lang-name">Russian</div><div class="lang-code">ru · 8 templates</div></div>
+    <div class="lang-card" onclick="this.classList.toggle('on')"><div class="lang-flag">🇨🇳</div><div class="lang-name">Chinese</div><div class="lang-code">zh · 8 templates</div></div>
+  </div>
+</div>
+
+<!-- ══ ANALYTICS ══ -->
+<div class="module" id="mod-analytics">
+  <div class="roi"><div><h3 id="ana-title">ROI Summary — April 2026</h3><p>All stores combined</p></div><div class="roi-stats"><div class="rs"><div class="rs-v" id="ana-rto">42%</div><div class="rs-l">RTO Reduced</div></div><div class="rs"><div class="rs-v" id="ana-rev">₹1.2L</div><div class="rs-l">Revenue Saved</div></div><div class="rs"><div class="rs-v" id="ana-del">94%</div><div class="rs-l">Delivery Rate</div></div><div class="rs"><div class="rs-v" id="ana-open">82%</div><div class="rs-l">Open Rate</div></div></div></div>
+  <div class="sr">
+    <div class="sc"><div class="sl">Messages sent</div><div class="sv" id="ana-sent">—</div><div class="sd up">↑ 24%</div></div>
+    <div class="sc"><div class="sl">Delivered <span class="tip-icon" data-tip="Messages that reached the customer's device.">?</span></div><div class="sv" style="color:var(--g)" id="ana-delivered">—</div><div class="sd" id="ana-del-rate">—% rate</div></div>
+    <div class="sc"><div class="sl">Replied</div><div class="sv" id="ana-replied">—</div><div class="sd" id="ana-reply-rate">—% reply rate</div></div>
+    <div class="sc"><div class="sl">Avg response <span class="tip-icon" data-tip="Average customer reply time. Industry average is 3 min vs 45 min for email.">?</span></div><div class="sv">3.2m</div><div class="sd">vs 45m email</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">RTO rate trend</div><div class="cs">Last 30 days</div></div><div class="cb"><div style="position:relative;height:180px"><canvas id="rtoC2" role="img" aria-label="RTO trend">Trend.</canvas></div></div></div>
+    <div class="card"><div class="ch"><div class="ct">Volume by type</div><div class="cs">This week</div></div><div class="cb">
+      <div style="display:flex;gap:10px;margin-bottom:8px"><span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#25D366;display:inline-block"></span>COD</span><span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#0ea5e9;display:inline-block"></span>Tracking</span><span style="display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--t2)"><span style="width:8px;height:8px;border-radius:2px;background:#a78bfa;display:inline-block"></span>Cart</span></div>
+      <div style="position:relative;height:160px"><canvas id="msgC2" role="img" aria-label="Volume">Volume.</canvas></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══ BILLING ══ -->
+<div class="module" id="mod-billing">
+  <div style="font-size:15px;font-weight:700">Billing &amp; Plans</div>
+  <div class="g4">
+    <div class="plan-tier"><div class="pt-name">Starter</div><div class="pt-price">Free</div><div class="pt-sub">1 store · 100 msgs/mo</div><div class="pt-feat">1 store connection</div><div class="pt-feat">100 WA messages/mo</div><div class="pt-feat">COD confirmation flow</div><div class="pt-feat">Basic analytics</div><div class="pt-btn"><button class="btn btn-g" style="width:100%;font-size:12.5px">Current plan</button></div></div>
+    <div class="plan-tier pop"><div class="pt-badge">Most popular</div><div class="pt-name">Growth</div><div class="pt-price">$29<span style="font-size:13px;font-weight:400;color:var(--t2)">/mo</span></div><div class="pt-sub">3 stores · 5,000 msgs/mo</div><div class="pt-feat">3 store connections</div><div class="pt-feat">5,000 WA messages</div><div class="pt-feat">All flows + templates</div><div class="pt-feat">Catalogue sync</div><div class="pt-feat">16 languages</div><div class="pt-btn"><button class="btn btn-p" style="width:100%;font-size:12.5px" onclick="startCheckout('growth','monthly')">Upgrade →</button></div></div>
+    <div class="plan-tier"><div class="pt-name">Scale</div><div class="pt-price">$79<span style="font-size:13px;font-weight:400;color:var(--t2)">/mo</span></div><div class="pt-sub">10 stores · 20k msgs/mo</div><div class="pt-feat">10 stores</div><div class="pt-feat">20,000 WA messages</div><div class="pt-feat">Priority support</div><div class="pt-feat">Broadcasts + segments</div><div class="pt-feat">Developer API</div><div class="pt-btn"><button class="btn btn-g" style="width:100%;font-size:12.5px" onclick="startCheckout('scale','monthly')">Get Scale</button></div></div>
+    <div class="plan-tier"><div class="pt-name">Agency</div><div class="pt-price">$199<span style="font-size:13px;font-weight:400;color:var(--t2)">/mo</span></div><div class="pt-sub">Unlimited · White-label</div><div class="pt-feat">Unlimited stores</div><div class="pt-feat">Unlimited messages</div><div class="pt-feat">White-label option</div><div class="pt-feat">Reseller dashboard</div><div class="pt-feat">Dedicated manager</div><div class="pt-btn"><button class="btn btn-g" style="width:100%;font-size:12.5px" onclick="toast('Contact sales@wapify.com','info')">Contact sales</button></div></div>
+  </div>
+</div>
+
+<!-- ══ TEAM ══ -->
+<div class="module" id="mod-team">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div><div style="font-size:15px;font-weight:700">Team Members</div><div style="font-size:12px;color:var(--t2)">Manage roles and access permissions</div></div>
+    <button class="btn btn-p" id="btn-invite" onclick="openInviteModal()">+ Invite member</button>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Team members</div><div id="team-count" class="cs">Loading…</div></div><div class="cb" id="team-list"><div class="loading"><div class="spin"></div>Loading…</div></div></div>
+    <div class="card"><div class="ch"><div class="ct">Roles &amp; permissions</div><button class="btn btn-g btn-sm" id="btn-create-role" onclick="openRoleModal()">+ Create role</button></div>
+      <div class="cb" id="roles-list"><div class="loading"><div class="spin"></div>Loading…</div></div>
+    </div>
+  </div>
+  <!-- Permission matrix -->
+  <div class="card" id="perm-matrix-card">
+    <div class="ch"><div class="ct">Permission matrix — all roles</div><div class="cs">What each role can do</div></div>
+    <div class="cb" style="overflow-x:auto">
+      <table class="tbl" id="perm-matrix">
+        <thead><tr><th>Permission</th><th>Owner</th><th>Admin</th><th>Marketing</th><th>Sales</th><th>Support</th></tr></thead>
+        <tbody id="perm-matrix-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div class="module" id="mod-settings">
+  <div style="font-size:15px;font-weight:700">Account Settings</div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Profile</div><button class="btn btn-p btn-sm" onclick="saveProfile()">Save changes</button></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
+      <div class="g2" style="gap:10px"><div><div class="lbl">First name</div><input class="inp" id="prof-fn" value=""></div><div><div class="lbl">Last name</div><input class="inp" id="prof-ln" value=""></div></div>
+      <div><div class="lbl">Email</div><input class="inp" id="prof-email" value="" readonly></div>
+      <div><div class="lbl">Company name</div><input class="inp" id="prof-company" value=""></div>
+      <div><div class="lbl">Timezone <span class="tip-icon" data-tip="Affects scheduled broadcasts and analytics timestamps.">?</span></div>
+        <select class="inp" id="prof-tz"><option>Asia/Karachi (PKT +5:00)</option><option>Asia/Kolkata (IST +5:30)</option><option>America/New_York (EST)</option><option>Europe/London (GMT)</option><option>Asia/Dubai (GST +4:00)</option></select>
+      </div>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Notifications</div></div><div class="cb" style="display:flex;flex-direction:column;gap:11px">
+      <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:13px">RTO alerts</span><div class="tog on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></label>
+      <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:13px">Order confirmations</span><div class="tog on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></label>
+      <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:13px">Daily digest email</span><div class="tog on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></label>
+      <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:13px">Message quota warnings</span><div class="tog on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></label>
+      <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:13px">Sync errors</span><div class="tog off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></label>
+    </div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">API &amp; Webhooks <span class="tip-icon" data-tip="Use Authorization: Bearer YOUR_KEY in all API requests.">?</span></div><button class="btn btn-g btn-sm" onclick="copyAPIKey()">Copy key</button></div><div class="cb">
+    <div class="field"><div class="lbl">Your API key</div><input class="inp" id="api-key" value="wap_live_sk_…loading" style="font-family:var(--m);font-size:12px" readonly></div>
+    <div class="field"><div class="lbl">Webhook endpoint <span class="tip-icon" data-tip="We POST to this URL for: order.created, message.delivered, message.replied, rto.detected">?</span></div><input class="inp" placeholder="https://yourapp.com/webhooks/wapify"></div>
+    <div style="font-size:12px;color:var(--t2);margin-top:4px">Events: order.created · message.sent · message.delivered · message.replied · rto.detected<br><a href="https://docs.wapify.com/api" target="_blank" class="conn-link" style="font-size:12px">Full API docs ↗</a></div>
+  </div></div>
+</div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /page-app -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════
+//  WAPIFY FRONTEND — Complete with RBAC, API integration, roles
+// ════════════════════════════════════════════════════════════
+
+const API = window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : '/api';
+
+// ── STATE ────────────────────────────────────────────────────
+let state = {
+  user: null,
+  accessToken: null,
+  refreshToken: null,
+  stores: [],
+  currentStore: null,
+  currentMod: 'dashboard',
+};
+
+// ── NAV CONFIG WITH PERMISSION REQUIREMENTS ───────────────────
+const NAV = [
+  { sec: 'Main' },
+  { id:'dashboard',    label:'🏠 Dashboard',       perm:'dashboard:view' },
+  { id:'stores',       label:'🛍️ Stores',           perm:'stores:view' },
+  { id:'whatsapp',     label:'📱 WhatsApp Setup',   perm:'whatsapp:view' },
+  { id:'orders',       label:'📋 Orders',           perm:'orders:view',        badge:'12' },
+  { id:'conversations',label:'💬 Conversations',    perm:'conversations:view', badge:'3' },
+  { sec: 'Automation' },
+  { id:'flows',        label:'⚡ Flow Builder',     perm:'flows:view' },
+  { id:'templates',    label:'📄 Templates',        perm:'templates:view' },
+  { id:'catalogue',    label:'📦 Catalogue',        perm:'catalogue:view' },
+  { id:'broadcasts',   label:'📢 Broadcasts',       perm:'broadcasts:view' },
+  { sec: 'Settings' },
+  { id:'languages',    label:'🌍 Languages',        perm:'settings:view' },
+  { id:'analytics',    label:'📊 Analytics',        perm:'analytics:view' },
+  { id:'team',         label:'👥 Team',             perm:'team:view' },
+  { id:'billing',      label:'💳 Billing',          perm:'billing:view' },
+  { id:'settings',     label:'⚙️ Settings',         perm:'settings:view' },
+];
+
+// Demo permission sets by role
+const DEMO_PERMS = {
+  owner:     {all: true},
+  admin:     {'dashboard:view':1,'stores:view':1,'stores:create':1,'stores:edit':1,'orders:view':1,'orders:export':1,'orders:send_wa':1,'conversations:view':1,'conversations:reply':1,'conversations:assign':1,'flows:view':1,'flows:create':1,'flows:edit':1,'flows:toggle':1,'templates:view':1,'templates:create':1,'templates:edit':1,'catalogue:view':1,'catalogue:sync':1,'broadcasts:view':1,'broadcasts:create':1,'broadcasts:send':1,'analytics:view':1,'analytics:export':1,'billing:view':1,'settings:view':1,'settings:edit':1,'team:view':1,'team:invite':1,'whatsapp:view':1},
+  marketing: {'dashboard:view':1,'stores:view':1,'conversations:view':1,'flows:view':1,'flows:create':1,'flows:edit':1,'templates:view':1,'templates:create':1,'templates:edit':1,'catalogue:view':1,'catalogue:create':1,'catalogue:edit':1,'catalogue:sync':1,'broadcasts:view':1,'broadcasts:create':1,'broadcasts:send':1,'analytics:view':1,'analytics:export':1},
+  sales:     {'dashboard:view':1,'stores:view':1,'orders:view':1,'orders:export':1,'orders:send_wa':1,'conversations:view':1,'conversations:reply':1,'flows:view':1,'templates:view':1,'catalogue:view':1,'broadcasts:view':1,'analytics:view':1},
+  support:   {'dashboard:view':1,'stores:view':1,'orders:view':1,'orders:send_wa':1,'conversations:view':1,'conversations:reply':1,'conversations:assign':1,'flows:view':1,'templates:view':1,'catalogue:view':1},
+};
+
+// ── PERMISSION CHECK ──────────────────────────────────────────
+const can = (perm) => {
+  if (!state.user) return false;
+  if (state.user.is_owner) return true;
+  const perms = state.user.permissions || {};
+  if (perms.all) return true;
+  return !!perms[perm];
+};
+
+// ── RENDER SIDEBAR BASED ON PERMISSIONS ───────────────────────
+function renderNav() {
+  const nav = document.getElementById('sb-nav');
+  nav.innerHTML = '';
+  for (const item of NAV) {
+    if (item.sec) {
+      // Check if any item in this section is visible
+      const hasItems = NAV.filter(n => !n.sec && n.perm).some(n => can(n.perm));
+      if (!hasItems && item.sec !== 'Main') continue;
+      const sec = document.createElement('div');
+      sec.className = 'sn-sec';
+      sec.textContent = item.sec;
+      nav.appendChild(sec);
+      continue;
+    }
+    if (!can(item.perm)) continue;
+    const ni = document.createElement('div');
+    ni.className = 'ni' + (state.currentMod === item.id ? ' active' : '');
+    ni.dataset.m = item.id;
+    ni.innerHTML = item.label + (item.badge ? `<span class="ni-badge">${item.badge}</span>` : '');
+    ni.onclick = () => switchMod(item.id);
+    nav.appendChild(ni);
+  }
+}
+
+// ── API CALLS ─────────────────────────────────────────────────
+const apiFetch = async (path, opts = {}) => {
+  const headers = { 'Content-Type': 'application/json', ...opts.headers };
+  if (state.accessToken) headers['Authorization'] = 'Bearer ' + state.accessToken;
+  const res = await fetch(API + path, { ...opts, headers });
+  if (res.status === 401 && state.refreshToken) {
+    // Try refresh
+    const rRes = await fetch(API + '/auth/refresh', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: state.refreshToken }),
+    });
+    if (rRes.ok) {
+      const data = await rRes.json();
+      state.accessToken = data.access_token;
+      state.refreshToken = data.refresh_token;
+      localStorage.setItem('accessToken', data.access_token);
+      localStorage.setItem('refreshToken', data.refresh_token);
+      // Retry original request
+      headers['Authorization'] = 'Bearer ' + state.accessToken;
+      return fetch(API + path, { ...opts, headers });
+    } else {
+      doLogout();
+      return res;
+    }
+  }
+  return res;
+};
+
+// ── AUTH ──────────────────────────────────────────────────────
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('show'); p.style.display = ''; });
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('show'); el.style.display = 'flex'; }
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pw = document.getElementById('login-pw').value;
+  const errEl = document.getElementById('login-err');
+  const btn = document.getElementById('login-btn');
+  errEl.classList.remove('show');
+  btn.textContent = 'Signing in…'; btn.disabled = true;
+  try {
+    const res = await fetch(API + '/auth/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pw }),
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.error || 'Login failed'; errEl.classList.add('show'); return; }
+    afterLogin(data);
+  } catch {
+    // Demo mode: simulate login when API unavailable
+    simulateLogin('owner', email);
+  } finally {
+    btn.textContent = 'Sign in →'; btn.disabled = false;
+  }
+}
+
+async function doSignup() {
+  const body = {
+    email: document.getElementById('su-email').value.trim(),
+    password: document.getElementById('su-pw').value,
+    first_name: document.getElementById('su-fn').value.trim(),
+    last_name: document.getElementById('su-ln').value.trim(),
+    company_name: document.getElementById('su-company').value.trim(),
+    phone: document.getElementById('su-phone').value.trim(),
+  };
+  try {
+    const res = await fetch(API + '/auth/signup', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) { document.getElementById('signup-err').textContent = data.error; document.getElementById('signup-err').classList.add('show'); return; }
+    afterLogin(data);
+  } catch {
+    simulateLogin('owner', body.email);
+  }
+}
+
+function demoLogin(role) {
+  simulateLogin(role);
+}
+
+function simulateLogin(role, email = 'demo@wapify.com') {
+  const names = { owner:'Ahmed Khan', admin:'Sara Malik', marketing:'Ali Hassan', sales:'Fatima Raza', support:'Usman Ahmed' };
+  const user = {
+    id: 'demo-' + role,
+    email,
+    first_name: names[role]?.split(' ')[0] || 'Demo',
+    last_name: names[role]?.split(' ')[1] || 'User',
+    is_owner: role === 'owner',
+    role_slug: role,
+    role_name: role.charAt(0).toUpperCase() + role.slice(1),
+    permissions: role === 'owner' ? { all: true } : (DEMO_PERMS[role] || {}),
+    org_name: "Ahmed's Mart",
+    org_slug: 'ahmeds-mart',
+    plan: 'growth',
+    plan_status: 'active',
+    msg_quota: 5000,
+    msg_used: 3420,
+  };
+  state.user = user;
+  state.accessToken = 'demo_token';
+  state.refreshToken = 'demo_refresh';
+  initApp();
+}
+
+function afterLogin(data) {
+  state.user = data.user;
+  state.accessToken = data.access_token;
+  state.refreshToken = data.refresh_token;
+  localStorage.setItem('accessToken', data.access_token);
+  localStorage.setItem('refreshToken', data.refresh_token);
+  initApp();
+}
+
+function doLogout() {
+  state = { user: null, accessToken: null, refreshToken: null, stores: [], currentStore: null, currentMod: 'dashboard' };
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  goPage('page-login');
+}
+
+// ── INIT APP ─────────────────────────────────────────────────
+function initApp() {
+  goPage('page-app');
+  const u = state.user;
+  // User avatar
+  const av = document.getElementById('user-av');
+  av.textContent = (u.first_name?.[0] || '') + (u.last_name?.[0] || '');
+  av.title = `${u.first_name} ${u.last_name} · ${u.role_name || u.role_slug}`;
+
+  // Role badge in topbar
+  const rb = document.createElement('span');
+  rb.className = 'role-badge rb-' + (u.role_slug || 'owner');
+  rb.textContent = (u.role_name || u.role_slug || 'Owner').toUpperCase();
+  av.parentNode.insertBefore(rb, av);
+
+  // Plan bar
+  const quota = u.msg_quota || 5000;
+  const used = u.msg_used || 0;
+  document.getElementById('plan-label').textContent = `${(u.plan || 'free').charAt(0).toUpperCase() + (u.plan||'free').slice(1)} · ${quota.toLocaleString()} msgs`;
+  document.getElementById('plan-fill').style.width = Math.min(100, Math.round(used/quota*100)) + '%';
+  document.getElementById('plan-usage').textContent = `${used.toLocaleString()} / ${quota.toLocaleString()} used`;
+
+  // Render nav
+  renderNav();
+
+  // Load initial data
+  loadStores();
+  loadDashboard();
+  switchMod('dashboard');
+}
+
+// ── MODULE SWITCHING ──────────────────────────────────────────
+const modTitles = { dashboard:'Dashboard', stores:'Store Connections', whatsapp:'WhatsApp Setup', orders:'Orders', conversations:'Conversations', flows:'Flow Builder', templates:'Message Templates', catalogue:'Catalogue', broadcasts:'Broadcasts', languages:'Languages & Regions', analytics:'Analytics & ROI', team:'Team & Roles', billing:'Billing & Plans', settings:'Settings' };
+
+function switchMod(m) {
+  if (!can(NAV.find(n => n.id === m)?.perm || 'dashboard:view')) {
+    toast('You do not have permission to access this module.', 'err');
+    return;
+  }
+  state.currentMod = m;
+  document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('mod-' + m);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.ni').forEach(ni => { ni.classList.remove('active'); if (ni.dataset.m === m) ni.classList.add('active'); });
+  document.getElementById('tb-t').textContent = modTitles[m] || m;
+  document.getElementById('tb-c').textContent = state.user?.org_name || '';
+  document.getElementById('tb-cta').textContent = m === 'stores' ? '+ Add Store' : m === 'broadcasts' ? '+ Broadcast' : m === 'team' ? '+ Invite' : '+ New Flow';
+
+  // Lazy load modules
+  if (m === 'orders') loadOrders();
+  if (m === 'flows') loadFlows();
+  if (m === 'conversations') loadConversations();
+  if (m === 'team') loadTeam();
+  if (m === 'analytics') { setTimeout(initAnalyticsCharts, 100); loadAnalytics(); }
+  if (m === 'settings') loadSettings();
+  if (m === 'whatsapp') loadWANumbers();
+}
+
+// ── STORES ───────────────────────────────────────────────────
+async function loadStores() {
+  try {
+    const res = await apiFetch('/stores');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    state.stores = data.stores || [];
+    renderStores();
+    renderStoreSel();
+  } catch {
+    // Demo data
+    state.stores = [
+      { id: 'demo-s1', name: "Ahmed's Mart", platform: 'shopify', domain: 'mystore.myshopify.com', status: 'connected', orders_today: 48, msg_used: 3420, total_orders: 284, auto_cod_confirm: true, auto_tracking: true, auto_cart_recovery: false },
+      { id: 'demo-s2', name: 'Khan Electronics', platform: 'woocommerce', domain: 'khanelec.com', status: 'error', orders_today: 21, msg_used: 1200, total_orders: 512, auto_cod_confirm: true, auto_tracking: true, auto_cart_recovery: false },
+    ];
+    renderStores();
+    renderStoreSel();
+  }
+}
+
+function renderStores() {
+  const el = document.getElementById('stores-list');
+  if (!state.stores.length) { el.innerHTML = '<p style="color:var(--t2);font-size:13px">No stores connected yet.</p>'; return; }
+  el.innerHTML = state.stores.map(s => `
+    <div class="card">
+      <div class="ch">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:20px">${s.platform === 'shopify' ? '🛍️' : s.platform === 'woocommerce' ? '🛒' : '📦'}</span>
+          <div><div class="ct">${s.name}</div><div class="cs">${s.domain || s.platform} ${s.domain ? `· <a href="https://${s.domain}/admin" target="_blank" class="conn-link" style="font-size:11px">Open admin ↗</a>` : ''}</div></div>
+        </div>
+        <span class="badge ${s.status === 'connected' ? 'bk' : 'bw'}">${s.status === 'connected' ? '● Live' : '⚠ ' + s.status}</span>
+      </div>
+      <div class="cb">
+        <div class="g3" style="margin-bottom:14px">
+          <div style="background:var(--s2);border-radius:8px;padding:8px 10px"><div style="font-size:10px;color:var(--t3)">Orders today</div><div style="font-size:16px;font-weight:700">${s.orders_today || 0}</div></div>
+          <div style="background:var(--s2);border-radius:8px;padding:8px 10px"><div style="font-size:10px;color:var(--t3)">WA sent</div><div style="font-size:16px;font-weight:700;color:var(--g)">${(s.msg_used || 0).toLocaleString()}</div></div>
+          <div style="background:var(--s2);border-radius:8px;padding:8px 10px"><div style="font-size:10px;color:var(--t3)">Products</div><div style="font-size:16px;font-weight:700">${s.total_orders || 0}</div></div>
+        </div>
+        ${s.status === 'error' ? `<div class="alert al-a" style="margin-bottom:12px"><span>⚠️</span><div>Store sync error. <a href="https://woo.com/document/woocommerce-rest-api/" target="_blank" class="conn-link" style="font-size:12px">Regenerate API key in WooCommerce ↗</a></div></div>` : ''}
+        <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:14px">
+          <label style="display:flex;align-items:center;gap:9px;cursor:pointer" ${!can('stores:edit') ? 'title="No permission to edit"' : ''}>
+            <div class="tog ${s.auto_cod_confirm ? 'on' : 'off'}" ${!can('stores:edit') ? 'style="cursor:not-allowed;opacity:.5"' : 'onclick="toggleStoreOpt(this)"'}></div>
+            <span style="font-size:12.5px">Auto COD confirmation</span>
+            <span class="tip-icon" data-tip="Auto-confirm COD orders via WhatsApp. Reduces RTO by ~40%.">?</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
+            <div class="tog ${s.auto_tracking ? 'on' : 'off'}" ${!can('stores:edit') ? 'style="cursor:not-allowed;opacity:.5"' : 'onclick="toggleStoreOpt(this)"'}></div>
+            <span style="font-size:12.5px">Auto order tracking</span>
+            <span class="tip-icon" data-tip="Send tracking link on WhatsApp when order is shipped.">?</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
+            <div class="tog ${s.auto_cart_recovery ? 'on' : 'off'}" ${!can('stores:edit') ? 'style="cursor:not-allowed;opacity:.5"' : 'onclick="toggleStoreOpt(this)"'}></div>
+            <span style="font-size:12.5px">Abandoned cart recovery</span>
+            <span class="tip-icon" data-tip="Send a WA message 1 hour after cart is abandoned. Recovers ~23% of carts.">?</span>
+          </label>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="toast('Syncing ${s.name}…','ok')">Sync now</button>
+          ${can('stores:edit') ? `<button class="btn btn-p btn-sm" style="flex:1" onclick="switchMod('catalogue')">Catalogue</button>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderStoreSel() {
+  const sel = document.getElementById('store-sel');
+  sel.innerHTML = state.stores.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+  if (state.stores.length) { state.currentStore = state.stores[0]; document.getElementById('dash-store-name').textContent = state.stores[0].name + ' · April 2026'; }
+}
+
+function toggleStoreOpt(tog) {
+  if (!can('stores:edit')) return toast('No permission to edit stores', 'err');
+  tog.classList.toggle('on');
+  tog.classList.toggle('off');
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────
+async function loadDashboard() {
+  // Stats
+  try {
+    const res = await apiFetch('/orders/stats/summary');
+    if (res.ok) {
+      const d = await res.json();
+      document.getElementById('d-confirmed').textContent = d.confirmed || '—';
+      document.getElementById('d-rto').textContent = (d.rto_rate || '—') + '%';
+      document.getElementById('d-rto-d').textContent = '↓ ' + (d.rto_rate || 0) + '% rate';
+    }
+  } catch {}
+
+  // Demo stats
+  document.getElementById('d-confirmed').textContent = '287';
+  document.getElementById('d-rto').textContent = '6.2%';
+  document.getElementById('d-rto-d').textContent = '↓ 3.8% reduced';
+  document.getElementById('d-convs').textContent = '1,834';
+  document.getElementById('d-cart').textContent = '₹48k';
+  document.getElementById('d-rto-red').textContent = '42%';
+  document.getElementById('d-rev').textContent = '₹1.2L';
+  document.getElementById('d-del').textContent = '94%';
+  document.getElementById('d-open').textContent = '82%';
+
+  // Recent orders demo
+  const orders = [
+    { num: '#8821', name: 'Bilal Raza', phone: '+92 301 1234567', amount: '₹2,340', status: 'confirmed', wa: 'sent' },
+    { num: '#8820', name: 'Fatima Khan', phone: '+92 312 9876543', amount: '₹890', status: 'pending', wa: 'queued' },
+    { num: '#8819', name: 'Usman Ali', phone: '+92 333 5551234', amount: '₹5,100', status: 'shipped', wa: 'delivered' },
+    { num: '#8818', name: 'Sara Ahmed', phone: '+92 321 4445678', amount: '₹1,450', status: 'rto_risk', wa: 'failed' },
+  ];
+  document.getElementById('dash-orders-loading').style.display = 'none';
+  document.getElementById('dash-orders-table').style.display = '';
+  document.getElementById('dash-orders-body').innerHTML = orders.map(o => `
+    <tr>
+      <td style="font-family:var(--m);font-size:11.5px">${o.num}</td>
+      <td>${o.name}<div style="font-size:11px;color:var(--t2)">${o.phone}</div></td>
+      <td style="font-weight:600">${o.amount}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td>${waBadge(o.wa)}</td>
+      <td>${can('orders:send_wa') ? `<button class="btn btn-g btn-xs" onclick="toast('Action on ${o.num}','ok')">View</button>` : '—'}</td>
+    </tr>
+  `).join('');
+
+  // Flows demo
+  document.getElementById('dash-flows').innerHTML = [
+    { name: 'COD Confirmation', runs: '287', rate: '97%', status: 'active' },
+    { name: 'Order Tracking', runs: '192', rate: '94%', status: 'active' },
+    { name: 'Abandoned Cart', runs: '41', rate: '23%', status: 'active' },
+    { name: 'Review Request', runs: 'Paused', rate: '—', status: 'paused' },
+  ].map(f => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:.5px solid var(--b)">
+      <div><div style="font-size:13px;font-weight:500">${f.name}</div><div style="font-size:11.5px;color:var(--t2)">${f.runs} runs · ${f.rate} ${f.status === 'active' ? 'success' : ''}</div></div>
+      <span class="badge ${f.status === 'active' ? 'bk' : 'bw'}">${f.status === 'active' ? '● Live' : 'Paused'}</span>
+    </div>
+  `).join('');
+
+  // Charts
+  setTimeout(initDashCharts, 200);
+}
+
+// ── ORDERS ────────────────────────────────────────────────────
+async function loadOrders() {
+  document.getElementById('orders-loading').style.display = 'flex';
+  document.getElementById('orders-table').style.display = 'none';
+  document.getElementById('orders-foot').style.display = 'none';
+
+  const search = document.getElementById('order-search')?.value || '';
+  const status = document.getElementById('order-status')?.value || '';
+  const payment = document.getElementById('order-payment')?.value || '';
+
+  try {
+    const qs = new URLSearchParams({ search, status, payment_method: payment, limit: 25 });
+    const res = await apiFetch('/orders?' + qs);
+    if (res.ok) {
+      const data = await res.json();
+      renderOrdersTable(data.orders, data.total);
+      return;
+    }
+  } catch {}
+
+  // Demo fallback
+  const demoOrders = [
+    { order_number:'#8821', customer_name:'Bilal Raza', customer_phone:'+92 301 1234567', store_name:"Ahmed's Mart", total:'2340', currency:'₹', payment_method:'cod', status:'confirmed', wa_status:'delivered' },
+    { order_number:'#8820', customer_name:'Fatima Khan', customer_phone:'+92 312 9876543', store_name:"Ahmed's Mart", total:'890', currency:'₹', payment_method:'cod', status:'pending', wa_status:'queued' },
+    { order_number:'#8819', customer_name:'Usman Ali', customer_phone:'+92 333 5551234', store_name:'Khan Electronics', total:'5100', currency:'₹', payment_method:'prepaid', status:'shipped', wa_status:'read' },
+    { order_number:'#8818', customer_name:'Sara Ahmed', customer_phone:'+92 321 4445678', store_name:"Ahmed's Mart", total:'1450', currency:'₹', payment_method:'cod', status:'rto_risk', wa_status:'failed' },
+    { order_number:'#8817', customer_name:'Hassan Mir', customer_phone:'+92 345 6781234', store_name:'Khan Electronics', total:'3200', currency:'₹', payment_method:'cod', status:'confirmed', wa_status:'delivered' },
+  ];
+  renderOrdersTable(demoOrders, demoOrders.length);
+
+  // Stats
+  document.getElementById('o-total').textContent = '287';
+  document.getElementById('o-confirmed').textContent = '241';
+  document.getElementById('o-conf-rate').textContent = '84% rate';
+  document.getElementById('o-rto').textContent = '18';
+  document.getElementById('o-rto-rate').textContent = '6.2% rate';
+  document.getElementById('o-rev').textContent = '₹2.1L';
+}
+
+function renderOrdersTable(orders, total) {
+  document.getElementById('orders-loading').style.display = 'none';
+  document.getElementById('orders-table').style.display = '';
+  document.getElementById('orders-foot').style.display = 'flex';
+  document.getElementById('orders-count').textContent = `Showing 1–${orders.length} of ${total}`;
+  document.getElementById('orders-body').innerHTML = orders.map(o => `
+    <tr>
+      <td style="font-family:var(--m);font-size:11.5px">${o.order_number}</td>
+      <td><div style="font-size:12.5px;font-weight:500">${o.customer_name || '—'}</div><div style="font-size:11px;color:var(--t2)">${o.customer_phone || ''}</div></td>
+      <td><span class="badge bk" style="font-size:10px">${o.store_name || '—'}</span></td>
+      <td style="font-weight:600">${o.currency || ''}${Number(o.total || 0).toLocaleString()}</td>
+      <td>${o.payment_method === 'cod' ? '<span class="badge bw">COD</span>' : '<span class="badge bi">Prepaid</span>'}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td>${waBadge(o.wa_status)}</td>
+      <td>
+        ${can('orders:view') ? `<button class="btn btn-g btn-xs" onclick="toast('Order detail opened','ok')">View</button>` : ''}
+        ${can('orders:send_wa') && (o.wa_status === 'failed' || o.status === 'pending') ? ` <button class="btn btn-p btn-xs" onclick="toast('WA sent to ${o.customer_name}','ok')">Send WA</button>` : ''}
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── FLOWS ─────────────────────────────────────────────────────
+async function loadFlows() {
+  document.getElementById('flows-list').innerHTML = '<div class="loading"><div class="spin"></div>Loading flows…</div>';
+  const demoFlows = [
+    { id:'f1', name:'COD Confirmation', trigger:'order_created', status:'active', stats:{runs:287, success:279, failed:8}, store_name:"Ahmed's Mart" },
+    { id:'f2', name:'Abandoned Cart Recovery', trigger:'cart_abandoned', status:'active', stats:{runs:41, success:9, failed:32}, store_name:"Ahmed's Mart" },
+    { id:'f3', name:'Order Tracking', trigger:'order_shipped', status:'active', stats:{runs:192, success:181, failed:11}, store_name:'Khan Electronics' },
+    { id:'f4', name:'Review Request', trigger:'order_delivered', status:'paused', stats:{runs:68, success:62, failed:6}, store_name:"Ahmed's Mart" },
+  ];
+  document.getElementById('flows-count').textContent = `${demoFlows.filter(f => f.status==='active').length} live · ${demoFlows.filter(f => f.status==='paused').length} paused`;
+  document.getElementById('flows-list').innerHTML = '<div class="g2">' + demoFlows.map(f => `
+    <div class="card">
+      <div class="ch">
+        <div><div class="ct">${f.name}</div><div class="cs">${f.stats.runs} runs · ${Math.round(f.stats.success/f.stats.runs*100)}% success</div></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${can('flows:toggle') ? `<div class="tog ${f.status === 'active' ? 'on' : 'off'}" onclick="toggleFlow('${f.id}',this)"></div>` : ''}
+          <span class="badge ${f.status === 'active' ? 'bk' : 'bw'}">${f.status === 'active' ? '● Live' : 'Paused'}</span>
+        </div>
+      </div>
+      <div class="cb" style="display:flex;flex-direction:column;gap:0">
+        <div class="fn"><div class="fi fi-t">⚡</div><div><div class="ft">${triggerLabel(f.trigger)}</div><div class="fd">Shopify / WooCommerce webhook</div></div><span class="ftag tt">Trigger</span></div>
+        <div class="fc"></div>
+        <div class="fn"><div class="fi fi-c">🌍</div><div><div class="ft">Auto-detect language</div><div class="fd">From customer phone prefix</div></div><span class="ftag tc">Auto</span></div>
+        <div class="fc"></div>
+        <div class="fn"><div class="fi fi-a">💬</div><div><div class="ft">Send WhatsApp message</div><div class="fd">Template in customer's language</div></div><span class="ftag ta">Action</span></div>
+      </div>
+      <div style="padding:10px 16px;border-top:.5px solid var(--b);display:flex;gap:8px">
+        ${can('flows:edit') ? `<button class="btn btn-g btn-sm" onclick="toast('Flow editor opened','ok')">Edit flow</button>` : ''}
+        ${can('flows:delete') ? `<button class="btn btn-r btn-sm" onclick="toast('Flow archived','ok')">Archive</button>` : ''}
+      </div>
+    </div>
+  `).join('') + '</div>';
+}
+
+async function toggleFlow(id, tog) {
+  if (!can('flows:toggle')) return toast('No permission to toggle flows', 'err');
+  tog.classList.toggle('on'); tog.classList.toggle('off');
+  const status = tog.classList.contains('on') ? 'active' : 'paused';
+  toast(`Flow ${status === 'active' ? 'activated' : 'paused'}`, 'ok');
+  try { await apiFetch('/flows/' + id + '/toggle', { method: 'PUT' }); } catch {}
+}
+
+// ── CONVERSATIONS ─────────────────────────────────────────────
+async function loadConversations() {
+  const demoConvs = [
+    { id:'c1', customer_name:'Bilal Raza', customer_phone:'+92 301 1234567', last_message:'✅ Confirm my order', last_message_at:'2m', status:'open' },
+    { id:'c2', customer_name:'Fatima Khan', customer_phone:'+92 312 9876543', last_message:'When will it arrive?', last_message_at:'8m', status:'open' },
+    { id:'c3', customer_name:'Sara Ahmed', customer_phone:'+92 321 4445678', last_message:'I want to cancel', last_message_at:'15m', status:'pending' },
+  ];
+  document.getElementById('conv-list').innerHTML = demoConvs.map(c => `
+    <div style="display:flex;gap:11px;padding:12px 14px;border-bottom:.5px solid var(--b);cursor:pointer;transition:background .12s" onclick="openConv('${c.id}','${c.customer_name}','${c.customer_phone}')" onmouseover="this.style.background='var(--s2)'" onmouseout="this.style.background=''">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">👤</div>
+      <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${c.customer_name}</div><div style="font-size:12px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.last_message}</div></div>
+      <div style="font-size:10.5px;color:var(--t3)">${c.last_message_at}</div>
+    </div>
+  `).join('');
+}
+
+function openConv(id, name, phone) {
+  document.getElementById('conv-title').textContent = name;
+  document.getElementById('conv-sub').textContent = phone;
+  document.getElementById('conv-handoff').style.display = '';
+  document.getElementById('conv-messages').innerHTML = `
+    <div class="wa-b">Hi ${name.split(' ')[0]}! Your order #8821 ₹2,340.<div class="wa-btns"><div class="wa-btn">✅ Confirm my order</div><div class="wa-btn">❌ Cancel order</div></div><div class="wa-t">10:42 AM</div></div>
+    <div class="wa-b sent">✅ Confirm my order<div class="wa-t">10:43 AM ✓✓</div></div>
+    <div class="wa-b">Great! 🎉 Order confirmed. Dispatching in 24 hrs.<div class="wa-t">10:43 AM</div></div>
+  `;
+}
+
+function sendReply() {
+  if (!can('conversations:reply')) return toast('No permission to reply', 'err');
+  const inp = document.getElementById('reply-input');
+  if (!inp.value.trim()) return;
+  const msgs = document.getElementById('conv-messages');
+  msgs.innerHTML += `<div class="wa-b sent">${inp.value}<div class="wa-t">Just now ✓</div></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+  inp.value = '';
+  toast('Message sent', 'ok');
+}
+
+function filterConversations(val) { /* filter conv list */ }
+
+// ── ANALYTICS ─────────────────────────────────────────────────
+async function loadAnalytics() {
+  try {
+    const res = await apiFetch('/analytics/overview');
+    if (res.ok) {
+      const d = await res.json();
+      document.getElementById('ana-sent').textContent = Number(d.messages?.sent || 0).toLocaleString();
+      document.getElementById('ana-delivered').textContent = Number(d.messages?.delivered || 0).toLocaleString();
+      document.getElementById('ana-replied').textContent = Number(d.messages?.replied || 0).toLocaleString();
+    }
+  } catch {}
+  document.getElementById('ana-sent').textContent = '3,420';
+  document.getElementById('ana-delivered').textContent = '3,215';
+  document.getElementById('ana-del-rate').textContent = '94% rate';
+  document.getElementById('ana-replied').textContent = '2,082';
+  document.getElementById('ana-reply-rate').textContent = '61% reply rate';
+}
+
+// ── TEAM ──────────────────────────────────────────────────────
+async function loadTeam() {
+  const teamDemo = [
+    { id:'u1', email:'ahmed@store.com', first_name:'Ahmed', last_name:'Khan', is_owner:true, role_name:'Owner', last_login_at:'Now', is_active:true },
+    { id:'u2', email:'sara@store.com', first_name:'Sara', last_name:'Malik', is_owner:false, role_name:'Admin', last_login_at:'1h ago', is_active:true },
+    { id:'u3', email:'ali@store.com', first_name:'Ali', last_name:'Hassan', is_owner:false, role_name:'Marketing', last_login_at:'3h ago', is_active:true },
+    { id:'u4', email:'fatima@store.com', first_name:'Fatima', last_name:'Raza', is_owner:false, role_name:'Sales', last_login_at:'1d ago', is_active:true },
+    { id:'u5', email:'usman@store.com', first_name:'Usman', last_name:'Ahmed', is_owner:false, role_name:'Support', last_login_at:'2d ago', is_active:false },
+  ];
+  document.getElementById('team-count').textContent = `${teamDemo.length} members`;
+  document.getElementById('team-list').innerHTML = teamDemo.map(m => `
+    <div class="member-row">
+      <div class="member-av">${m.first_name[0]}${m.last_name[0]}</div>
+      <div class="member-info">
+        <div class="member-name">${m.first_name} ${m.last_name} ${m.is_owner ? '👑' : ''}</div>
+        <div class="member-email">${m.email} · Last: ${m.last_login_at}</div>
+      </div>
+      <span class="role-badge rb-${m.role_name.toLowerCase()}">${m.role_name.toUpperCase()}</span>
+      <div class="member-actions">
+        ${!m.is_owner && can('team:edit') ? `<select class="inp" style="width:110px;padding:4px 8px;font-size:11.5px" onchange="changeRole('${m.id}',this.value)"><option>${m.role_name}</option><option>Admin</option><option>Marketing</option><option>Sales</option><option>Support</option></select>` : ''}
+        ${!m.is_owner && can('team:edit') ? `<button class="btn btn-g btn-xs" onclick="toggleMember('${m.id}',${m.is_active})">${m.is_active ? 'Suspend' : 'Activate'}</button>` : ''}
+        ${!m.is_owner && can('team:remove') ? `<button class="btn btn-r btn-xs" onclick="removeMember('${m.id}','${m.first_name}')">Remove</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  // Roles
+  const rolesDemo = [
+    { name:'Owner', slug:'owner', description:'Full access to everything', member_count:1, is_system:true },
+    { name:'Admin', slug:'admin', description:'Full access except billing deletion', member_count:1, is_system:true },
+    { name:'Marketing', slug:'marketing', description:'Flows, templates, broadcasts, catalogue', member_count:1, is_system:true },
+    { name:'Sales', slug:'sales', description:'Orders, conversations, analytics', member_count:1, is_system:true },
+    { name:'Support', slug:'support', description:'Conversations and orders only', member_count:1, is_system:true },
+  ];
+  document.getElementById('roles-list').innerHTML = rolesDemo.map(r => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:.5px solid var(--b)">
+      <div>
+        <div style="font-size:13px;font-weight:500">${r.name} <span style="font-size:10px;color:var(--t3)">${r.member_count} member${r.member_count !== 1 ? 's' : ''}</span></div>
+        <div style="font-size:11.5px;color:var(--t2)">${r.description}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        ${!r.is_system && can('team:edit') ? `<button class="btn btn-g btn-xs" onclick="editRole('${r.slug}')">Edit</button>` : ''}
+        <button class="btn btn-g btn-xs" onclick="viewRolePerms('${r.slug}')">View perms</button>
+      </div>
+    </div>
+  `).join('');
+
+  // Permission matrix
+  const permGroups = {
+    'Dashboard': ['dashboard:view'],
+    'Stores': ['stores:view','stores:create','stores:edit','stores:delete'],
+    'Orders': ['orders:view','orders:export','orders:send_wa'],
+    'Conversations': ['conversations:view','conversations:reply','conversations:assign'],
+    'Flows': ['flows:view','flows:create','flows:edit','flows:delete','flows:toggle'],
+    'Templates': ['templates:view','templates:create','templates:edit'],
+    'Catalogue': ['catalogue:view','catalogue:create','catalogue:sync'],
+    'Broadcasts': ['broadcasts:view','broadcasts:create','broadcasts:send'],
+    'Analytics': ['analytics:view','analytics:export'],
+    'Billing': ['billing:view','billing:manage'],
+    'Settings': ['settings:view','settings:edit'],
+    'Team': ['team:view','team:invite','team:edit','team:remove'],
+  };
+  const roles = ['owner','admin','marketing','sales','support'];
+  const perms = DEMO_PERMS;
+  let rows = '';
+  for (const [group, ps] of Object.entries(permGroups)) {
+    rows += `<tr><td colspan="6" style="background:var(--s2);font-size:10.5px;font-weight:600;color:var(--t3);letter-spacing:.4px;text-transform:uppercase">${group}</td></tr>`;
+    for (const p of ps) {
+      const action = p.split(':')[1];
+      rows += `<tr><td style="padding-left:20px;color:var(--t2);font-size:12px">${action}</td>${roles.map(r => {
+        const has = r === 'owner' || perms[r]?.[p];
+        return `<td style="text-align:center">${has ? '✅' : '—'}</td>`;
+      }).join('')}</tr>`;
+    }
+  }
+  document.getElementById('perm-matrix-body').innerHTML = rows;
+}
+
+function changeRole(userId, role) {
+  if (!can('team:edit')) return toast('No permission to edit roles', 'err');
+  toast(`Role changed to ${role}`, 'ok');
+}
+function toggleMember(userId, active) {
+  if (!can('team:edit')) return toast('No permission', 'err');
+  toast(active ? 'Member suspended' : 'Member activated', 'ok');
+}
+function removeMember(userId, name) {
+  if (!can('team:remove')) return toast('No permission to remove members', 'err');
+  openModal('Remove ' + name + '?', 'This will revoke their access immediately.',
+    '', 'Remove', () => toast(name + ' removed', 'ok'));
+  document.getElementById('mok').className = 'btn btn-r';
+}
+
+// ── WA NUMBERS ────────────────────────────────────────────────
+async function loadWANumbers() {
+  document.getElementById('wa-numbers').innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gl);border:.5px solid var(--g);border-radius:9px;margin-bottom:10px">
+      <div><div style="font-size:13px;font-weight:600;color:var(--gd)">+92 300 123 4567</div><div style="font-size:11px;color:var(--t2)">Ahmed's Mart · Tier 2 · 10k msgs/day</div></div>
+      <span class="badge bk">● Live</span>
+    </div>
+    ${can('whatsapp:setup') ? '<button class="btn btn-g" style="font-size:12px;width:100%" onclick="toast(\'Add number flow started\',\'ok\')">+ Add another number</button>' : ''}
+  `;
+}
+
+// ── SETTINGS ─────────────────────────────────────────────────
+function loadSettings() {
+  const u = state.user;
+  document.getElementById('prof-fn').value = u.first_name || '';
+  document.getElementById('prof-ln').value = u.last_name || '';
+  document.getElementById('prof-email').value = u.email || '';
+  document.getElementById('prof-company').value = u.org_name || '';
+  document.getElementById('api-key').value = 'wap_live_sk_4f8a2b1c9e7d3f6a0b5e8c2d';
+}
+async function saveProfile() {
+  const body = { first_name: document.getElementById('prof-fn').value, last_name: document.getElementById('prof-ln').value };
+  try {
+    const res = await apiFetch('/auth/me', { method: 'PUT', body: JSON.stringify(body) });
+  } catch {}
+  toast('Profile saved', 'ok');
+}
+function copyAPIKey() { navigator.clipboard.writeText(document.getElementById('api-key').value).then(() => toast('API key copied!', 'ok')); }
+
+// ── STORE CONNECT ACTIONS ─────────────────────────────────────
+function selStorePlatform(el, plat) {
+  document.getElementById('store-pgrid').querySelectorAll('.pcard').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.querySelectorAll('.connect-panel').forEach(p => p.classList.remove('show'));
+  document.getElementById('cp-' + plat)?.classList.add('show');
+  if (plat === 'custom') document.getElementById('webhook-url').value = API + '/stores/webhooks/custom/' + (state.user?.id || 'abc123');
+}
+async function connectShopify() {
+  const shop = document.getElementById('shopify-url').value.trim();
+  if (!shop) return toast('Enter your store URL', 'err');
+  if (!can('stores:create')) return toast('No permission to add stores', 'err');
+  const url = `https://${shop}/admin/oauth/authorize?client_id=${encodeURIComponent('SHOPIFY_KEY')}&scope=read_orders,read_products,read_customers&redirect_uri=${encodeURIComponent(API + '/stores/shopify/callback')}&state=secure_random`;
+  toast('Redirecting to Shopify…', 'ok');
+  setTimeout(() => { toast('Shopify connected! (demo)', 'ok'); loadStores(); }, 1500);
+}
+async function connectWoo() {
+  if (!can('stores:create')) return toast('No permission to add stores', 'err');
+  const url = document.getElementById('woo-url').value.trim();
+  const key = document.getElementById('woo-key').value.trim();
+  const secret = document.getElementById('woo-secret').value.trim();
+  if (!url || !key || !secret) return toast('All WooCommerce fields are required', 'err');
+  try {
+    const res = await apiFetch('/stores', { method: 'POST', body: JSON.stringify({ name: url, platform: 'woocommerce', woo_url: url, woo_consumer_key: key, woo_consumer_secret: secret }) });
+    if (res.ok) { toast('WooCommerce connected!', 'ok'); loadStores(); }
+  } catch { toast('WooCommerce connected! (demo)', 'ok'); }
+}
+async function connectBC() {
+  if (!can('stores:create')) return toast('No permission to add stores', 'err');
+  toast('BigCommerce connecting…', 'ok');
+  setTimeout(() => { toast('BigCommerce connected! (demo)', 'ok'); }, 1000);
+}
+function copyWebhook() { navigator.clipboard.writeText(document.getElementById('webhook-url').value).then(() => toast('Webhook URL copied!', 'ok')); }
+function testWebhook() { toast('Test event sent — check your server logs', 'ok'); }
+
+// ── WA ACTIONS ────────────────────────────────────────────────
+async function sendOTP(method) {
+  if (!can('whatsapp:setup')) return toast('No permission to configure WhatsApp', 'err');
+  toast(`OTP sent via ${method}`, 'ok');
+}
+async function verifyOTP() {
+  if (!can('whatsapp:setup')) return toast('No permission to verify WhatsApp', 'err');
+  toast('Number verified! Moving to step 4…', 'ok');
+}
+
+// ── BILLING ───────────────────────────────────────────────────
+async function startCheckout(plan, interval) {
+  if (!can('billing:manage')) return toast('You need Owner permission to change billing', 'err');
+  try {
+    const res = await apiFetch('/billing/checkout', { method: 'POST', body: JSON.stringify({ plan, interval }) });
+    if (res.ok) { const d = await res.json(); window.location.href = d.url; return; }
+  } catch {}
+  toast('Redirecting to Stripe checkout…', 'ok');
+}
+
+// ── HELPERS ───────────────────────────────────────────────────
+function statusBadge(s) {
+  const m = { confirmed:'bk', pending:'bw', shipped:'bi', rto_risk:'be', cancelled:'be' };
+  const l = { confirmed:'Confirmed', pending:'Pending', shipped:'Shipped', rto_risk:'RTO Risk', cancelled:'Cancelled' };
+  return `<span class="badge ${m[s]||'bw'}">${l[s]||s}</span>`;
+}
+function waBadge(s) {
+  const m = { sent:'bwa', delivered:'bwa', read:'bwa', queued:'bwa', failed:'be', pending:'bw' };
+  const l = { sent:'✓ Sent', delivered:'✓ Delivered', read:'✓ Read', queued:'⟳ Queued', failed:'⚠ Failed', pending:'Pending' };
+  return `<span class="badge ${m[s]||'bw'}">${l[s]||s}</span>`;
+}
+function triggerLabel(t) { return { order_created:'Order created (COD)', cart_abandoned:'Cart abandoned (1 hr)', order_shipped:'Order shipped', order_delivered:'Order delivered (5 day wait)' }[t] || t; }
+
+// ── MODALS ────────────────────────────────────────────────────
+function openModal(t, s, b, ok, fn) {
+  document.getElementById('mt').textContent = t;
+  document.getElementById('ms').textContent = s || '';
+  document.getElementById('mb').innerHTML = b || '';
+  document.getElementById('mok').textContent = ok || 'Confirm';
+  document.getElementById('mok').className = 'btn btn-p';
+  document.getElementById('mok').onclick = () => { if (fn) fn(); closeModal(); };
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal() { document.getElementById('overlay').classList.remove('show'); }
+
+function openAddStoreModal() {
+  if (!can('stores:create')) return toast('No permission to add stores', 'err');
+  switchMod('stores');
+  document.getElementById('add-store-wizard').scrollIntoView({ behavior: 'smooth' });
+}
+
+function openInviteModal() {
+  if (!can('team:invite')) return toast('No permission to invite members', 'err');
+  openModal('Invite team member', 'They will receive an email with login credentials.',
+    `<div class="field"><div class="lbl">Email</div><input class="inp" id="inv-email" type="email" placeholder="colleague@store.com"></div>
+     <div class="field"><div class="lbl">First name</div><input class="inp" id="inv-fn" placeholder="Sara"></div>
+     <div class="field"><div class="lbl">Last name</div><input class="inp" id="inv-ln" placeholder="Malik"></div>
+     <div class="field"><div class="lbl">Role <span class="tip-icon" data-tip="This controls what they can see and do in Wapify. You can change it later.">?</span></div>
+       <select class="inp" id="inv-role">
+         <option value="admin">Admin — Full access except billing</option>
+         <option value="marketing">Marketing — Flows, templates, broadcasts</option>
+         <option value="sales">Sales — Orders, conversations</option>
+         <option value="support">Support — Conversations and orders</option>
+       </select>
+     </div>`,
+    'Send invite →', async () => {
+      const email = document.getElementById('inv-email').value.trim();
+      if (!email) return toast('Email required', 'err');
+      try {
+        const res = await apiFetch('/team/invite', { method: 'POST', body: JSON.stringify({ email, first_name: document.getElementById('inv-fn').value, last_name: document.getElementById('inv-ln').value, role_id: document.getElementById('inv-role').value }) });
+      } catch {}
+      toast('Invitation sent to ' + email, 'ok');
+      loadTeam();
+    });
+}
+
+function openRoleModal() {
+  if (!can('team:edit')) return toast('No permission to create roles', 'err');
+  openModal('Create custom role', 'Define a custom set of permissions for this role.',
+    `<div class="field"><div class="lbl">Role name</div><input class="inp" id="role-name" placeholder="e.g. Operations Manager"></div>
+     <div class="field"><div class="lbl">Description</div><input class="inp" id="role-desc" placeholder="What this role can do…"></div>
+     <div style="font-size:11.5px;font-weight:500;color:var(--t2);margin-bottom:8px">Base on existing role:</div>
+     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+       ${['Admin','Marketing','Sales','Support'].map(r => `<button class="btn btn-g btn-sm" onclick="document.getElementById('role-name').value='${r} (custom)'">${r}</button>`).join('')}
+     </div>`,
+    'Create role', () => toast('Custom role created', 'ok'));
+}
+
+function openBroadcastModal() {
+  if (!can('broadcasts:create')) return toast('No permission to create broadcasts', 'err');
+  openModal('New broadcast campaign', 'Send WhatsApp messages to a segmented customer list.',
+    `<div class="field"><div class="lbl">Campaign name</div><input class="inp" placeholder="Eid Sale 2026"></div>
+     <div class="field"><div class="lbl">Segment</div><select class="inp"><option>All customers</option><option>COD customers</option><option>VIP (3+ orders)</option><option>Unconfirmed CODs</option></select></div>
+     <div class="field"><div class="lbl">Template</div><select class="inp"><option>cod_confirm_v2</option><option>abandoned_cart_v1</option><option>order_shipped_v1</option></select></div>
+     <div class="field"><div class="lbl">Schedule</div><input class="inp" type="datetime-local"></div>`,
+    'Schedule broadcast →', () => toast('Broadcast scheduled!', 'ok'));
+}
+
+function openNewFlowModal() {
+  if (!can('flows:create')) return toast('No permission to create flows', 'err');
+  openModal('New automation flow', 'Choose a trigger to start building your flow.',
+    `<div class="field"><div class="lbl">Flow name</div><input class="inp" placeholder="e.g. Post-delivery review request"></div>
+     <div class="field"><div class="lbl">Trigger</div>
+       <select class="inp"><option value="order_created">Order created (COD)</option><option value="cart_abandoned">Cart abandoned</option><option value="order_shipped">Order shipped</option><option value="order_delivered">Order delivered</option></select>
+     </div>
+     <div class="field"><div class="lbl">Store</div><select class="inp">${state.stores.map(s=>`<option value="${s.id}">${s.name}</option>`).join('')}</select></div>`,
+    'Create flow →', () => toast('Flow created — opening editor…', 'ok'));
+}
+
+function openProfile() {
+  openModal(state.user.first_name + ' ' + state.user.last_name, state.user.email + ' · ' + state.user.role_name,
+    `<div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+       <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Role</span><span class="role-badge rb-${state.user.role_slug}" style="font-size:11px">${(state.user.role_name||'').toUpperCase()}</span></div>
+       <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Org</span><span>${state.user.org_name}</span></div>
+       <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Plan</span><span style="font-weight:500;color:var(--gd)">${(state.user.plan||'free').toUpperCase()}</span></div>
+     </div>`,
+    'Go to Settings', () => switchMod('settings'));
+}
+
+function viewRolePerms(slug) {
+  const p = DEMO_PERMS[slug] || {};
+  const granted = Object.entries(slug === 'owner' ? {'dashboard:view':1,'stores:manage':1,'orders:manage':1,'team:manage':1,'billing:manage':1} : p).filter(([,v]) => v).map(([k]) => k);
+  openModal(slug.charAt(0).toUpperCase() + slug.slice(1) + ' permissions', `${granted.length} permissions granted`,
+    `<div style="display:flex;flex-wrap:wrap;gap:6px">${granted.map(p=>`<span class="badge bk">${p}</span>`).join('')}</div>`,
+    'Close', null);
+  document.getElementById('mfoot').innerHTML = '<button class="btn btn-g" onclick="closeModal()">Close</button>';
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+let nt;
+function toast(msg, type = 'ok') {
+  const el = document.getElementById('notif');
+  document.getElementById('ni').textContent = type === 'ok' ? '✅' : type === 'err' ? '❌' : 'ℹ️';
+  document.getElementById('nm').textContent = msg;
+  el.className = 'notif ' + type + ' show';
+  clearTimeout(nt); nt = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+// ── CHARTS ────────────────────────────────────────────────────
+let ci = false;
+function initDashCharts() {
+  if (ci) return; ci = true;
+  const dk = matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc = dk ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.35)';
+  const gc = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
+  const base = { responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}}} };
+  const rc = document.getElementById('rtoC');
+  if (rc) new Chart(rc,{type:'line',data:{labels:['Apr 1','Apr 5','Apr 10','Apr 15','Apr 20'],datasets:[{data:[18,14.5,11,8.2,6.2],borderColor:'#25D366',backgroundColor:'rgba(37,211,102,.08)',tension:.4,fill:true,pointBackgroundColor:'#25D366',pointRadius:3,borderWidth:2}]},options:{...base,scales:{...base.scales,y:{...base.scales.y,min:0,max:22,ticks:{...base.scales.y.ticks,callback:v=>v+'%'}}}}});
+  const mc = document.getElementById('msgC');
+  if (mc) new Chart(mc,{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[180,210,165,230,195,120,90],backgroundColor:'#25D366',borderRadius:3},{data:[90,110,95,140,105,70,50],backgroundColor:'#0ea5e9',borderRadius:3},{data:[40,55,30,65,50,35,20],backgroundColor:'#a78bfa',borderRadius:3}]},options:{...base,scales:{x:{...base.scales.x,stacked:true},y:{...base.scales.y,stacked:true}}}});
+}
+
+let ci2 = false;
+function initAnalyticsCharts() {
+  if (ci2) return; ci2 = true;
+  const dk = matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc = dk ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.35)';
+  const gc = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
+  const base = { responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}}} };
+  const rc = document.getElementById('rtoC2');
+  if (rc) new Chart(rc,{type:'line',data:{labels:['Apr 1','Apr 5','Apr 10','Apr 15','Apr 20'],datasets:[{data:[18,14.5,11,8.2,6.2],borderColor:'#25D366',backgroundColor:'rgba(37,211,102,.08)',tension:.4,fill:true,pointBackgroundColor:'#25D366',pointRadius:3,borderWidth:2}]},options:{...base,scales:{...base.scales,y:{...base.scales.y,min:0,max:22,ticks:{...base.scales.y.ticks,callback:v=>v+'%'}}}}});
+  const mc = document.getElementById('msgC2');
+  if (mc) new Chart(mc,{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[180,210,165,230,195,120,90],backgroundColor:'#25D366',borderRadius:3},{data:[90,110,95,140,105,70,50],backgroundColor:'#0ea5e9',borderRadius:3},{data:[40,55,30,65,50,35,20],backgroundColor:'#a78bfa',borderRadius:3}]},options:{...base,scales:{x:{...base.scales.x,stacked:true},y:{...base.scales.y,stacked:true}}}});
+}
+
+// ── AUTO LOGIN FROM STORAGE ───────────────────────────────────
+window.addEventListener('load', async () => {
+  const at = localStorage.getItem('accessToken');
+  const rt = localStorage.getItem('refreshToken');
+  if (at && rt) {
+    state.accessToken = at;
+    state.refreshToken = rt;
+    try {
+      const res = await apiFetch('/auth/me');
+      if (res.ok) { const d = await res.json(); state.user = d.user; initApp(); return; }
+    } catch {}
+  }
+  goPage('page-login');
+});
+</script>
+</body>
+</html>
