@@ -40,10 +40,14 @@ async function seed() {
     await client.query(`INSERT INTO admin_users (email,password_hash,name,role) VALUES ($1,$2,'CEO','owner') ON CONFLICT (email) DO NOTHING`,
       [process.env.ADMIN_EMAIL || 'admin@wapify.com', adminPass]);
 
-    // Demo org
-    const orgId = uuidv4();
-    await client.query(`INSERT INTO organizations (id,name,slug,plan,plan_status,msg_quota,max_stores,billing_email)
-      VALUES ($1,'Demo Store','demo-store','growth','active',5000,3,'demo@wapify.com') ON CONFLICT DO NOTHING`, [orgId]);
+    // Demo org (Use fixed ID or handle conflict properly)
+    const orgRes = await client.query(`
+      INSERT INTO organizations (id, name, slug, plan, plan_status, msg_quota, max_stores, billing_email)
+      VALUES ($1, 'Demo Store', 'demo-store', 'growth', 'active', 5000, 3, 'demo@wapify.com')
+      ON CONFLICT (slug) DO UPDATE SET name = EXCLUDED.name
+      RETURNING id
+    `, [uuidv4()]);
+    const orgId = orgRes.rows[0].id;
 
     // Roles for demo org
     const roleIds = {};
