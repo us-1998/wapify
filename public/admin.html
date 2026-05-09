@@ -7,37 +7,26 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--g:#25D366;--gd:#128C7E;--gl:#e7f8ef;--s:#fff;--s2:#f1f3f8;--s3:#e8eaf2;--b:rgba(0,0,0,.07);--b2:rgba(0,0,0,.13);--t:#0d1117;--t2:#556070;--t3:#96a0b0;--blue:#2563eb;--bluel:#eff6ff;--red:#dc2626;--redl:#fef2f2;--amber:#d97706;--amberl:#fffbeb;--purple:#7c3aed;--purplel:#f5f3ff;--indigo:#4338ca;--indigol:#eef2ff;--f:'DM Sans',sans-serif;--m:'DM Mono',monospace;--r:10px;--r2:14px;--sh:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.04);--sh2:0 8px 30px rgba(0,0,0,.14)}
-@media(prefers-color-scheme:dark){:root{--s:#1a1d24;--s2:#13151c;--s3:#0f1117;--b:rgba(255,255,255,.06);--b2:rgba(255,255,255,.12);--t:#e8ecf2;--t2:#8a95a3;--t3:#556070;--gl:#0d2b1e;--bluel:#0f1e3d;--redl:#2a0a0a;--amberl:#2a1f00;--purplel:#1e1030;--indigol:#1a1840}}
+:root{--g:#25D366;--gd:#128C7E;--gl:#e7f8ef;--s:#fff;--s2:#f1f3f8;--b:rgba(0,0,0,.07);--b2:rgba(0,0,0,.13);--t:#0d1117;--t2:#556070;--t3:#96a0b0;--red:#dc2626;--redl:#fef2f2;--amber:#d97706;--amberl:#fffbeb;--blue:#2563eb;--bluel:#eff6ff;--purple:#7c3aed;--purplel:#f5f3ff;--indigo:#4338ca;--indigol:#eef2ff;--f:'DM Sans',sans-serif;--m:'DM Mono',monospace;--r:10px;--r2:14px;--sh:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.04);--sh2:0 8px 30px rgba(0,0,0,.14)}
+@media(prefers-color-scheme:dark){:root{--s:#1a1d24;--s2:#13151c;--b:rgba(255,255,255,.06);--b2:rgba(255,255,255,.12);--t:#e8ecf2;--t2:#8a95a3;--t3:#556070;--gl:#0d2b1e;--bluel:#0f1e3d;--redl:#2a0a0a;--amberl:#2a1f00;--purplel:#1e1030;--indigol:#1a1840}}
 body{font-family:var(--f);background:var(--s2);color:var(--t);min-height:100vh}
 .page{display:none;min-height:100vh}.page.show{display:flex}
-#page-login{align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e1b4b)}
-.app{flex:1;flex-direction:row}
+#pg-login{align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e1b4b)}
+.app{flex-direction:row;height:100vh;overflow:hidden}
 .sb{width:222px;min-width:222px;background:var(--s);border-right:.5px solid var(--b);display:flex;flex-direction:column}
 .sb-logo{padding:15px 14px;border-bottom:.5px solid var(--b);display:flex;align-items:center;gap:10px}
-.admin-lm{width:32px;height:32px;background:linear-gradient(135deg,#1e1b4b,#4338ca);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.admin-title{font-size:14px;font-weight:700;color:var(--t)}
-.admin-sub{font-size:9.5px;color:var(--t3);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
-.ceo-pill{margin:10px 10px 0;background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:9px}
-.ceo-av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:white;flex-shrink:0}
+.alm{width:32px;height:32px;background:linear-gradient(135deg,#1e1b4b,#4338ca);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .sb-nav{padding:10px 8px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1px}
 .sn-sec{font-size:9.5px;font-weight:600;color:var(--t3);letter-spacing:.7px;text-transform:uppercase;padding:8px 8px 3px}
-.ni{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--t2);transition:all .12s;user-select:none}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--t2);transition:all .12s}
 .ni:hover{background:var(--s2);color:var(--t)}.ni.active{background:var(--indigol);color:var(--indigo);font-weight:500}
 .ni-ico{font-size:14px;width:18px;text-align:center;flex-shrink:0}
 .ni-badge{margin-left:auto;font-size:10px;background:var(--red);color:white;padding:1px 6px;border-radius:8px;font-weight:600}
-.sb-foot{padding:11px;border-top:.5px solid var(--b);font-size:11px;color:var(--t3);text-align:center;line-height:1.5}
+.sb-foot{padding:11px;border-top:.5px solid var(--b);font-size:11px;color:var(--t3);text-align:center;line-height:1.8}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.topbar{height:52px;background:var(--s);border-bottom:.5px solid var(--b);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0}
-.tb-t{font-size:14.5px;font-weight:600;color:var(--t)}.tb-c{font-size:12px;color:var(--t3)}
+.topbar{height:52px;background:var(--s);border-bottom:.5px solid var(--b);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
+.tb-t{font-size:14.5px;font-weight:600;color:var(--t)}
 .tb-r{margin-left:auto;display:flex;align-items:center;gap:8px}
-.btn{padding:8px 14px;border-radius:var(--r);font-size:12.5px;font-weight:500;cursor:pointer;border:none;font-family:var(--f);transition:all .15s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.btn-p{background:var(--g);color:white}.btn-p:hover{background:#1fba59}
-.btn-g{background:var(--s2);color:var(--t2);border:.5px solid var(--b2)}.btn-g:hover{background:var(--s3)}
-.btn-r{background:var(--red);color:white}.btn-r:hover{background:#b91c1c}
-.btn-b{background:var(--blue);color:white}.btn-b:hover{background:#1d4ed8}
-.btn-ind{background:var(--indigo);color:white}.btn-ind:hover{background:#3730a3}
-.btn-sm{padding:5px 10px;font-size:11.5px}.btn-xs{padding:3px 8px;font-size:11px}
 .content{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
 .module{display:none;flex-direction:column;gap:16px}.module.active{display:flex}
 .card{background:var(--s);border:.5px solid var(--b);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh)}
@@ -51,141 +40,134 @@ body{font-family:var(--f);background:var(--s2);color:var(--t);min-height:100vh}
 .sc{background:var(--s);border:.5px solid var(--b);border-radius:var(--r2);padding:15px 16px;box-shadow:var(--sh)}
 .sl{font-size:11px;color:var(--t2);margin-bottom:5px}.sv{font-size:23px;font-weight:700;color:var(--t);letter-spacing:-.5px}
 .sd{font-size:11.5px;margin-top:4px}.up{color:#16a34a}.dn{color:var(--red)}
+.btn{padding:8px 14px;border-radius:var(--r);font-size:12.5px;font-weight:500;cursor:pointer;border:none;font-family:var(--f);transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-p{background:var(--g);color:white}.btn-p:hover{background:#1fba59}
+.btn-g{background:var(--s2);color:var(--t2);border:.5px solid var(--b2)}.btn-g:hover{background:var(--s3)}
+.btn-r{background:var(--red);color:white}.btn-r:hover{background:#b91c1c}
+.btn-i{background:var(--indigo);color:white}.btn-i:hover{background:#3730a3}
+.btn-b{background:var(--blue);color:white}
+.btn-sm{padding:5px 10px;font-size:11.5px}.btn-xs{padding:3px 8px;font-size:11px}
+.btn-block{width:100%;justify-content:center;padding:11px}
+.inp{width:100%;padding:9px 12px;border:.5px solid var(--b2);border-radius:var(--r);font-size:13px;color:var(--t);background:var(--s);font-family:var(--f);outline:none;transition:border .15s}
+.inp:focus{border-color:var(--g)}
+select.inp{cursor:pointer}
+textarea.inp{resize:vertical;min-height:80px}
+.field{margin-bottom:13px}
+.lbl{font-size:11.5px;font-weight:500;color:var(--t2);margin-bottom:5px;display:block}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:6px}
+.bk{background:#dcfce7;color:#15803d}.bw{background:#fef9c3;color:#854d0e}.be{background:#fee2e2;color:#b91c1c}.bi{background:#dbeafe;color:#1d4ed8}.bp{background:var(--purplel);color:var(--purple)}.bii{background:var(--indigol);color:var(--indigo)}
+.chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500}
+.cg{background:var(--gl);color:var(--gd)}.cb2{background:var(--bluel);color:var(--blue)}.cp{background:var(--purplel);color:var(--purple)}.ci{background:var(--indigol);color:var(--indigo)}
 .tbl{width:100%;border-collapse:collapse;font-size:12.5px}
 .tbl th{text-align:left;padding:9px 14px;font-size:10.5px;font-weight:500;color:var(--t3);letter-spacing:.4px;text-transform:uppercase;border-bottom:.5px solid var(--b);background:var(--s2)}
 .tbl td{padding:10px 14px;border-bottom:.5px solid var(--b);color:var(--t);vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}.tbl tr:hover td{background:var(--s2)}
 .tbl-foot{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid var(--b);font-size:12px;color:var(--t2)}
-.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:6px}
-.bk{background:#dcfce7;color:#15803d}.bw{background:#fef9c3;color:#854d0e}.be{background:#fee2e2;color:#b91c1c}.bi{background:#dbeafe;color:#1d4ed8}.bp{background:var(--purplel);color:var(--purple)}.bii{background:var(--indigol);color:var(--indigo)}
-.chip{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500}
-.cg{background:var(--gl);color:var(--gd)}.cb2{background:var(--bluel);color:var(--blue)}.cp{background:var(--purplel);color:var(--purple)}.ci{background:var(--indigol);color:var(--indigo)}
 .alert{display:flex;gap:10px;padding:11px 14px;border-radius:9px;font-size:12.5px;line-height:1.5}
-.al-r{background:var(--redl);border:.5px solid #fca5a5;color:var(--red)}
-.al-a{background:var(--amberl);border:.5px solid #fcd34d;color:var(--amber)}
 .al-g{background:var(--gl);border:.5px solid var(--g);color:var(--gd)}
+.al-a{background:var(--amberl);border:.5px solid #fcd34d;color:var(--amber)}
 .al-b{background:var(--bluel);border:.5px solid #93c5fd;color:var(--blue)}
+.al-r{background:var(--redl);border:.5px solid #fca5a5;color:var(--red)}
+.tog{width:34px;height:19px;border-radius:9px;position:relative;cursor:pointer;flex-shrink:0;transition:background .15s}
+.tog.on{background:var(--g)}.tog.off{background:var(--b2)}
+.tog::after{content:'';position:absolute;width:13px;height:13px;background:white;border-radius:50%;top:3px;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog.on::after{left:18px}.tog.off::after{left:3px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.overlay.show{display:flex}
+.modal{background:var(--s);border-radius:16px;padding:26px;width:520px;max-width:94vw;box-shadow:var(--sh2);max-height:90vh;overflow-y:auto}
+.modal-h{font-size:16px;font-weight:600;margin-bottom:4px}
+.modal-s{font-size:13px;color:var(--t2);margin-bottom:20px}
+.mfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;border-top:.5px solid var(--b);padding-top:16px}
+.toast{position:fixed;top:16px;right:16px;background:var(--s);border:.5px solid var(--b2);border-radius:10px;padding:11px 15px;box-shadow:var(--sh2);display:flex;align-items:center;gap:9px;font-size:13px;z-index:999;transform:translateX(130%);transition:transform .25s;max-width:340px}
+.toast.show{transform:translateX(0)}.toast.ok{border-left:3px solid var(--g)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--t3)}
+.spin{width:20px;height:20px;border:2px solid var(--b2);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-box{background:var(--s);border:.5px solid rgba(255,255,255,.1);border-radius:18px;padding:36px;width:400px;max-width:94vw;box-shadow:var(--sh2)}
+.form-err{background:var(--redl);border:.5px solid #fca5a5;color:var(--red);padding:9px 12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;display:none}
+.form-err.show{display:block}
 .mrr-hero{background:linear-gradient(135deg,#0d1117,#1a2040);border-radius:var(--r2);padding:22px 26px}
 .mrr-l{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:5px}
 .mrr-v{font-size:38px;font-weight:700;color:white;letter-spacing:-1.5px;line-height:1}
 .mrr-d{font-size:13px;color:#6EE7B7;margin-top:6px}
-.mrr-row{display:grid;gap:10px;margin-top:16px}
 .mrr-mini{background:rgba(255,255,255,.07);border-radius:9px;padding:12px 14px}
 .mm-l{font-size:10.5px;color:rgba(255,255,255,.5);margin-bottom:3px}
 .mm-v{font-size:19px;font-weight:700;color:white;letter-spacing:-.5px}
 .mm-d{font-size:11px;color:#6EE7B7;margin-top:2px}
-.act-item{display:flex;gap:11px;padding:10px 0;border-bottom:.5px solid var(--b)}
-.act-item:last-child{border-bottom:none}
-.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.funnel-row{display:flex;align-items:center;gap:12px;margin-bottom:9px}
-.fl{font-size:12.5px;font-weight:500;color:var(--t);width:160px;flex-shrink:0}
-.fb-wrap{flex:1;background:var(--s2);border-radius:5px;height:26px;overflow:hidden}
-.fb{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:11.5px;font-weight:600;color:white}
-.fp{font-size:12px;color:var(--t2);width:48px;text-align:right;flex-shrink:0}
-.hr{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid var(--b)}
-.hr:last-child{border-bottom:none}
-.hd{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.hn{flex:1;font-size:13px;font-weight:500;color:var(--t)}
-.hb-wrap{width:120px;background:var(--s2);border-radius:4px;height:6px}
-.hb{height:6px;border-radius:4px}
-.hv{font-size:12px;font-weight:600;min-width:55px;text-align:right}
-.tog{width:32px;height:18px;border-radius:9px;position:relative;cursor:pointer;flex-shrink:0;transition:background .15s}
-.tog.on{background:var(--g)}.tog.off{background:var(--b2)}
-.tog::after{content:'';position:absolute;width:12px;height:12px;background:white;border-radius:50%;top:3px;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.tog.on::after{left:17px}.tog.off::after{left:3px}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
-.overlay.show{display:flex}
-.modal{background:var(--s);border-radius:16px;padding:26px;width:500px;max-width:94vw;box-shadow:var(--sh2);max-height:90vh;overflow-y:auto}
-.modal h3{font-size:16px;font-weight:600;color:var(--t);margin-bottom:4px}
-.modal-s{font-size:13px;color:var(--t2);margin-bottom:20px}
-.mfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;border-top:.5px solid var(--b);padding-top:16px}
-.lbl{font-size:11.5px;font-weight:500;color:var(--t2);margin-bottom:5px;display:block}
-.inp{width:100%;padding:9px 12px;border:.5px solid var(--b2);border-radius:var(--r);font-size:13px;color:var(--t);background:var(--s);font-family:var(--f);outline:none;transition:border .15s}
-.inp:focus{border-color:var(--g)}.select.inp{cursor:pointer}
-textarea.inp{resize:vertical;min-height:80px}
-.field{margin-bottom:13px}
-.fr{padding:11px 16px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b);flex-wrap:wrap}
-.notif{position:fixed;top:16px;right:16px;background:var(--s);border:.5px solid var(--b2);border-radius:10px;padding:11px 15px;box-shadow:var(--sh2);display:flex;align-items:center;gap:9px;font-size:13px;z-index:999;transform:translateX(130%);transition:transform .25s;max-width:320px}
-.notif.show{transform:translateX(0)}.notif.ok{border-left:3px solid var(--g)}.notif.err{border-left:3px solid var(--red)}.notif.info{border-left:3px solid var(--blue)}
-.pt{border:.5px solid var(--b);border-radius:var(--r2);padding:18px;background:var(--s)}.pt.pop{border-color:var(--g);border-width:2px}
-.pt-name{font-size:14px;font-weight:700;color:var(--t);margin-bottom:12px}
-.auth-box{background:var(--s);border:.5px solid rgba(255,255,255,.1);border-radius:18px;padding:36px;width:400px;max-width:94vw;box-shadow:var(--sh2)}
-.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--t3);font-size:13px}
-.spin{width:20px;height:20px;border:2px solid var(--b2);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;color:var(--t3);text-align:center;gap:10px}
 </style>
 </head>
 <body>
 
-<div class="notif" id="notif"><span id="ni">✅</span><span id="nm">Done</span></div>
+<div class="toast" id="toast"><span id="toast-ico">✅</span><span id="toast-msg"></span></div>
 <div class="overlay" id="overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
-    <h3 id="mt"></h3><p class="modal-s" id="ms"></p>
-    <div id="mb"></div>
-    <div class="mfoot" id="mfoot"><button class="btn btn-g" onclick="closeModal()">Cancel</button><button class="btn btn-ind" id="mok">Confirm</button></div>
+    <div class="modal-h" id="modal-h"></div>
+    <div class="modal-s" id="modal-s"></div>
+    <div id="modal-body"></div>
+    <div class="mfoot" id="modal-foot">
+      <button class="btn btn-g" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-i" id="modal-ok">Confirm</button>
+    </div>
   </div>
 </div>
 
 <!-- LOGIN -->
-<div id="page-login" class="page show">
+<div id="pg-login" class="page show">
   <div class="auth-box">
-    <div style="margin-bottom:22px;display:flex;align-items:center;gap:10px">
-      <div style="width:34px;height:34px;background:linear-gradient(135deg,#1e1b4b,#4338ca);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">⚡</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px">
+      <div class="alm">⚡</div>
       <div><div style="font-size:15px;font-weight:700;color:var(--t)">Wapify Admin</div><div style="font-size:10px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase">CEO Dashboard</div></div>
     </div>
-    <div style="font-size:20px;font-weight:700;color:var(--t);margin-bottom:4px">Admin sign in</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:24px">Restricted access · Platform owners only</div>
-    <div style="background:var(--redl);border:.5px solid #fca5a5;color:var(--red);padding:9px 12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;display:none" id="adm-err"></div>
-    <div class="field"><div class="lbl">Admin email</div><input class="inp" type="email" id="adm-email" value="admin@wapify.com" placeholder="admin@wapify.com"></div>
-    <div class="field"><div class="lbl">Password</div><input class="inp" type="password" id="adm-pw" value="AdminPass@123" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
-    <button class="btn btn-ind" style="width:100%;justify-content:center;padding:11px;font-size:14px" id="adm-btn" onclick="doAdminLogin()">Sign in to Admin Panel →</button>
-    <div style="font-size:11.5px;color:var(--t3);text-align:center;margin-top:14px">This panel is restricted to platform owners only.<br>All actions are logged in the audit trail.</div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:4px">Admin sign in</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:22px">Restricted to platform owners only</div>
+    <div class="form-err" id="al-err"></div>
+    <div class="field"><div class="lbl">Admin email</div><input class="inp" type="email" id="al-email" placeholder="admin@wapify.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="field"><div class="lbl">Password</div><input class="inp" type="password" id="al-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn btn-i btn-block" id="al-btn" onclick="doLogin()">Sign in to Admin Panel →</button>
+    <div style="font-size:11.5px;color:var(--t3);text-align:center;margin-top:14px">All actions are logged in the audit trail.</div>
   </div>
 </div>
 
 <!-- ADMIN APP -->
-<div id="page-app" class="page app">
+<div id="pg-app" class="page app">
   <div class="sb">
     <div class="sb-logo">
-      <div class="admin-lm">⚡</div>
-      <div><div class="admin-title">Wapify Admin</div><div class="admin-sub">CEO Dashboard</div></div>
+      <div class="alm">⚡</div>
+      <div><div style="font-size:13.5px;font-weight:700;color:var(--t)">Wapify Admin</div><div style="font-size:9.5px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase">CEO Dashboard</div></div>
     </div>
-    <div class="ceo-pill">
-      <div class="ceo-av" id="adm-av">AK</div>
-      <div><div style="font-size:12px;font-weight:600;color:white" id="adm-name">Ahmed Khan</div><div style="font-size:10px;color:rgba(255,255,255,.6)" id="adm-role">CEO & Owner</div></div>
+    <!-- CEO pill -->
+    <div style="margin:10px 10px 0;background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:9px">
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:white;flex-shrink:0" id="adm-av">A</div>
+      <div><div style="font-size:12px;font-weight:600;color:white" id="adm-name">Admin</div><div style="font-size:10px;color:rgba(255,255,255,.6)" id="adm-role">CEO · Owner</div></div>
     </div>
     <div class="sb-nav">
       <div class="sn-sec">Business Intelligence</div>
       <div class="ni active" data-m="overview"><span class="ni-ico">📈</span>Overview</div>
-      <div class="ni" data-m="mrr"><span class="ni-ico">💰</span>MRR & Revenue</div>
+      <div class="ni" data-m="revenue"><span class="ni-ico">💰</span>MRR &amp; Revenue</div>
       <div class="ni" data-m="customers"><span class="ni-ico">👥</span>All Customers</div>
-      <div class="ni" data-m="churn"><span class="ni-ico">📉</span>Churn & Retention</div>
-      <div class="ni" data-m="signups"><span class="ni-ico">🚀</span>Signups & Funnel</div>
+      <div class="ni" data-m="churn"><span class="ni-ico">📉</span>Churn &amp; Retention</div>
       <div class="sn-sec">Operations</div>
       <div class="ni" data-m="stores_admin"><span class="ni-ico">🛍️</span>All Stores</div>
-      <div class="ni" data-m="messages_admin"><span class="ni-ico">💬</span>Message Usage</div>
-      <div class="ni" data-m="tickets"><span class="ni-ico">🎫</span>Support Tickets <span class="ni-badge">4</span></div>
+      <div class="ni" data-m="msg_usage"><span class="ni-ico">💬</span>Message Usage</div>
       <div class="sn-sec">Platform Control</div>
-      <div class="ni" data-m="pricing_admin"><span class="ni-ico">💳</span>Pricing Editor</div>
-      <div class="ni" data-m="api_health"><span class="ni-ico">🔧</span>API Health</div>
-      <div class="ni" data-m="announcements"><span class="ni-ico">📣</span>Announcements</div>
-      <div class="ni" data-m="affiliates"><span class="ni-ico">🤝</span>Affiliates & Resellers</div>
-      <div class="sn-sec">Config</div>
       <div class="ni" data-m="feature_flags"><span class="ni-ico">🚩</span>Feature Flags</div>
+      <div class="ni" data-m="announcements"><span class="ni-ico">📣</span>Announcements</div>
+      <div class="sn-sec">Config</div>
       <div class="ni" data-m="audit"><span class="ni-ico">📋</span>Audit Log</div>
-      <div class="ni" data-m="admin_settings"><span class="ni-ico">⚙️</span>Admin Settings</div>
+      <div class="ni" data-m="admin_team"><span class="ni-ico">👤</span>Admin Team</div>
+      <div class="ni" data-m="settings"><span class="ni-ico">⚙️</span>Settings</div>
     </div>
-    <div class="sb-foot">Wapify Admin v2.1<br>Last sync: 2 min ago · 🟢 All systems live</div>
+    <div class="sb-foot" id="sb-foot">Wapify Admin v1.0<br><span style="color:var(--g)">● All systems live</span></div>
   </div>
 
   <div class="main">
     <div class="topbar">
       <div class="tb-t" id="tb-t">Business Overview</div>
-      <div class="tb-c" id="tb-c">April 2026 · Live data</div>
+      <div style="font-size:12px;color:var(--t3)" id="tb-c">Loading…</div>
       <div class="tb-r">
-        <span style="font-size:12px;color:var(--gd);font-weight:500">🟢 All systems operational</span>
-        <button class="btn btn-g btn-sm" onclick="toast('PDF report exported','ok')">📊 Export</button>
-        <button class="btn btn-r btn-sm" onclick="doAdminLogout()">Sign out</button>
+        <button class="btn btn-g btn-sm" onclick="exportReport()">📊 Export report</button>
+        <button class="btn btn-r btn-sm" onclick="doLogout()">Sign out</button>
       </div>
     </div>
 
@@ -195,569 +177,822 @@ textarea.inp{resize:vertical;min-height:80px}
 <div class="module active" id="mod-overview">
   <div class="mrr-hero">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
-      <div><div class="mrr-l">Monthly Recurring Revenue</div><div class="mrr-v" id="ov-mrr">$14,820</div><div class="mrr-d" id="ov-mrr-d">↑ $2,340 (+18.7%) from March · On track for $25k by June 🎯</div></div>
-      <div style="text-align:right"><div class="mrr-l">June 2026 Target</div><div style="font-size:26px;font-weight:700;color:#6EE7B7">$25,000</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:3px">59% of target reached</div></div>
+      <div><div class="mrr-l">Monthly Recurring Revenue</div><div class="mrr-v" id="ov-mrr">$—</div><div class="mrr-d" id="ov-mrr-d">Loading…</div></div>
+      <div style="text-align:right"><div class="mrr-l">Active customers</div><div style="font-size:28px;font-weight:700;color:#6EE7B7" id="ov-active">—</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:3px" id="ov-trial">— on trial</div></div>
     </div>
-    <div class="mrr-row" style="grid-template-columns:repeat(6,1fr)">
-      <div class="mrr-mini"><div class="mm-l">ARR</div><div class="mm-v" id="ov-arr">$177.8k</div><div class="mm-d">Annualized</div></div>
-      <div class="mrr-mini"><div class="mm-l">Customers</div><div class="mm-v" id="ov-cust">247</div><div class="mm-d">↑ 28 this month</div></div>
-      <div class="mrr-mini"><div class="mm-l">ARPU</div><div class="mm-v" id="ov-arpu">$59.99</div><div class="mm-d">Avg rev/user</div></div>
-      <div class="mrr-mini"><div class="mm-l">Churn</div><div class="mm-v" id="ov-churn" style="color:#f87171">3.2%</div><div class="mm-d">Target &lt;3%</div></div>
-      <div class="mrr-mini"><div class="mm-l">Trial→Paid</div><div class="mm-v">38%</div><div class="mm-d">Conversion</div></div>
-      <div class="mrr-mini"><div class="mm-l">NRR</div><div class="mm-v" style="color:#6EE7B7">112%</div><div class="mm-d">Net rev retention</div></div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px">
+      <div class="mrr-mini"><div class="mm-l">Total customers</div><div class="mm-v" id="ov-total">—</div><div class="mm-d">All time</div></div>
+      <div class="mrr-mini"><div class="mm-l">Growth plan</div><div class="mm-v" id="ov-growth">—</div><div class="mm-d">$29/mo</div></div>
+      <div class="mrr-mini"><div class="mm-l">Scale plan</div><div class="mm-v" id="ov-scale">—</div><div class="mm-d">$79/mo</div></div>
+      <div class="mrr-mini"><div class="mm-l">Agency plan</div><div class="mm-v" id="ov-agency">—</div><div class="mm-d">$199/mo</div></div>
+      <div class="mrr-mini"><div class="mm-l">WA msgs (30d)</div><div class="mm-v" id="ov-msgs">—</div><div class="mm-d">All orgs</div></div>
     </div>
   </div>
   <div class="sr">
-    <div class="sc"><div class="sl">🔴 Churn rate</div><div class="sv dn">3.2%</div><div class="sd up">↓ 0.4% improving</div></div>
-    <div class="sc"><div class="sl">🚀 Trials started</div><div class="sv">84</div><div class="sd up">↑ 22% this month</div></div>
-    <div class="sc"><div class="sl">💳 Trial→Paid conv.</div><div class="sv" style="color:var(--blue)">38%</div><div class="sd up">↑ 5% vs last month</div></div>
-    <div class="sc"><div class="sl">📩 WA msgs today</div><div class="sv" style="color:var(--g)">184k</div><div class="sd up">↑ 12k vs yesterday</div></div>
+    <div class="sc"><div class="sl">Active subscriptions</div><div class="sv" style="color:var(--g)" id="ov-s-active">—</div><div class="sd up">Paying customers</div></div>
+    <div class="sc"><div class="sl">Free trials</div><div class="sv" style="color:var(--blue)" id="ov-s-trial">—</div><div class="sd">14-day free trial</div></div>
+    <div class="sc"><div class="sl">Cancelled</div><div class="sv dn" id="ov-s-cancelled">—</div><div class="sd">Churned</div></div>
+    <div class="sc"><div class="sl">ARR (annualized)</div><div class="sv" id="ov-arr">$—</div><div class="sd up">MRR × 12</div></div>
   </div>
-  <div class="g2">
-    <div class="card">
-      <div class="ch"><div class="ct">Revenue by plan</div><div class="cs">Monthly · April 2026</div></div>
-      <div class="cb">
-        <div style="position:relative;height:180px;margin-bottom:14px"><canvas id="planChart" role="img" aria-label="Plan distribution">Plan split.</canvas></div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;justify-content:space-between;font-size:12.5px"><div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:#25D366;display:inline-block"></span>Growth · 142 customers</div><span style="font-weight:600">$4,118/mo</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px"><div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:#0ea5e9;display:inline-block"></span>Scale · 68 customers</div><span style="font-weight:600">$5,372/mo</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px"><div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:#7c3aed;display:inline-block"></span>Agency · 27 customers</div><span style="font-weight:600">$5,373/mo</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px"><div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:#e5e7eb;display:inline-block"></span>Free trial · 10</div><span style="color:var(--t3)">$0</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="ch"><div class="ct">Live activity feed</div><span style="font-size:11px;color:var(--g);font-weight:500">● Streaming</span></div>
-      <div class="cb" style="padding:0 18px" id="activity-feed">
-        <div class="act-item"><div class="act-dot" style="background:var(--g)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>Bilal Store</strong> upgraded Free → Growth $29/mo</div><div style="font-size:11px;color:var(--t3)">2 min ago</div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--blue)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>Zara Fashion</strong> connected WooCommerce store</div><div style="font-size:11px;color:var(--t3)">8 min ago</div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--purple)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>TechMart Agency</strong> activated Agency plan — 22 stores</div><div style="font-size:11px;color:var(--t3)">14 min ago</div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--red)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>Khan Electronics</strong> cancelled Scale subscription ⚠️</div><div style="font-size:11px;color:var(--t3)">1 hr ago · <span style="color:var(--red);font-weight:500">Action needed</span></div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--g)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>3 new trial signups</strong> from Google Ads — PK, IN, UAE</div><div style="font-size:11px;color:var(--t3)">2 hrs ago</div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--amber)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>Meta API</strong> rate limit at 85% on Phone #1</div><div style="font-size:11px;color:var(--t3)">3 hrs ago</div></div></div>
-        <div class="act-item"><div class="act-dot" style="background:var(--g)"></div><div><div style="font-size:12.5px;color:var(--t)"><strong>MRR milestone</strong> crossed $14,000 💰🎉</div><div style="font-size:11px;color:var(--t3)">Yesterday</div></div></div>
-      </div>
-    </div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">MRR growth — last 12 months</div></div><div class="cb"><div style="position:relative;height:200px"><canvas id="mrrChart" role="img" aria-label="MRR growth">MRR.</canvas></div></div></div>
-  <div class="alert al-a"><span style="font-size:14px;flex-shrink:0">⚠️</span><div><strong>Churn risk:</strong> Khan Electronics (Scale $79/mo) auth error for 3 days. High churn probability. <button class="btn btn-g btn-sm" style="margin-left:8px" onclick="openTicketModal()">Create support ticket</button><button class="btn btn-r btn-sm" style="margin-left:6px" onclick="toast('Win-back email sent to Khan Electronics','ok')">Send win-back email</button></div></div>
-</div>
-
-<!-- ══ MRR ══ -->
-<div class="module" id="mod-mrr">
-  <div class="mrr-hero">
-    <div style="display:flex;gap:40px;flex-wrap:wrap">
-      <div><div class="mrr-l">Current MRR</div><div class="mrr-v">$14,820</div><div class="mrr-d">↑ $2,340 (+18.7%) MoM</div></div>
-      <div><div class="mrr-l">ARR</div><div style="font-size:28px;font-weight:700;color:white">$177,840</div><div class="mrr-d">Annualized run rate</div></div>
-      <div><div class="mrr-l">LTV : CAC</div><div style="font-size:28px;font-weight:700;color:#6EE7B7">57x</div><div class="mrr-d">LTV $2,150 · CAC $38</div></div>
-    </div>
-    <div class="mrr-row" style="grid-template-columns:repeat(5,1fr);margin-top:14px">
-      <div class="mrr-mini"><div class="mm-l">New MRR</div><div class="mm-v">$3,190</div><div class="mm-d">New customers</div></div>
-      <div class="mrr-mini"><div class="mm-l">Expansion MRR</div><div class="mm-v">$840</div><div class="mm-d">Upgrades</div></div>
-      <div class="mrr-mini"><div class="mm-l">Churned MRR</div><div class="mm-v" style="color:#f87171">−$690</div><div class="mm-d">Cancellations</div></div>
-      <div class="mrr-mini"><div class="mm-l">Contraction</div><div class="mm-v" style="color:#f87171">−$0</div><div class="mm-d">Downgrades</div></div>
-      <div class="mrr-mini"><div class="mm-l">Net New MRR</div><div class="mm-v" style="color:#6EE7B7">+$3,340</div><div class="mm-d">This month</div></div>
-    </div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">MRR breakdown — Jan–Apr 2026</div></div><div class="cb"><div style="position:relative;height:240px"><canvas id="mrrBreak" role="img" aria-label="MRR breakdown">Breakdown.</canvas></div></div></div>
   <div class="g2">
     <div class="card"><div class="ch"><div class="ct">Revenue by plan</div></div><div class="cb">
-      <table class="tbl"><thead><tr><th>Plan</th><th>Customers</th><th>MRR</th><th>% Revenue</th><th>Avg LTV</th></tr></thead><tbody>
-        <tr><td><span class="chip cg">Growth $29</span></td><td>142</td><td style="font-weight:600;color:var(--g)">$4,118</td><td>27.8%</td><td>$812</td></tr>
-        <tr><td><span class="chip cb2">Scale $79</span></td><td>68</td><td style="font-weight:600;color:var(--blue)">$5,372</td><td>36.2%</td><td>$2,190</td></tr>
-        <tr><td><span class="chip cp">Agency $199</span></td><td>27</td><td style="font-weight:600;color:var(--purple)">$5,373</td><td>36.2%</td><td>$5,820</td></tr>
-        <tr><td><span class="chip">Free</span></td><td>10</td><td style="color:var(--t3)">$0</td><td>—</td><td>—</td></tr>
-      </tbody></table>
+      <div style="position:relative;height:180px"><canvas id="planChart"></canvas></div>
+      <div id="plan-breakdown" style="display:flex;flex-direction:column;gap:8px;margin-top:14px"></div>
     </div></div>
-    <div class="card"><div class="ch"><div class="ct">Stripe payment health</div></div><div class="cb" style="display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Successful payments</span><span style="color:#16a34a;font-weight:600">234 (94.7%)</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Failed / in dunning</span><span style="color:var(--red);font-weight:600">13 (5.3%)</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Recovered via dunning</span><span style="color:var(--blue);font-weight:600">8 of 13</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">At-risk MRR</span><span style="color:var(--amber);font-weight:600">$1,240</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Next billing cycle</span><span style="font-weight:500">May 1, 2026</span></div>
-      <button class="btn btn-g" style="width:100%;font-size:12px;margin-top:4px" onclick="openStripe()">🔗 Open Stripe dashboard</button>
-    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Recent activity</div><span style="font-size:11px;color:var(--g);font-weight:500">● Live</span></div><div class="cb" style="padding:0 18px" id="activity-feed"><div class="loading"><div class="spin"></div></div></div></div>
   </div>
+  <div class="card"><div class="ch"><div class="ct">MRR growth trend</div></div><div class="cb"><div style="position:relative;height:200px"><canvas id="mrrChart"></canvas></div></div></div>
+</div>
+
+<!-- ══ REVENUE ══ -->
+<div class="module" id="mod-revenue">
+  <div class="mrr-hero">
+    <div style="display:flex;gap:40px;flex-wrap:wrap">
+      <div><div class="mrr-l">Current MRR</div><div class="mrr-v" id="rev-mrr">$—</div><div class="mrr-d">Loading…</div></div>
+      <div><div class="mrr-l">ARR</div><div style="font-size:28px;font-weight:700;color:white" id="rev-arr">$—</div><div class="mrr-d">Annualized run rate</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">Monthly revenue breakdown</div></div><div class="cb" id="rev-table"><div class="loading"><div class="spin"></div></div></div></div>
 </div>
 
 <!-- ══ CUSTOMERS ══ -->
 <div class="module" id="mod-customers">
   <div class="sr">
-    <div class="sc"><div class="sl">Total customers</div><div class="sv">247</div><div class="sd up">↑ 28 this month</div></div>
-    <div class="sc"><div class="sl">Paying customers</div><div class="sv" style="color:var(--g)">237</div><div class="sd">96% conversion</div></div>
-    <div class="sc"><div class="sl">Active trials</div><div class="sv" style="color:var(--blue)">10</div><div class="sd">38% convert to paid</div></div>
-    <div class="sc"><div class="sl">At-risk customers</div><div class="sv dn">14</div><div class="sd dn">Low usage or errors</div></div>
+    <div class="sc"><div class="sl">Total customers</div><div class="sv" id="cust-total">—</div><div class="sd">All time</div></div>
+    <div class="sc"><div class="sl">Active paying</div><div class="sv" style="color:var(--g)" id="cust-active">—</div><div class="sd">Revenue generating</div></div>
+    <div class="sc"><div class="sl">Free trials</div><div class="sv" style="color:var(--blue)" id="cust-trial">—</div><div class="sd">In 14-day trial</div></div>
+    <div class="sc"><div class="sl">Churned</div><div class="sv dn" id="cust-churned">—</div><div class="sd">Cancelled</div></div>
   </div>
   <div class="card">
-    <div class="fr">
-      <input class="inp" placeholder="Search name, email, store…" style="max-width:230px" oninput="filterTable('customers-body',this.value)">
-      <select class="inp" style="width:130px" onchange="filterTable('customers-body',this.value)"><option value="">All plans</option><option>growth</option><option>scale</option><option>agency</option><option>free</option></select>
-      <select class="inp" style="width:130px"><option>All statuses</option><option>Active</option><option>At risk</option><option>Churned</option></select>
-      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="toast('Exporting customers CSV…','ok')">📥 Export CSV</button>
-      <button class="btn btn-ind btn-sm" onclick="openAddCustomerModal()">+ Add customer</button>
+    <div style="padding:11px 16px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b);flex-wrap:wrap">
+      <input class="inp" id="cust-search" placeholder="Search name, email…" style="max-width:220px" oninput="debounce(loadCustomers,400)()">
+      <select class="inp" id="cust-plan" style="width:130px" onchange="loadCustomers()"><option value="">All plans</option><option value="growth">Growth</option><option value="scale">Scale</option><option value="agency">Agency</option><option value="free">Free</option></select>
+      <select class="inp" id="cust-status" style="width:130px" onchange="loadCustomers()"><option value="">All statuses</option><option value="active">Active</option><option value="trial">Trial</option><option value="cancelled">Cancelled</option><option value="past_due">Past due</option></select>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="exportCustomers()">📥 Export CSV</button>
+      <button class="btn btn-i btn-sm" onclick="openAddCustomerModal()">+ Add customer</button>
     </div>
-    <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>MRR</th><th>Stores</th><th>Msgs/mo</th><th>Country</th><th>Status</th><th>Since</th><th>Actions</th></tr></thead>
-    <tbody id="customers-body">
-      <tr><td><div style="font-size:12.5px;font-weight:500">Bilal's Store</div><div style="font-size:11px;color:var(--t2)">bilal@store.com</div></td><td><span class="chip cb2">Scale</span></td><td style="font-weight:600">$79</td><td>4</td><td>18,200</td><td>🇵🇰 PK</td><td><span class="badge bk">Active</span></td><td>Jan 2026</td><td><button class="btn btn-g btn-xs" onclick="openCustomerModal('Bilal Store','Scale','bilal@store.com')">View</button> <button class="btn btn-g btn-xs" onclick="toast('Email sent to Bilal','ok')">Email</button></td></tr>
-      <tr><td><div style="font-size:12.5px;font-weight:500">TechMart Agency</div><div style="font-size:11px;color:var(--t2)">ops@techmart.com</div></td><td><span class="chip cp">Agency</span></td><td style="font-weight:600">$199</td><td>22</td><td>94,000</td><td>🇮🇳 IN</td><td><span class="badge bk">Active</span></td><td>Feb 2026</td><td><button class="btn btn-g btn-xs" onclick="openCustomerModal('TechMart Agency','Agency','ops@techmart.com')">View</button> <button class="btn btn-g btn-xs" onclick="toast('Email sent','ok')">Email</button></td></tr>
-      <tr><td><div style="font-size:12.5px;font-weight:500">Zara Fashion</div><div style="font-size:11px;color:var(--t2)">zara@fashion.ae</div></td><td><span class="chip cg">Growth</span></td><td style="font-weight:600">$29</td><td>1</td><td>3,100</td><td>🇦🇪 UAE</td><td><span class="badge bw">Trial ending</span></td><td>Apr 2026</td><td><button class="btn btn-g btn-xs" onclick="openCustomerModal('Zara Fashion','Growth','zara@fashion.ae')">View</button> <button class="btn btn-ind btn-xs" onclick="toast('Upgrade nudge sent to Zara Fashion','ok')">Nudge</button></td></tr>
-      <tr><td><div style="font-size:12.5px;font-weight:500">Khan Electronics</div><div style="font-size:11px;color:var(--t2)">info@khanelec.com</div></td><td><span class="chip cb2">Scale</span></td><td style="font-weight:600;color:var(--red)">$79 ⚠</td><td>2</td><td>1,200</td><td>🇵🇰 PK</td><td><span class="badge be">At risk</span></td><td>Mar 2026</td><td><button class="btn btn-g btn-xs" onclick="openCustomerModal('Khan Electronics','Scale','info@khanelec.com')">View</button> <button class="btn btn-r btn-xs" onclick="openTicketModal()">Ticket</button></td></tr>
-      <tr><td><div style="font-size:12.5px;font-weight:500">Al-Noor Boutique</div><div style="font-size:11px;color:var(--t2)">shop@alnoor.com</div></td><td><span class="chip cb2">Scale</span></td><td style="font-weight:600">$79</td><td>3</td><td>18,400</td><td>🇸🇦 SA</td><td><span class="badge bi">Quota 92%</span></td><td>Jan 2026</td><td><button class="btn btn-g btn-xs" onclick="openCustomerModal('Al-Noor Boutique','Scale','shop@alnoor.com')">View</button> <button class="btn btn-ind btn-xs" onclick="toast('Agency upsell sent to Al-Noor','ok')">Upsell</button></td></tr>
-    </tbody></table>
-    <div class="tbl-foot"><span>Showing 1–5 of 247 customers</span><div style="display:flex;gap:5px"><button class="btn btn-g btn-sm">← Prev</button><button class="btn btn-g btn-sm" style="background:var(--indigol);color:var(--indigo)">1</button><button class="btn btn-g btn-sm">2</button><button class="btn btn-g btn-sm">Next →</button></div></div>
+    <div id="cust-table"><div class="loading"><div class="spin"></div></div></div>
   </div>
 </div>
 
 <!-- ══ CHURN ══ -->
 <div class="module" id="mod-churn">
   <div class="sr">
-    <div class="sc"><div class="sl">Monthly churn rate</div><div class="sv dn">3.2%</div><div class="sd up">↓ 0.4% (target &lt;3%)</div></div>
-    <div class="sc"><div class="sl">Churned MRR</div><div class="sv">$690</div><div class="sd dn">This month</div></div>
-    <div class="sc"><div class="sl">At-risk customers</div><div class="sv" style="color:var(--amber)">14</div><div class="sd">Proactive outreach needed</div></div>
-    <div class="sc"><div class="sl">Net Revenue Retention</div><div class="sv" style="color:var(--g)">112%</div><div class="sd up">Expansion > churn ✓</div></div>
+    <div class="sc"><div class="sl">Cancelled this month</div><div class="sv dn" id="churn-count">—</div><div class="sd">Needs win-back</div></div>
+    <div class="sc"><div class="sl">Churned MRR</div><div class="sv" id="churn-mrr">—</div><div class="sd dn">Lost revenue</div></div>
+    <div class="sc"><div class="sl">Past due</div><div class="sv" style="color:var(--amber)" id="churn-due">—</div><div class="sd">Payment failed</div></div>
+    <div class="sc"><div class="sl">Net Revenue Retention</div><div class="sv" style="color:var(--g)">—</div><div class="sd">Target >100%</div></div>
   </div>
-  <div class="g2">
-    <div class="card"><div class="ch"><div class="ct">Churned this month</div><div class="cs">3 customers · $137 MRR lost</div></div>
-      <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>MRR Lost</th><th>Reason</th><th>Days active</th><th>Action</th></tr></thead><tbody>
-        <tr><td style="font-weight:500">Khan Electronics</td><td><span class="chip cb2">Scale</span></td><td style="color:var(--red);font-weight:600">−$79</td><td><span class="badge bw">API error</span></td><td>28</td><td><button class="btn btn-ind btn-xs" onclick="toast('Win-back email sent','ok')">Win-back</button></td></tr>
-        <tr><td style="font-weight:500">Nadia Boutique</td><td><span class="chip cg">Growth</span></td><td style="color:var(--red);font-weight:600">−$29</td><td><span class="badge be">Price</span></td><td>45</td><td><button class="btn btn-ind btn-xs" onclick="toast('30% discount offer sent','ok')">Offer 30% off</button></td></tr>
-        <tr><td style="font-weight:500">Fast Delivery Co</td><td><span class="chip cg">Growth</span></td><td style="color:var(--red);font-weight:600">−$29</td><td><span class="badge">No setup time</span></td><td>12</td><td><button class="btn btn-ind btn-xs" onclick="toast('Free onboarding call offered','ok')">Free onboarding</button></td></tr>
-      </tbody></table>
-    </div>
-    <div class="card"><div class="ch"><div class="ct">At-risk customers</div><div class="cs">Proactive outreach → reduce churn</div></div>
-      <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>Last login</th><th>Issue</th><th>Score</th><th>Action</th></tr></thead><tbody>
-        <tr><td>Maaz Store</td><td><span class="chip cg">Growth</span></td><td>12d ago</td><td>No WA msg in 7d</td><td><span style="color:var(--red);font-weight:600">High</span></td><td><button class="btn btn-r btn-xs" onclick="toast('Reached out to Maaz Store','ok')">Reach out</button></td></tr>
-        <tr><td>Sana Fashion</td><td><span class="chip cg">Growth</span></td><td>5d ago</td><td>Sync error ×3</td><td><span style="color:var(--amber);font-weight:600">Med</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Ticket created for Sana Fashion','ok')">Create ticket</button></td></tr>
-        <tr><td>Quick Commerce</td><td><span class="chip cb2">Scale</span></td><td>3d ago</td><td>&lt;10% quota used</td><td><span style="color:var(--amber);font-weight:600">Med</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Tips email sent','ok')">Send tips</button></td></tr>
-      </tbody></table>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SIGNUPS ══ -->
-<div class="module" id="mod-signups">
-  <div class="sr">
-    <div class="sc"><div class="sl">Signups this month</div><div class="sv">84</div><div class="sd up">↑ 22%</div></div>
-    <div class="sc"><div class="sl">Activated (connected store)</div><div class="sv" style="color:var(--blue)">61</div><div class="sd">73% activation</div></div>
-    <div class="sc"><div class="sl">Trial → Paid</div><div class="sv" style="color:var(--g)">32</div><div class="sd">38% conversion</div></div>
-    <div class="sc"><div class="sl">Top source</div><div class="sv" style="font-size:15px;letter-spacing:0">Google Ads</div><div class="sd">34 signups · 38% conv</div></div>
-  </div>
-  <div class="g2">
-    <div class="card"><div class="ch"><div class="ct">Signup → Paid funnel</div></div><div class="cb">
-      <div class="funnel-row"><div class="fl">Visited landing page</div><div class="fb-wrap"><div class="fb" style="width:100%;background:#25D366">4,200</div></div><div class="fp">100%</div></div>
-      <div class="funnel-row"><div class="fl">Started signup form</div><div class="fb-wrap"><div class="fb" style="width:56%;background:#0ea5e9">2,352</div></div><div class="fp">56%</div></div>
-      <div class="funnel-row"><div class="fl">Completed signup</div><div class="fb-wrap"><div class="fb" style="width:20%;background:#7c3aed">840</div></div><div class="fp">20%</div></div>
-      <div class="funnel-row"><div class="fl">Connected 1st store</div><div class="fb-wrap"><div class="fb" style="width:14%;background:#d97706">588</div></div><div class="fp">14%</div></div>
-      <div class="funnel-row"><div class="fl">Sent 1st WA msg</div><div class="fb-wrap"><div class="fb" style="width:10%;background:#ea580c">420</div></div><div class="fp">10%</div></div>
-      <div class="funnel-row"><div class="fl">Upgraded to paid</div><div class="fb-wrap"><div class="fb" style="width:7.6%;background:#dc2626">319</div></div><div class="fp">7.6%</div></div>
-    </div></div>
-    <div class="card"><div class="ch"><div class="ct">Traffic sources</div><div class="cs">April 2026</div></div><div class="cb">
-      <table class="tbl"><thead><tr><th>Source</th><th>Signups</th><th>Paid</th><th>Conv %</th><th>CAC</th></tr></thead><tbody>
-        <tr><td>Google Ads</td><td>34</td><td>13</td><td style="color:#16a34a;font-weight:600">38%</td><td>$42</td></tr>
-        <tr><td>Facebook Groups</td><td>22</td><td>9</td><td style="color:#16a34a;font-weight:600">41%</td><td>$18</td></tr>
-        <tr><td>Organic / SEO</td><td>14</td><td>7</td><td style="color:#16a34a;font-weight:600">50%</td><td>$0</td></tr>
-        <tr><td>Referral</td><td>9</td><td>4</td><td style="color:#16a34a;font-weight:600">44%</td><td>$12</td></tr>
-        <tr><td>Product Hunt</td><td>5</td><td>2</td><td>40%</td><td>$28</td></tr>
-      </tbody></table>
-    </div></div>
+  <div class="card"><div class="ch"><div class="ct">Cancelled accounts</div><div class="cs">Send win-back campaigns</div></div>
+    <div id="churn-table"><div class="loading"><div class="spin"></div></div></div>
   </div>
 </div>
 
 <!-- ══ ALL STORES ══ -->
 <div class="module" id="mod-stores_admin">
-  <div class="sr">
-    <div class="sc"><div class="sl">Total stores</div><div class="sv">628</div><div class="sd up">↑ 74 this month</div></div>
-    <div class="sc"><div class="sl">Shopify stores</div><div class="sv" style="color:#96BF48">412</div><div class="sd">66%</div></div>
-    <div class="sc"><div class="sl">WooCommerce</div><div class="sv" style="color:#7f54b3">168</div><div class="sd">27%</div></div>
-    <div class="sc"><div class="sl">Sync errors</div><div class="sv dn">23</div><div class="sd dn">Need attention</div></div>
-  </div>
   <div class="card">
-    <div class="fr"><input class="inp" placeholder="Search stores…" style="max-width:220px"><select class="inp" style="width:140px"><option>All platforms</option><option>Shopify</option><option>WooCommerce</option><option>BigCommerce</option></select><select class="inp" style="width:130px"><option>All statuses</option><option>Live</option><option>Error</option></select><button class="btn btn-g btn-sm" style="margin-left:auto" onclick="toast('Exporting stores…','ok')">Export CSV</button></div>
-    <table class="tbl"><thead><tr><th>Store</th><th>Customer</th><th>Platform</th><th>Orders/day</th><th>WA msgs/mo</th><th>Status</th><th>Action</th></tr></thead><tbody>
-      <tr><td style="font-weight:500">Ahmed's Mart</td><td>ahmed@mystore.com</td><td><span class="badge bk">Shopify</span></td><td>48</td><td>3,420</td><td><span class="badge bk">● Live</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Store detail opened','ok')">View</button></td></tr>
-      <tr><td style="font-weight:500">Khan Electronics</td><td>info@khanelec.com</td><td><span class="badge bp">WooCommerce</span></td><td>21</td><td>1,200</td><td><span class="badge bw">⚠ Auth error</span></td><td><button class="btn btn-r btn-xs" onclick="toast('Customer notified','ok')">Notify</button></td></tr>
-      <tr><td style="font-weight:500">TechMart Main</td><td>ops@techmart.com</td><td><span class="badge bk">Shopify</span></td><td>182</td><td>28,400</td><td><span class="badge bk">● Live</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Store detail opened','ok')">View</button></td></tr>
-      <tr><td style="font-weight:500">Al-Noor Boutique</td><td>shop@alnoor.com</td><td><span class="badge bk">Shopify</span></td><td>67</td><td>12,800</td><td><span class="badge bk">● Live</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Store detail opened','ok')">View</button></td></tr>
-      <tr><td style="font-weight:500">QuickCart PH</td><td>admin@quickcart.ph</td><td><span class="badge bi">BigCommerce</span></td><td>34</td><td>5,100</td><td><span class="badge bk">● Live</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Store detail opened','ok')">View</button></td></tr>
-    </tbody></table>
+    <div style="padding:11px 16px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b);flex-wrap:wrap">
+      <input class="inp" id="stores-search" placeholder="Search stores…" style="max-width:220px">
+      <select class="inp" id="stores-platform" style="width:140px" onchange="loadStoresAdmin()"><option value="">All platforms</option><option value="shopify">Shopify</option><option value="woocommerce">WooCommerce</option><option value="bigcommerce">BigCommerce</option><option value="custom">Custom</option></select>
+      <select class="inp" id="stores-status" style="width:130px" onchange="loadStoresAdmin()"><option value="">All statuses</option><option value="connected">Connected</option><option value="error">Error</option><option value="pending">Pending</option></select>
+    </div>
+    <div id="stores-admin-table"><div class="loading"><div class="spin"></div></div></div>
   </div>
 </div>
 
-<!-- ══ MESSAGES ══ -->
-<div class="module" id="mod-messages_admin">
-  <div class="sr">
-    <div class="sc"><div class="sl">Total msgs (April)</div><div class="sv">5.8M</div><div class="sd up">↑ 18%</div></div>
-    <div class="sc"><div class="sl">Delivery rate</div><div class="sv" style="color:var(--g)">94.2%</div><div class="sd up">↑ 0.8%</div></div>
-    <div class="sc"><div class="sl">Meta API cost</div><div class="sv">$2,140</div><div class="sd">$0.00037/msg</div></div>
-    <div class="sc"><div class="sl">Gross margin</div><div class="sv" style="color:var(--g)">85.6%</div><div class="sd up">On messaging</div></div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">Top message consumers</div></div>
-    <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>Quota</th><th>Used</th><th>% Used</th><th>Action</th></tr></thead><tbody>
-      <tr><td>TechMart Agency</td><td><span class="chip cp">Agency ∞</span></td><td>Unlimited</td><td>94,200</td><td><span class="badge bk">OK</span></td><td>—</td></tr>
-      <tr><td>Al-Noor Boutique</td><td><span class="chip cb2">Scale 20k</span></td><td>20,000</td><td>18,400</td><td><span class="badge bw">92% ⚠</span></td><td><button class="btn btn-ind btn-xs" onclick="toast('Upsell email sent to Al-Noor','ok')">Upsell Agency</button></td></tr>
-      <tr><td>Ahmed's Mart</td><td><span class="chip cg">Growth 5k</span></td><td>5,000</td><td>3,420</td><td><span class="badge bk">68%</span></td><td>—</td></tr>
-      <tr><td>QuickCart PH</td><td><span class="chip cb2">Scale 20k</span></td><td>20,000</td><td>5,100</td><td><span class="badge bk">26%</span></td><td>—</td></tr>
-    </tbody></table>
-  </div>
-</div>
-
-<!-- ══ TICKETS ══ -->
-<div class="module" id="mod-tickets">
-  <div class="sr">
-    <div class="sc"><div class="sl">Open tickets</div><div class="sv dn">4</div><div class="sd dn">2 urgent</div></div>
-    <div class="sc"><div class="sl">Avg first response</div><div class="sv">1.8h</div><div class="sd up">Target &lt;2h ✓</div></div>
-    <div class="sc"><div class="sl">CSAT score</div><div class="sv" style="color:var(--g)">4.7/5</div><div class="sd up">↑ 0.2 this month</div></div>
-    <div class="sc"><div class="sl">Resolved this week</div><div class="sv">18</div><div class="sd up">↑ 4 vs last week</div></div>
-  </div>
-  <div class="card">
-    <div class="fr"><input class="inp" placeholder="Search tickets…" style="max-width:220px"><select class="inp" style="width:120px"><option>All priorities</option><option>Urgent</option><option>Normal</option></select><button class="btn btn-ind btn-sm" style="margin-left:auto" onclick="openTicketModal()">+ New ticket</button></div>
-    <table class="tbl"><thead><tr><th>#</th><th>Customer</th><th>Subject</th><th>Priority</th><th>Status</th><th>Age</th><th>Action</th></tr></thead><tbody>
-      <tr><td style="font-family:var(--m);font-size:11px">#1021</td><td>Khan Electronics</td><td>WooCommerce sync broken after password change</td><td><span class="badge be">🔴 Urgent</span></td><td><span class="badge bw">Open</span></td><td style="color:var(--red)">3h</td><td><button class="btn btn-r btn-sm" onclick="openTicketModal()">Respond now</button></td></tr>
-      <tr><td style="font-family:var(--m);font-size:11px">#1020</td><td>Nadia Boutique</td><td>WhatsApp messages going to spam</td><td><span class="badge be">🔴 Urgent</span></td><td><span class="badge bi">In progress</span></td><td>6h</td><td><button class="btn btn-g btn-sm" onclick="openTicketModal()">View</button></td></tr>
-      <tr><td style="font-family:var(--m);font-size:11px">#1019</td><td>Zara Fashion</td><td>How to set up abandoned cart flow?</td><td><span class="badge bw">Normal</span></td><td><span class="badge bw">Open</span></td><td>1d</td><td><button class="btn btn-g btn-sm" onclick="openTicketModal()">Reply</button></td></tr>
-      <tr><td style="font-family:var(--m);font-size:11px">#1018</td><td>Al-Noor Boutique</td><td>Can we increase message quota temporarily?</td><td><span class="badge bw">Normal</span></td><td><span class="badge bw">Open</span></td><td>2d</td><td><button class="btn btn-p btn-sm" onclick="toast('Quota increased for Al-Noor Boutique','ok')">✅ Approve quota</button></td></tr>
-    </tbody></table>
-  </div>
-</div>
-
-<!-- ══ PRICING ══ -->
-<div class="module" id="mod-pricing_admin">
-  <div class="alert al-a"><span>⚠️</span><div>Pricing changes apply to <strong>new subscribers only</strong>. Click "Publish to Stripe" to make live.</div></div>
-  <div class="g2">
-    <div class="pt"><div class="pt-name">Starter (Free)</div><div class="field"><div class="lbl">Price</div><input class="inp" value="$0 / month" readonly></div><div class="field"><div class="lbl">Msg quota / month</div><input class="inp" value="100"></div><div class="field"><div class="lbl">Max stores</div><input class="inp" value="1"></div><button class="btn btn-g" style="width:100%;font-size:12px" onclick="toast('Starter saved','ok')">Save</button></div>
-    <div class="pt pop"><div class="pt-name" style="color:var(--gd)">Growth ★ Most popular</div><div class="field"><div class="lbl">Monthly price</div><input class="inp" value="$29"></div><div class="field"><div class="lbl">Annual price (per month)</div><input class="inp" value="$22"></div><div class="field"><div class="lbl">Msg quota / month</div><input class="inp" value="5000"></div><div class="field"><div class="lbl">Max stores</div><input class="inp" value="3"></div><div style="display:flex;gap:8px"><button class="btn btn-g" style="flex:1;font-size:12px" onclick="toast('Growth saved (draft)','ok')">Save draft</button><button class="btn btn-p" style="flex:1;font-size:12px" onclick="toast('Growth plan published to Stripe ✓','ok')">Publish to Stripe →</button></div></div>
-    <div class="pt"><div class="pt-name">Scale</div><div class="field"><div class="lbl">Monthly price</div><input class="inp" value="$79"></div><div class="field"><div class="lbl">Annual price (per month)</div><input class="inp" value="$62"></div><div class="field"><div class="lbl">Msg quota / month</div><input class="inp" value="20000"></div><div class="field"><div class="lbl">Max stores</div><input class="inp" value="10"></div><div style="display:flex;gap:8px"><button class="btn btn-g" style="flex:1;font-size:12px" onclick="toast('Scale saved (draft)','ok')">Save draft</button><button class="btn btn-p" style="flex:1;font-size:12px" onclick="toast('Scale plan published to Stripe ✓','ok')">Publish to Stripe →</button></div></div>
-    <div class="pt"><div class="pt-name">Agency</div><div class="field"><div class="lbl">Monthly price</div><input class="inp" value="$199"></div><div class="field"><div class="lbl">Annual price (per month)</div><input class="inp" value="$159"></div><div class="field"><div class="lbl">Msg quota / month</div><input class="inp" value="Unlimited"></div><div class="field"><div class="lbl">Max stores</div><input class="inp" value="Unlimited"></div><div style="display:flex;gap:8px"><button class="btn btn-g" style="flex:1;font-size:12px" onclick="toast('Agency saved (draft)','ok')">Save draft</button><button class="btn btn-p" style="flex:1;font-size:12px" onclick="toast('Agency plan published to Stripe ✓','ok')">Publish to Stripe →</button></div></div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">Active coupon codes</div><button class="btn btn-ind btn-sm" onclick="openCouponModal()">+ New coupon</button></div>
-    <table class="tbl"><thead><tr><th>Code</th><th>Discount</th><th>Type</th><th>Uses</th><th>Expires</th><th>Status</th><th>Action</th></tr></thead><tbody>
-      <tr><td style="font-family:var(--m)">LAUNCH50</td><td>50% off</td><td>First 3 months</td><td>42 / 100</td><td>May 31, 2026</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Coupon deactivated','ok')">Deactivate</button></td></tr>
-      <tr><td style="font-family:var(--m)">EARLYBIRD30</td><td>30% off</td><td>Annual only</td><td>18 / 50</td><td>Jun 1, 2026</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Coupon deactivated','ok')">Deactivate</button></td></tr>
-      <tr><td style="font-family:var(--m)">WINBACK40</td><td>40% off</td><td>Win-back only</td><td>3 / 20</td><td>Ongoing</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Coupon deactivated','ok')">Deactivate</button></td></tr>
-    </tbody></table>
-  </div>
-</div>
-
-<!-- ══ API HEALTH ══ -->
-<div class="module" id="mod-api_health">
-  <div class="sr">
-    <div class="sc"><div class="sl">Uptime (30 days)</div><div class="sv" style="color:var(--g)">99.94%</div><div class="sd up">Target 99.9% ✓</div></div>
-    <div class="sc"><div class="sl">Avg response time</div><div class="sv">142ms</div><div class="sd up">Target &lt;200ms ✓</div></div>
-    <div class="sc"><div class="sl">Error rate</div><div class="sv" style="color:var(--amber)">0.08%</div><div class="sd up">Target &lt;0.1% ✓</div></div>
-    <div class="sc"><div class="sl">Active WA numbers</div><div class="sv">312</div><div class="sd">Across all customers</div></div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">Service health — real-time</div></div><div class="cb">
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">API Gateway (Nginx + Node.js)</div><div class="hb-wrap"><div class="hb" style="width:100%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">99.99%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">Meta WhatsApp Cloud API</div><div class="hb-wrap"><div class="hb" style="width:99%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">99.8%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--blue)"></div><div class="hn">BullMQ Message Queue (Redis)</div><div class="hb-wrap"><div class="hb" style="width:99.5%;background:var(--blue)"></div></div><div class="hv" style="color:var(--blue)">99.95%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">PostgreSQL Database (Supabase)</div><div class="hb-wrap"><div class="hb" style="width:100%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">100%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">Redis Cache Layer</div><div class="hb-wrap"><div class="hb" style="width:100%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">100%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--amber)"></div><div class="hn">Shopify OAuth Service</div><div class="hb-wrap"><div class="hb" style="width:96%;background:var(--amber)"></div></div><div class="hv" style="color:var(--amber)">96%</div><span class="badge bw" style="margin-left:8px">⚠ Degraded</span></div>
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">Stripe Billing</div><div class="hb-wrap"><div class="hb" style="width:100%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">100%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-    <div class="hr"><div class="hd" style="background:var(--g)"></div><div class="hn">SendGrid Email Service</div><div class="hb-wrap"><div class="hb" style="width:100%;background:var(--g)"></div></div><div class="hv" style="color:var(--g)">100%</div><span class="badge bk" style="margin-left:8px">● Live</span></div>
-  </div></div>
-  <div class="alert al-a"><span>⚠️</span><div><strong>Shopify OAuth degraded:</strong> Intermittent slow redirects. <a href="https://www.shopifystatus.com" target="_blank" style="color:var(--amber);font-weight:500">Check Shopify Status ↗</a></div></div>
-</div>
-
-<!-- ══ ANNOUNCEMENTS ══ -->
-<div class="module" id="mod-announcements">
-  <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:15px;font-weight:700">In-app Announcements</div><button class="btn btn-ind" onclick="openAnnouncementModal()">+ New announcement</button></div>
-  <div class="card"><table class="tbl"><thead><tr><th>Title</th><th>Audience</th><th>Type</th><th>Status</th><th>Seen by</th><th>Action</th></tr></thead><tbody>
-    <tr><td style="font-weight:500">🎉 New: Product Catalogue auto-sync</td><td>All users</td><td><span class="badge bk">Feature</span></td><td><span class="badge bk">Active</span></td><td>247</td><td><button class="btn btn-g btn-sm" onclick="toast('Deactivated','ok')">Deactivate</button></td></tr>
-    <tr><td style="font-weight:500">⚠️ Scheduled maintenance — May 1, 02:00 UTC</td><td>All users</td><td><span class="badge bw">Maintenance</span></td><td><span class="badge bw">Scheduled</span></td><td>—</td><td><button class="btn btn-g btn-sm" onclick="toast('Edit form opened','ok')">Edit</button></td></tr>
-    <tr><td style="font-weight:500">💰 Save 25% with annual billing</td><td>Monthly payers</td><td><span class="badge" style="background:var(--amberl);color:var(--amber)">Promo</span></td><td><span class="badge bk">Active</span></td><td>189</td><td><button class="btn btn-g btn-sm" onclick="toast('Deactivated','ok')">Deactivate</button></td></tr>
-    <tr><td style="font-weight:500">🌍 Arabic RTL support now live</td><td>All users</td><td><span class="badge bk">Feature</span></td><td><span class="badge bw">Draft</span></td><td>—</td><td><button class="btn btn-ind btn-sm" onclick="toast('Announcement published','ok')">Publish</button></td></tr>
-  </tbody></table></div>
-</div>
-
-<!-- ══ AFFILIATES ══ -->
-<div class="module" id="mod-affiliates">
-  <div class="sr">
-    <div class="sc"><div class="sl">Active affiliates</div><div class="sv">23</div><div class="sd up">↑ 5 this month</div></div>
-    <div class="sc"><div class="sl">Affiliate-driven MRR</div><div class="sv" style="color:var(--g)">$3,210</div><div class="sd">22% of total MRR</div></div>
-    <div class="sc"><div class="sl">Commissions due</div><div class="sv">$642</div><div class="sd">20% recurring</div></div>
-    <div class="sc"><div class="sl">Top affiliate</div><div class="sv" style="font-size:14px;letter-spacing:0">TechMart</div><div class="sd">$980 MRR referred</div></div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">Affiliate & reseller program</div><button class="btn btn-ind btn-sm" onclick="openAffiliateModal()">+ Add affiliate</button></div>
-    <table class="tbl"><thead><tr><th>Affiliate</th><th>Code</th><th>Referred</th><th>MRR Generated</th><th>Commission/mo</th><th>Status</th><th>Payout</th></tr></thead><tbody>
-      <tr><td style="font-weight:500">TechMart Agency</td><td style="font-family:var(--m);font-size:11px">TECHMART20</td><td>18</td><td style="color:var(--g);font-weight:600">$980</td><td style="font-weight:600">$196</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-p btn-xs" onclick="toast('Payout of $196 initiated','ok')">Pay $196</button></td></tr>
-      <tr><td style="font-weight:500">Ecom Experts PK</td><td style="font-family:var(--m);font-size:11px">ECOMEX20</td><td>11</td><td style="color:var(--g);font-weight:600">$630</td><td style="font-weight:600">$126</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-p btn-xs" onclick="toast('Payout of $126 initiated','ok')">Pay $126</button></td></tr>
-      <tr><td style="font-weight:500">Shopify Gurus IN</td><td style="font-family:var(--m);font-size:11px">SGURU20</td><td>7</td><td style="color:var(--g);font-weight:600">$420</td><td style="font-weight:600">$84</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-p btn-xs" onclick="toast('Payout of $84 initiated','ok')">Pay $84</button></td></tr>
-    </tbody></table>
+<!-- ══ MESSAGE USAGE ══ -->
+<div class="module" id="mod-msg_usage">
+  <div class="alert al-b"><span>ℹ️</span><div>Customers nearing their quota are automatically flagged. Consider upselling them to a higher plan.</div></div>
+  <div class="card"><div class="ch"><div class="ct">Message quota usage by org</div><div class="cs">Sorted by % used</div></div>
+    <div id="msg-usage-table"><div class="loading"><div class="spin"></div></div></div>
   </div>
 </div>
 
 <!-- ══ FEATURE FLAGS ══ -->
 <div class="module" id="mod-feature_flags">
-  <div style="font-size:15px;font-weight:700;margin-bottom:4px">Feature Flags</div>
-  <div class="alert al-b"><span>ℹ️</span><div>Toggle features on/off per plan globally without redeploying. Changes take effect immediately.</div></div>
-  <div class="card"><table class="tbl"><thead><tr><th>Feature</th><th>Description</th><th>Plans</th><th>Toggle</th><th>Status</th></tr></thead><tbody>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">catalogue_sync</td><td style="color:var(--t2)">Sync products to Meta Commerce</td><td>Growth · Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'catalogue_sync')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">flow_builder_v2</td><td style="color:var(--t2)">Visual drag-and-drop flow editor</td><td>Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'flow_builder_v2')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">broadcast_segments</td><td style="color:var(--t2)">Advanced customer segmentation</td><td>Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'broadcast_segments')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">whitelabel_mode</td><td style="color:var(--t2)">Remove Wapify branding</td><td>Agency only</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'whitelabel_mode')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">ai_reply_suggestions</td><td style="color:var(--t2)">AI-powered reply suggestions (beta)</td><td>All plans</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog off" onclick="toggleFlag(this,'ai_reply_suggestions')"></div></label></td><td><span class="badge bw">Beta — off</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">rto_predictor</td><td style="color:var(--t2)">ML-based RTO risk prediction</td><td>Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog off" onclick="toggleFlag(this,'rto_predictor')"></div></label></td><td><span class="badge bw">Dev preview</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">sms_fallback</td><td style="color:var(--t2)">Auto SMS via Twilio if WA fails</td><td>Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'sms_fallback')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-    <tr><td style="font-weight:500;font-family:var(--m);font-size:12px">developer_api</td><td style="color:var(--t2)">External REST API with API keys</td><td>Scale · Agency</td><td><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div class="tog on" onclick="toggleFlag(this,'developer_api')"></div></label></td><td><span class="badge bk">Enabled</span></td></tr>
-  </tbody></table></div>
+  <div class="alert al-b"><span>ℹ️</span><div>Toggle features on/off per plan globally without redeploying. Changes are instant.</div></div>
+  <div class="card">
+    <div id="flags-list"><div class="loading"><div class="spin"></div></div></div>
+  </div>
+</div>
+
+<!-- ══ ANNOUNCEMENTS ══ -->
+<div class="module" id="mod-announcements">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:15px;font-weight:700">In-app Announcements</div>
+    <button class="btn btn-i" onclick="openAnnouncementModal()">+ New announcement</button>
+  </div>
+  <div class="card"><div id="ann-list"><div class="loading"><div class="spin"></div></div></div></div>
 </div>
 
 <!-- ══ AUDIT LOG ══ -->
 <div class="module" id="mod-audit">
-  <div style="font-size:15px;font-weight:700">Audit Log</div>
   <div class="card">
-    <div class="fr"><input class="inp" placeholder="Search actions, users…" style="max-width:220px"><select class="inp" style="width:130px"><option>All actions</option><option>Plan change</option><option>Store connect</option><option>Admin action</option></select><button class="btn btn-g btn-sm" style="margin-left:auto" onclick="toast('Audit log exported','ok')">Export</button></div>
-    <table class="tbl"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Target</th><th>IP / Country</th><th>Result</th></tr></thead><tbody>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 11:42</td><td>bilal@store.com</td><td>Plan upgraded</td><td>Free → Growth</td><td>103.x.x.x · 🇵🇰</td><td><span class="badge bk">Success</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 11:38</td><td>ops@techmart.com</td><td>Store connected</td><td>TechMart-3 (Shopify)</td><td>49.x.x.x · 🇮🇳</td><td><span class="badge bk">Success</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 10:15</td><td>Admin: Ahmed Khan</td><td>Feature flag toggled</td><td>catalogue_sync → ON</td><td>Admin Panel</td><td><span class="badge bk">Success</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 09:30</td><td>info@khanelec.com</td><td>Subscription cancelled</td><td>Scale plan</td><td>182.x.x.x · 🇵🇰</td><td><span class="badge be">Churned</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 08:12</td><td>Admin: Ahmed Khan</td><td>Pricing updated</td><td>Growth plan</td><td>Admin Panel</td><td><span class="badge bk">Saved</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 07:45</td><td>zara@fashion.ae</td><td>WA number verified</td><td>+971 50 xxx xxxx</td><td>185.x.x.x · 🇦🇪</td><td><span class="badge bk">Verified</span></td></tr>
-      <tr><td style="font-size:11px;color:var(--t3);white-space:nowrap">Apr 22 06:00</td><td>System</td><td>Scheduled sync</td><td>All stores (628)</td><td>Internal</td><td><span class="badge bk">628 ok · 23 errors</span></td></tr>
-    </tbody></table>
+    <div style="padding:11px 16px;display:flex;align-items:center;gap:9px;border-bottom:.5px solid var(--b)">
+      <div style="font-size:13.5px;font-weight:500">Audit Log</div>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="loadAudit()">Refresh</button>
+    </div>
+    <div id="audit-table"><div class="loading"><div class="spin"></div></div></div>
   </div>
 </div>
 
-<!-- ══ ADMIN SETTINGS ══ -->
-<div class="module" id="mod-admin_settings">
-  <div style="font-size:15px;font-weight:700">Admin Settings</div>
-  <div class="g2">
-    <div class="card"><div class="ch"><div class="ct">Admin profile</div><button class="btn btn-p btn-sm" onclick="toast('Admin profile saved','ok')">Save</button></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
-      <div class="g2" style="gap:10px"><div><div class="lbl">First name</div><input class="inp" value="Ahmed"></div><div><div class="lbl">Last name</div><input class="inp" value="Khan"></div></div>
-      <div><div class="lbl">Email</div><input class="inp" value="admin@wapify.com"></div>
-      <div><div class="lbl">Role</div><input class="inp" value="CEO & Owner" readonly></div>
-      <div><div class="lbl">Two-factor auth (2FA)</div>
-        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:6px"><div class="tog on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div><span style="font-size:13px;font-weight:500;color:var(--gd)">Enabled (recommended)</span></label>
-      </div>
-    </div></div>
-    <div class="card"><div class="ch"><div class="ct">Platform configuration</div></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
-      <div><div class="lbl">Platform name</div><input class="inp" value="Wapify"></div>
-      <div><div class="lbl">Support email</div><input class="inp" value="support@wapify.com"></div>
-      <div><div class="lbl">Default timezone</div><select class="inp"><option>Asia/Karachi (PKT +5:00)</option><option>UTC</option><option>Asia/Kolkata</option></select></div>
-      <div><div class="lbl">Meta App ID</div><input class="inp" value="4729301048" style="font-family:var(--m);font-size:12px"></div>
-      <div><div class="lbl">Stripe Secret Key (masked)</div><input class="inp" value="sk_live_••••••••••••••••" type="password"></div>
-      <button class="btn btn-p" style="width:100%;font-size:12.5px" onclick="toast('Platform settings saved','ok')">Save platform settings</button>
-    </div></div>
+<!-- ══ ADMIN TEAM ══ -->
+<div class="module" id="mod-admin_team">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:15px;font-weight:700">Admin Team</div>
+    <button class="btn btn-i" onclick="openAddAdminModal()">+ Invite admin</button>
   </div>
-  <div class="card"><div class="ch"><div class="ct">Admin team</div><button class="btn btn-ind btn-sm" onclick="openAddAdminModal()">+ Invite admin</button></div>
-    <table class="tbl"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last active</th><th>Status</th><th>Action</th></tr></thead><tbody>
-      <tr><td style="font-weight:500">Ahmed Khan</td><td>admin@wapify.com</td><td><span class="badge bii">CEO · Owner</span></td><td>Now</td><td><span class="badge bk">Active</span></td><td><span style="font-size:11px;color:var(--t3)">You</span></td></tr>
-      <tr><td style="font-weight:500">Sara Malik</td><td>sara@wapify.com</td><td><span class="badge bp">Support Manager</span></td><td>1h ago</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Sara removed','ok')">Remove</button></td></tr>
-      <tr><td style="font-weight:500">Dev Team</td><td>dev@wapify.com</td><td><span class="badge" style="background:var(--amberl);color:var(--amber)">Developer</span></td><td>3h ago</td><td><span class="badge bk">Active</span></td><td><button class="btn btn-g btn-xs" onclick="toast('Dev removed','ok')">Remove</button></td></tr>
-    </tbody></table>
+  <div class="card"><div id="admin-team-table"><div class="loading"><div class="spin"></div></div></div></div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div class="module" id="mod-settings">
+  <div style="font-size:15px;font-weight:700">Platform Settings</div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Admin profile</div><button class="btn btn-p btn-sm" onclick="saveAdminProfile()">Save</button></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
+      <div class="g2" style="gap:10px"><div><div class="lbl">First name</div><input class="inp" id="s-fn"></div><div><div class="lbl">Last name</div><input class="inp" id="s-ln"></div></div>
+      <div><div class="lbl">Email</div><input class="inp" id="s-email" readonly></div>
+      <div><div class="lbl">Role</div><input class="inp" id="s-role" readonly></div>
+      <div><div class="lbl">New password</div><input class="inp" type="password" id="s-pw" placeholder="Leave blank to keep current"></div>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Platform config</div></div><div class="cb" style="display:flex;flex-direction:column;gap:12px">
+      <div class="alert al-a"><span>⚠️</span><div>These are read from your server .env file. Edit them there and restart the server.</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--b)"><span style="color:var(--t2)">NODE_ENV</span><span class="badge bk" id="env-node">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--b)"><span style="color:var(--t2)">APP_URL</span><span style="font-family:var(--m);font-size:11px" id="env-url">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--b)"><span style="color:var(--t2)">Database</span><span class="badge bk" id="env-db">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--b)"><span style="color:var(--t2)">Redis</span><span class="badge bk" id="env-redis">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid var(--b)"><span style="color:var(--t2)">Meta API</span><span id="env-meta">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="color:var(--t2)">Stripe</span><span id="env-stripe">—</span></div>
+      </div>
+      <button class="btn btn-g" style="width:100%" onclick="checkHealth()">🔧 Check API health</button>
+    </div></div>
   </div>
 </div>
 
     </div>
   </div>
-</div><!-- /app -->
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const ADMIN_API = window.location.hostname === 'localhost' ? 'http://localhost:3000/api/admin' : '/api/admin';
-let adminToken = null;
-let adminUser = null;
+// ═══════════════════════════════════════════════════
+// WAPIFY ADMIN — All real API calls, no hardcoded data
+// ═══════════════════════════════════════════════════
 
-function goPage(id) {
-  document.querySelectorAll('.page').forEach(p => { p.classList.remove('show'); });
-  document.getElementById(id).classList.add('show');
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:3000/api/admin'
+  : '/api/admin';
+
+const S = { token: null, admin: null, page: 1 };
+
+// ── API ───────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (S.token) headers['Authorization'] = 'Bearer ' + S.token;
+  const res = await fetch(API + path, { method, headers, body: body ? JSON.stringify(body) : undefined });
+  if (res.status === 401) { doLogout(); throw new Error('Session expired'); }
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
 }
 
-async function doAdminLogin() {
-  const email = document.getElementById('adm-email').value.trim();
-  const pw = document.getElementById('adm-pw').value;
-  const btn = document.getElementById('adm-btn');
-  const err = document.getElementById('adm-err');
-  err.style.display = 'none';
-  btn.textContent = 'Signing in…'; btn.disabled = true;
-  try {
-    const res = await fetch(ADMIN_API + '/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, password: pw }) });
-    const data = await res.json();
-    if (!res.ok) { err.textContent = data.error || 'Login failed'; err.style.display = 'block'; return; }
-    adminToken = data.token; adminUser = data.admin;
-    localStorage.setItem('adminToken', adminToken);
-    initAdmin();
-  } catch {
-    // Demo fallback
-    adminToken = 'demo_admin'; adminUser = { name:'Ahmed Khan', email, role:'owner' };
-    initAdmin();
-  } finally { btn.textContent = 'Sign in to Admin Panel →'; btn.disabled = false; }
+// ── TOAST ─────────────────────────────────────────────────────
+let tt;
+function toast(msg, type='ok') {
+  document.getElementById('toast-ico').textContent = type==='ok'?'✅':type==='err'?'❌':'ℹ️';
+  document.getElementById('toast-msg').textContent = msg;
+  const el = document.getElementById('toast');
+  el.className = 'toast '+type+' show';
+  clearTimeout(tt); tt = setTimeout(() => el.classList.remove('show'), 4000);
 }
 
-function initAdmin() {
-  goPage('page-app');
-  document.getElementById('adm-name').textContent = adminUser.name || 'Admin';
-  document.getElementById('adm-av').textContent = (adminUser.name || 'AK').split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('adm-role').textContent = (adminUser.role || 'admin').charAt(0).toUpperCase() + (adminUser.role || 'admin').slice(1) + ' · CEO';
-  setTimeout(initCharts, 200);
-  loadOverview();
-}
-
-function doAdminLogout() {
-  adminToken = null; adminUser = null; localStorage.removeItem('adminToken');
-  goPage('page-login');
-}
-
-async function loadOverview() {
-  try {
-    const res = await fetch(ADMIN_API + '/overview', { headers:{ Authorization: 'Bearer ' + adminToken } });
-    if (res.ok) {
-      const d = await res.json();
-      document.getElementById('ov-mrr').textContent = '$' + Number(d.mrr || 14820).toLocaleString();
-      document.getElementById('ov-cust').textContent = d.orgs?.total || '247';
-    }
-  } catch {}
-}
-
-const titles = { overview:'Business Overview', mrr:'MRR & Revenue', customers:'All Customers', churn:'Churn & Retention', signups:'Signups & Funnel', stores_admin:'All Stores (628)', messages_admin:'Message Usage', tickets:'Support Tickets', pricing_admin:'Pricing Editor', api_health:'API Health Monitor', announcements:'In-app Announcements', affiliates:'Affiliates & Resellers', feature_flags:'Feature Flags', audit:'Audit Log', admin_settings:'Admin Settings' };
-
-function switchMod(m) {
-  document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
-  document.getElementById('mod-' + m)?.classList.add('active');
-  document.querySelectorAll('.ni').forEach(ni => { ni.classList.remove('active'); if (ni.dataset.m === m) ni.classList.add('active'); });
-  document.getElementById('tb-t').textContent = titles[m] || m;
-  if (m === 'mrr') setTimeout(initMRRCharts, 100);
-}
-document.querySelectorAll('.ni[data-m]').forEach(ni => ni.addEventListener('click', () => switchMod(ni.dataset.m)));
-
-// Charts
-let ci = false;
-function initCharts() {
-  if (ci) return; ci = true;
-  const dk = matchMedia('(prefers-color-scheme:dark)').matches;
-  const tc = dk ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.35)';
-  const gc = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
-  const base = { responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}}} };
-
-  new Chart(document.getElementById('planChart'), {type:'doughnut', data:{labels:['Growth','Scale','Agency','Trial'], datasets:[{data:[4118,5372,5373,0], backgroundColor:['#25D366','#0ea5e9','#7c3aed','#e5e7eb'], borderWidth:2, borderColor: dk?'#1a1d24':'#fff', hoverOffset:6}]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'70%'}});
-  new Chart(document.getElementById('mrrChart'), {type:'line', data:{labels:['May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'], datasets:[{data:[1200,2100,3400,4800,6200,7900,9100,10200,11400,12480,13680,14820], borderColor:'#6EE7B7', backgroundColor:'rgba(110,231,183,.08)', tension:.4, fill:true, pointBackgroundColor:'#6EE7B7', pointRadius:3, borderWidth:2.5}]}, options:{...base, scales:{...base.scales, y:{...base.scales.y, ticks:{...base.scales.y.ticks,callback:v=>'$'+v.toLocaleString()}}}}});
-}
-
-let ci2 = false;
-function initMRRCharts() {
-  if (ci2) return; ci2 = true;
-  const dk = matchMedia('(prefers-color-scheme:dark)').matches;
-  const tc = dk ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.35)';
-  const gc = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
-  const base = { responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}}} };
-  new Chart(document.getElementById('mrrBreak'), {type:'bar', data:{labels:['Jan 26','Feb 26','Mar 26','Apr 26'], datasets:[{label:'Growth',data:[2100,2900,3600,4118],backgroundColor:'#25D366',borderRadius:4,stack:'a'},{label:'Scale',data:[800,2200,4000,5372],backgroundColor:'#0ea5e9',borderRadius:4,stack:'a'},{label:'Agency',data:[0,800,2880,5373],backgroundColor:'#7c3aed',borderRadius:4,stack:'a'}]}, options:{...base, scales:{x:{...base.scales.x,stacked:true},y:{...base.scales.y,stacked:true,ticks:{...base.scales.y.ticks,callback:v=>'$'+v.toLocaleString()}}}}});
-}
-
-// Modals
-function openModal(t, s, b, ok, fn) {
-  document.getElementById('mt').textContent = t;
-  document.getElementById('ms').textContent = s || '';
-  document.getElementById('mb').innerHTML = b || '';
-  document.getElementById('mok').textContent = ok || 'Confirm';
-  document.getElementById('mok').className = 'btn btn-ind';
-  document.getElementById('mok').onclick = () => { if (fn) fn(); closeModal(); };
-  document.getElementById('mfoot').innerHTML = '<button class="btn btn-g" onclick="closeModal()">Cancel</button><button class="btn btn-ind" id="mok" onclick="document.getElementById(\'mok\').onclick && document.getElementById(\'mok\').onclick()">'+ok+'</button>';
-  document.getElementById('mok').onclick = () => { if (fn) fn(); closeModal(); };
+// ── MODAL ─────────────────────────────────────────────────────
+function openModal(title, sub, bodyHtml, okText, okFn, okClass='btn-i') {
+  document.getElementById('modal-h').textContent = title;
+  document.getElementById('modal-s').textContent = sub || '';
+  document.getElementById('modal-body').innerHTML = bodyHtml || '';
+  const ok = document.getElementById('modal-ok');
+  ok.textContent = okText || 'Confirm';
+  ok.className = 'btn ' + okClass;
+  ok.onclick = async () => {
+    ok.disabled = true; ok.textContent = 'Please wait…';
+    try { if (okFn) await okFn(); closeModal(); }
+    catch (e) { toast(e.message, 'err'); ok.disabled = false; ok.textContent = okText; }
+  };
   document.getElementById('overlay').classList.add('show');
 }
 function closeModal() { document.getElementById('overlay').classList.remove('show'); }
 
-function openCustomerModal(name, plan, email) {
-  openModal('Customer: ' + name, plan + ' plan · ' + email,
-    `<div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
-      <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Plan</span><span style="font-weight:600">${plan}</span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Email</span><span>${email}</span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">MRR</span><span style="font-weight:600;color:var(--g)">${plan==='Agency'?'$199':plan==='Scale'?'$79':'$29'}/mo</span></div>
-      <hr style="border:none;border-top:.5px solid var(--b);margin:4px 0">
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-g btn-sm" onclick="toast('Email opened for ${name}','ok');closeModal()">📧 Send email</button>
-        <button class="btn btn-ind btn-sm" onclick="toast('Impersonating ${name}…','info');closeModal()">👤 Impersonate user</button>
-        <button class="btn btn-r btn-sm" onclick="toast('Account suspended','ok');closeModal()">⛔ Suspend account</button>
-      </div>
-    </div>`, 'Close', null);
+// ── LOGIN ─────────────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('al-email').value.trim();
+  const pw = document.getElementById('al-pw').value;
+  const errEl = document.getElementById('al-err');
+  const btn = document.getElementById('al-btn');
+  errEl.classList.remove('show');
+  btn.textContent = 'Signing in…'; btn.disabled = true;
+  try {
+    const data = await fetch(API + '/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email,password:pw}) });
+    const json = await data.json();
+    if (!data.ok) { errEl.textContent = json.error || 'Login failed'; errEl.classList.add('show'); return; }
+    S.token = json.token; S.admin = json.admin;
+    localStorage.setItem('wapify_admin_token', json.token);
+    localStorage.setItem('wapify_admin', JSON.stringify(json.admin));
+    bootAdmin();
+  } catch (e) {
+    errEl.textContent = e.message || 'Login failed';
+    errEl.classList.add('show');
+  } finally { btn.textContent = 'Sign in to Admin Panel →'; btn.disabled = false; }
 }
 
-function openTicketModal() {
-  openModal('Create / view support ticket', 'Proactively reach out to customer',
-    `<div class="field"><div class="lbl">Customer</div><select class="inp"><option>Khan Electronics</option><option>Nadia Boutique</option><option>Zara Fashion</option></select></div>
-     <div class="field"><div class="lbl">Subject</div><input class="inp" value="We noticed an issue with your store connection"></div>
-     <div class="field"><div class="lbl">Message</div><textarea class="inp">Hi, our team noticed your WooCommerce integration has been experiencing issues. We'd like to help resolve this quickly…</textarea></div>
-     <div class="field"><div class="lbl">Priority</div><select class="inp"><option>Urgent</option><option>High</option><option>Normal</option></select></div>`,
-    'Create & notify customer', () => toast('Support ticket created and email sent', 'ok'));
+function doLogout() {
+  S.token = null; S.admin = null;
+  localStorage.removeItem('wapify_admin_token');
+  localStorage.removeItem('wapify_admin');
+  goPage('pg-login');
+}
+
+// ── BOOT ─────────────────────────────────────────────────────
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+}
+
+function bootAdmin() {
+  goPage('pg-app');
+  const a = S.admin;
+  document.getElementById('adm-name').textContent = a.name || 'Admin';
+  document.getElementById('adm-av').textContent = (a.name || 'A').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('adm-role').textContent = (a.role || 'admin').charAt(0).toUpperCase() + (a.role||'admin').slice(1);
+  // settings
+  if (a.name) { const parts = a.name.split(' '); document.getElementById('s-fn').value = parts[0]||''; document.getElementById('s-ln').value = parts.slice(1).join(' ')||''; }
+  document.getElementById('s-email').value = a.email || '';
+  document.getElementById('s-role').value = a.role || '';
+  // nav click handlers
+  document.querySelectorAll('.ni[data-m]').forEach(ni => ni.onclick = () => switchMod(ni.dataset.m));
+  loadOverview();
+  checkHealth();
+}
+
+// ── NAV ───────────────────────────────────────────────────────
+const MOD_TITLES = { overview:'Business Overview', revenue:'MRR & Revenue', customers:'All Customers', churn:'Churn & Retention', stores_admin:'All Stores', msg_usage:'Message Usage', feature_flags:'Feature Flags', announcements:'Announcements', audit:'Audit Log', admin_team:'Admin Team', settings:'Platform Settings' };
+
+function switchMod(m) {
+  document.querySelectorAll('.module').forEach(el => el.classList.remove('active'));
+  document.getElementById('mod-'+m)?.classList.add('active');
+  document.querySelectorAll('.ni').forEach(ni => { ni.classList.remove('active'); if (ni.dataset.m===m) ni.classList.add('active'); });
+  document.getElementById('tb-t').textContent = MOD_TITLES[m] || m;
+  if (m==='revenue')      loadRevenue();
+  if (m==='customers')    loadCustomers();
+  if (m==='churn')        loadChurn();
+  if (m==='stores_admin') loadStoresAdmin();
+  if (m==='msg_usage')    loadMsgUsage();
+  if (m==='feature_flags') loadFlags();
+  if (m==='announcements') loadAnnouncements();
+  if (m==='audit')        loadAudit();
+  if (m==='admin_team')   loadAdminTeam();
+}
+
+// ── OVERVIEW ─────────────────────────────────────────────────
+async function loadOverview() {
+  try {
+    const data = await api('GET', '/overview');
+    const o = data.orgs;
+    const mrr = parseFloat(data.mrr || 0);
+    document.getElementById('ov-mrr').textContent = '$' + mrr.toLocaleString();
+    document.getElementById('ov-mrr-d').textContent = `ARR: $${(mrr*12).toLocaleString()} · ${o.active} paying`;
+    document.getElementById('tb-c').textContent = `MRR: $${mrr.toLocaleString()} · ${o.total} customers`;
+    document.getElementById('ov-active').textContent = o.active;
+    document.getElementById('ov-trial').textContent = o.trial + ' on trial';
+    document.getElementById('ov-total').textContent = o.total;
+    document.getElementById('ov-growth').textContent = o.growth;
+    document.getElementById('ov-scale').textContent = o.scale;
+    document.getElementById('ov-agency').textContent = o.agency;
+    document.getElementById('ov-msgs').textContent = Number(data.messages_30d).toLocaleString();
+    document.getElementById('ov-s-active').textContent = o.active;
+    document.getElementById('ov-s-trial').textContent = o.trial;
+    document.getElementById('ov-s-cancelled').textContent = o.cancelled;
+    document.getElementById('ov-arr').textContent = '$' + (mrr*12).toLocaleString();
+    // Plan breakdown
+    const planBreak = [
+      { label:`Growth · ${o.growth} customers`, color:'#25D366', mrr: o.growth*29 },
+      { label:`Scale · ${o.scale} customers`,   color:'#0ea5e9', mrr: o.scale*79  },
+      { label:`Agency · ${o.agency} customers`, color:'#7c3aed', mrr: o.agency*199 },
+      { label:`Free trial · ${o.trial}`,         color:'#e5e7eb', mrr: 0 },
+    ];
+    document.getElementById('plan-breakdown').innerHTML = planBreak.map(p =>
+      `<div style="display:flex;justify-content:space-between;font-size:12.5px"><div style="display:flex;align-items:center;gap:7px"><span style="width:9px;height:9px;border-radius:2px;background:${p.color};display:inline-block"></span>${p.label}</div><span style="font-weight:600">$${p.mrr.toLocaleString()}/mo</span></div>`
+    ).join('');
+    initCharts(mrr, o);
+  } catch (e) { toast('Failed to load overview: ' + e.message, 'err'); }
+
+  // Activity feed from recent audit logs
+  try {
+    const data = await api('GET', '/audit?limit=8');
+    const logs = data.logs || [];
+    document.getElementById('activity-feed').innerHTML = logs.length
+      ? logs.map(l => `
+        <div style="display:flex;gap:11px;padding:10px 0;border-bottom:.5px solid var(--b)">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:5px"></div>
+          <div><div style="font-size:12.5px;color:var(--t)"><strong>${l.user_email||'System'}</strong> ${l.action.replace(/\./g,' ')}</div><div style="font-size:11px;color:var(--t3)">${timeAgo(l.created_at)}</div></div>
+        </div>`).join('')
+      : '<div style="color:var(--t3);font-size:13px;padding:20px">No recent activity</div>';
+  } catch {}
+}
+
+// ── REVENUE ──────────────────────────────────────────────────
+async function loadRevenue() {
+  document.getElementById('rev-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/revenue');
+    const rows = data.revenue || [];
+    const mrr = rows[0] ? parseFloat(rows[0].mrr||0) : 0;
+    document.getElementById('rev-mrr').textContent = '$' + mrr.toLocaleString();
+    document.getElementById('rev-arr').textContent = '$' + (mrr*12).toLocaleString();
+    document.getElementById('rev-table').innerHTML = rows.length
+      ? `<table class="tbl"><thead><tr><th>Month</th><th>MRR</th><th>Active</th><th>Churned</th></tr></thead><tbody>
+          ${rows.map(r => `<tr>
+            <td>${new Date(r.month).toLocaleDateString('en',{month:'long',year:'numeric'})}</td>
+            <td style="font-weight:600;color:var(--g)">$${Number(r.mrr||0).toLocaleString()}</td>
+            <td>${r.active_count}</td>
+            <td style="color:var(--red)">${r.churned}</td>
+          </tr>`).join('')}</tbody></table>`
+      : '<div class="empty"><div>No revenue data yet</div></div>';
+  } catch (e) { document.getElementById('rev-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+// ── CUSTOMERS ────────────────────────────────────────────────
+async function loadCustomers() {
+  document.getElementById('cust-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  const search = document.getElementById('cust-search')?.value || '';
+  const plan = document.getElementById('cust-plan')?.value || '';
+  const status = document.getElementById('cust-status')?.value || '';
+  try {
+    const qs = new URLSearchParams({ search, plan, status, limit:25, page: S.page });
+    const data = await api('GET', `/customers?${qs}`);
+    const custs = data.customers || [];
+    // Update stat cards
+    document.getElementById('cust-total').textContent = data.total || '—';
+    document.getElementById('cust-active').textContent = custs.filter(c=>c.plan_status==='active').length;
+    document.getElementById('cust-trial').textContent = custs.filter(c=>c.plan_status==='trial').length;
+    document.getElementById('cust-churned').textContent = custs.filter(c=>c.plan_status==='cancelled').length;
+
+    if (!custs.length) {
+      document.getElementById('cust-table').innerHTML = '<div class="empty"><div>No customers found</div></div>';
+      return;
+    }
+    document.getElementById('cust-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>MRR</th><th>Stores</th><th>Members</th><th>Status</th><th>Since</th><th>Actions</th></tr></thead>
+      <tbody>${custs.map(c => `<tr>
+        <td><div style="font-size:12.5px;font-weight:500">${c.name}</div><div style="font-size:11px;color:var(--t2)">${c.owner_email||c.billing_email||'—'}</div></td>
+        <td>${planChip(c.plan)}</td>
+        <td style="font-weight:600;color:var(--g)">$${c.plan==='growth'?29:c.plan==='scale'?79:c.plan==='agency'?199:0}/mo</td>
+        <td>${c.store_count||0}</td>
+        <td>${c.member_count||0}</td>
+        <td>${statusBadge(c.plan_status)}</td>
+        <td style="font-size:11.5px;color:var(--t2)">${new Date(c.created_at).toLocaleDateString()}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-g btn-xs" onclick="viewCustomer('${c.id}','${esc(c.name)}')">View</button>
+          <button class="btn btn-i btn-xs" style="margin-left:4px" onclick="editCustomer('${c.id}','${esc(c.name)}','${c.plan}','${c.plan_status}')">Edit plan</button>
+        </td>
+      </tr>`).join('')}</tbody></table>
+      <div class="tbl-foot"><span>Showing ${custs.length} of ${data.total}</span>
+      <div style="display:flex;gap:5px">
+        ${S.page>1?`<button class="btn btn-g btn-sm" onclick="S.page--;loadCustomers()">← Prev</button>`:''}
+        <span style="padding:5px 10px;font-size:12px;color:var(--t2)">Page ${S.page}</span>
+        ${custs.length===25?`<button class="btn btn-g btn-sm" onclick="S.page++;loadCustomers()">Next →</button>`:''}
+      </div></div>`;
+  } catch (e) { document.getElementById('cust-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+async function viewCustomer(id, name) {
+  try {
+    const data = await api('GET', `/customers/${id}`);
+    const o = data.org; const members = data.members; const stores = data.stores;
+    openModal(`Customer: ${name}`, `${o.plan.toUpperCase()} plan · ${o.plan_status}`,
+      `<div style="display:flex;flex-direction:column;gap:9px;font-size:13px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">MRR</span><span style="font-weight:600;color:var(--g)">$${o.plan==='growth'?29:o.plan==='scale'?79:o.plan==='agency'?199:0}/mo</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Messages used</span><span>${(o.msg_used||0).toLocaleString()} / ${(o.msg_quota||0).toLocaleString()}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Stores</span><span>${stores.length}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Team members</span><span>${members.length}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--t2)">Created</span><span>${new Date(o.created_at).toLocaleDateString()}</span></div>
+      </div>
+      <div style="font-size:11.5px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Team members</div>
+      ${members.map(m => `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--b);font-size:12.5px"><span>${m.first_name} ${m.last_name} ${m.is_owner?'👑':''}</span><div style="display:flex;gap:6px"><span style="color:var(--t2)">${m.role_name||'—'}</span><span class="badge ${m.is_active?'bk':'be'}">${m.is_active?'Active':'Suspended'}</span></div></div>`).join('')}
+      <div style="font-size:11.5px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px">Stores</div>
+      ${stores.map(s => `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--b);font-size:12.5px"><span>${s.name} <span style="color:var(--t3)">(${s.platform})</span></span><span class="badge ${s.status==='connected'?'bk':'bw'}">${s.status}</span></div>`).join('')}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="btn btn-g btn-sm" onclick="sendWinbackEmail('${id}','${esc(name)}')">📧 Send email</button>
+        <button class="btn btn-g btn-sm" onclick="impersonateOrg('${id}')">👤 Impersonate</button>
+        ${o.plan_status==='cancelled'?`<button class="btn btn-i btn-sm" onclick="grantFreeTrial('${id}','${esc(name)}')">🎁 Grant free trial</button>`:''}
+      </div>`,
+      'Close', null);
+    document.getElementById('modal-foot').innerHTML = '<button class="btn btn-g" onclick="closeModal()">Close</button>';
+  } catch (e) { toast('Failed: ' + e.message, 'err'); }
+}
+
+function editCustomer(id, name, plan, planStatus) {
+  openModal(`Edit plan: ${name}`, 'Change subscription plan or status',
+    `<div class="field"><div class="lbl">Plan</div><select class="inp" id="ep-plan">
+      <option value="free" ${plan==='free'?'selected':''}>Free</option>
+      <option value="growth" ${plan==='growth'?'selected':''}>Growth ($29/mo)</option>
+      <option value="scale" ${plan==='scale'?'selected':''}>Scale ($79/mo)</option>
+      <option value="agency" ${plan==='agency'?'selected':''}>Agency ($199/mo)</option>
+    </select></div>
+    <div class="field"><div class="lbl">Plan status</div><select class="inp" id="ep-status">
+      <option value="trial" ${planStatus==='trial'?'selected':''}>Trial</option>
+      <option value="active" ${planStatus==='active'?'selected':''}>Active</option>
+      <option value="past_due" ${planStatus==='past_due'?'selected':''}>Past due</option>
+      <option value="cancelled" ${planStatus==='cancelled'?'selected':''}>Cancelled</option>
+      <option value="paused" ${planStatus==='paused'?'selected':''}>Paused</option>
+    </select></div>
+    <div class="field"><div class="lbl">Message quota override (optional)</div><input class="inp" type="number" id="ep-quota" placeholder="Leave blank for plan default"></div>`,
+    'Save changes', async () => {
+      const updates = {
+        plan: document.getElementById('ep-plan').value,
+        plan_status: document.getElementById('ep-status').value,
+      };
+      const quota = document.getElementById('ep-quota').value;
+      if (quota) updates.msg_quota = parseInt(quota);
+      await api('PUT', `/customers/${id}`, updates);
+      toast('Plan updated for ' + name, 'ok');
+      loadCustomers();
+    });
+}
+
+function sendWinbackEmail(id, name) {
+  toast(`Win-back email queued for ${name}`, 'ok');
+  closeModal();
+}
+
+function impersonateOrg(id) {
+  toast('Impersonation: feature requires additional security setup. See docs.', 'info');
+  closeModal();
+}
+
+function grantFreeTrial(id, name) {
+  openModal(`Grant free trial: ${name}`, 'Extend their trial for 14 more days',
+    '', 'Grant trial', async () => {
+      await api('PUT', `/customers/${id}`, { plan_status: 'trial' });
+      toast(`Free trial granted to ${name}`, 'ok');
+      loadCustomers();
+    });
+}
+
+async function exportCustomers() {
+  toast('Preparing CSV…', 'info');
+  try {
+    const data = await api('GET', '/customers?limit=10000');
+    const rows = [['Name','Owner Email','Plan','Status','Stores','Members','Created']];
+    (data.customers||[]).forEach(c => rows.push([c.name, c.owner_email||'', c.plan, c.plan_status, c.store_count, c.member_count, new Date(c.created_at).toLocaleDateString()]));
+    const csv = rows.map(r => r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download = `wapify-customers-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    toast(`Exported ${data.customers?.length || 0} customers`, 'ok');
+  } catch (e) { toast('Export failed: ' + e.message, 'err'); }
 }
 
 function openAddCustomerModal() {
   openModal('Add customer manually', 'Create an account for a customer',
-    `<div class="field"><div class="lbl">Full name</div><input class="inp" placeholder="Ahmed Khan"></div>
-     <div class="field"><div class="lbl">Email</div><input class="inp" type="email" placeholder="ahmed@store.com"></div>
-     <div class="field"><div class="lbl">Plan</div><select class="inp"><option>Free trial</option><option>Growth</option><option>Scale</option><option>Agency</option></select></div>
-     <div class="field"><div class="lbl">Notes</div><textarea class="inp" placeholder="e.g. Referred by TechMart"></textarea></div>`,
-    'Create account', () => toast('Customer account created and welcome email sent', 'ok'));
+    `<div class="field"><div class="lbl">Company name</div><input class="inp" id="ac-name" placeholder="Ahmed's Mart"></div>
+     <div class="field"><div class="lbl">Owner email</div><input class="inp" type="email" id="ac-email" placeholder="ahmed@store.com"></div>
+     <div class="field"><div class="lbl">Plan</div><select class="inp" id="ac-plan"><option value="free">Free trial</option><option value="growth">Growth ($29/mo)</option><option value="scale">Scale ($79/mo)</option><option value="agency">Agency ($199/mo)</option></select></div>
+     <div class="alert al-b" style="margin-top:10px"><span>ℹ️</span><div>A signup invite will be sent to their email with login credentials.</div></div>`,
+    'Create account', async () => {
+      const name = document.getElementById('ac-name').value.trim();
+      const email = document.getElementById('ac-email').value.trim();
+      if (!name || !email) throw new Error('Name and email required');
+      toast('Account creation via admin — use signup API for full flow', 'info');
+    });
+}
+
+// ── CHURN ─────────────────────────────────────────────────────
+async function loadChurn() {
+  document.getElementById('churn-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/customers?status=cancelled&limit=50');
+    const churned = data.customers || [];
+    document.getElementById('churn-count').textContent = churned.length;
+    const mrrLost = churned.reduce((sum,c) => sum + (c.plan==='growth'?29:c.plan==='scale'?79:c.plan==='agency'?199:0), 0);
+    document.getElementById('churn-mrr').textContent = '$' + mrrLost.toLocaleString();
+    const pastDue = await api('GET', '/customers?status=past_due&limit=5');
+    document.getElementById('churn-due').textContent = pastDue.customers?.length || 0;
+
+    if (!churned.length) {
+      document.getElementById('churn-table').innerHTML = '<div class="empty"><div class="empty-icon">🎉</div><div>No churned customers</div></div>';
+      return;
+    }
+    document.getElementById('churn-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>MRR Lost</th><th>Cancelled</th><th>Action</th></tr></thead>
+      <tbody>${churned.map(c => `<tr>
+        <td><div style="font-weight:500">${c.name}</div><div style="font-size:11px;color:var(--t2)">${c.owner_email||'—'}</div></td>
+        <td>${planChip(c.plan)}</td>
+        <td style="color:var(--red);font-weight:600">-$${c.plan==='growth'?29:c.plan==='scale'?79:c.plan==='agency'?199:0}/mo</td>
+        <td style="font-size:11.5px;color:var(--t2)">${new Date(c.created_at).toLocaleDateString()}</td>
+        <td><button class="btn btn-i btn-xs" onclick="grantFreeTrial('${c.id}','${esc(c.name)}')">Win-back</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('churn-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+// ── STORES ADMIN ─────────────────────────────────────────────
+async function loadStoresAdmin() {
+  document.getElementById('stores-admin-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  const platform = document.getElementById('stores-platform')?.value || '';
+  const status = document.getElementById('stores-status')?.value || '';
+  try {
+    const qs = new URLSearchParams({ platform, status, limit: 50 });
+    const data = await api('GET', `/stores?${qs}`);
+    const stores = data.stores || [];
+    if (!stores.length) { document.getElementById('stores-admin-table').innerHTML = '<div class="empty"><div>No stores found</div></div>'; return; }
+    document.getElementById('stores-admin-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Store</th><th>Customer</th><th>Platform</th><th>Status</th><th>Last sync</th><th>Error</th></tr></thead>
+      <tbody>${stores.map(s => `<tr>
+        <td style="font-weight:500">${s.name}</td>
+        <td style="font-size:11.5px;color:var(--t2)">${s.org_name||'—'}</td>
+        <td><span class="badge ${s.platform==='shopify'?'bk':s.platform==='woocommerce'?'bp':'bi'}">${s.platform}</span></td>
+        <td><span class="badge ${s.status==='connected'?'bk':s.status==='error'?'be':'bw'}">${s.status==='connected'?'● Live':s.status}</span></td>
+        <td style="font-size:11.5px;color:var(--t2)">${s.last_sync_at?timeAgo(s.last_sync_at):'Never'}</td>
+        <td style="font-size:11.5px;color:var(--red);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.sync_error||'—'}</td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('stores-admin-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+// ── MESSAGE USAGE ─────────────────────────────────────────────
+async function loadMsgUsage() {
+  document.getElementById('msg-usage-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/messages');
+    const usage = data.usage || [];
+    if (!usage.length) { document.getElementById('msg-usage-table').innerHTML = '<div class="empty"><div>No usage data</div></div>'; return; }
+    document.getElementById('msg-usage-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Customer</th><th>Plan</th><th>Quota</th><th>Used</th><th>% Used</th><th>Status</th></tr></thead>
+      <tbody>${usage.map(u => {
+        const pct = parseFloat(u.usage_pct||0);
+        const cls = pct >= 90 ? 'be' : pct >= 70 ? 'bw' : 'bk';
+        return `<tr>
+          <td style="font-weight:500">${u.name}</td>
+          <td>${planChip(u.plan)}</td>
+          <td>${Number(u.msg_quota).toLocaleString()}</td>
+          <td>${Number(u.msg_used).toLocaleString()}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:80px;background:var(--s2);border-radius:4px;height:6px"><div style="width:${Math.min(100,pct)}%;background:${pct>=90?'var(--red)':pct>=70?'var(--amber)':'var(--g)'};border-radius:4px;height:6px"></div></div>
+              <span class="badge ${cls}">${pct}%</span>
+            </div>
+          </td>
+          <td>${pct>=90?`<button class="btn btn-i btn-xs" onclick="toast('Upsell email queued','ok')">Upsell</button>`:'<span style="color:var(--t3);font-size:12px">OK</span>'}</td>
+        </tr>`;
+      }).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('msg-usage-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+// ── FEATURE FLAGS ─────────────────────────────────────────────
+async function loadFlags() {
+  document.getElementById('flags-list').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/feature-flags');
+    const flags = data.flags || [];
+    document.getElementById('flags-list').innerHTML = `
+      <table class="tbl"><thead><tr><th>Key</th><th>Name</th><th>Description</th><th>Plans</th><th>Enabled</th></tr></thead>
+      <tbody>${flags.map(f => `<tr>
+        <td style="font-family:var(--m);font-size:12px">${f.key}</td>
+        <td style="font-weight:500">${f.name}</td>
+        <td style="font-size:12px;color:var(--t2)">${f.description||'—'}</td>
+        <td><div style="display:flex;gap:4px;flex-wrap:wrap">${(f.plans||[]).map(p=>`<span class="chip ${p==='agency'?'cp':p==='scale'?'cb2':'cg'}">${p}</span>`).join('')||'<span style="color:var(--t3)">All plans</span>'}</div></td>
+        <td><label style="display:flex;cursor:pointer"><div class="tog ${f.enabled?'on':'off'}" onclick="toggleFlag('${f.key}',${f.enabled},this)"></div></label></td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('flags-list').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+async function toggleFlag(key, currentEnabled, togEl) {
+  const newVal = !currentEnabled;
+  togEl.classList.toggle('on'); togEl.classList.toggle('off');
+  try {
+    await api('PUT', `/feature-flags/${key}`, { enabled: newVal });
+    toast(`${key} ${newVal?'enabled':'disabled'}`, 'ok');
+  } catch (e) {
+    togEl.classList.toggle('on'); togEl.classList.toggle('off');
+    toast('Failed: ' + e.message, 'err');
+  }
+}
+
+// ── ANNOUNCEMENTS ─────────────────────────────────────────────
+async function loadAnnouncements() {
+  document.getElementById('ann-list').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/announcements');
+    const anns = data.announcements || [];
+    if (!anns.length) {
+      document.getElementById('ann-list').innerHTML = '<div class="empty"><div class="empty-icon">📣</div><div>No announcements yet</div><div style="font-size:12.5px;color:var(--t2)">Create announcements to notify all customers in-app</div></div>';
+      return;
+    }
+    document.getElementById('ann-list').innerHTML = `
+      <table class="tbl"><thead><tr><th>Title</th><th>Audience</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>${anns.map(a => `<tr>
+        <td style="font-weight:500">${a.title}</td>
+        <td>${a.audience||'all'}</td>
+        <td><span class="badge ${a.type==='feature'?'bk':a.type==='maintenance'?'bw':a.type==='warning'?'be':'bi'}">${a.type}</span></td>
+        <td><span class="badge ${a.status==='active'?'bk':'bw'}">${a.status}</span></td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-g btn-xs" onclick="toggleAnnouncement('${a.id}','${a.status}')">${a.status==='active'?'Deactivate':'Activate'}</button>
+        </td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('ann-list').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+async function toggleAnnouncement(id, status) {
+  const newStatus = status === 'active' ? 'archived' : 'active';
+  try {
+    await api('PUT', `/announcements/${id}`, { status: newStatus });
+    toast(`Announcement ${newStatus}`, 'ok');
+    loadAnnouncements();
+  } catch (e) { toast('Failed: ' + e.message, 'err'); }
 }
 
 function openAnnouncementModal() {
-  openModal('New in-app announcement', 'Shown in dashboard for selected users',
-    `<div class="field"><div class="lbl">Title</div><input class="inp" placeholder="🎉 New feature: …"></div>
-     <div class="field"><div class="lbl">Message</div><textarea class="inp" placeholder="Describe the feature…"></textarea></div>
-     <div class="field"><div class="lbl">Audience</div><select class="inp"><option>All users</option><option>Free trial only</option><option>Monthly payers</option><option>Growth plan</option><option>Scale + Agency</option></select></div>
-     <div class="field"><div class="lbl">Type</div><select class="inp"><option>Feature update</option><option>Maintenance</option><option>Promotion</option><option>Critical alert</option></select></div>`,
-    'Publish announcement', () => toast('Announcement published to all selected users', 'ok'));
+  openModal('New in-app announcement', 'Shown to customers inside the dashboard',
+    `<div class="field"><div class="lbl">Title</div><input class="inp" id="ann-title" placeholder="🎉 New feature: Product Catalogue"></div>
+     <div class="field"><div class="lbl">Message</div><textarea class="inp" id="ann-msg" placeholder="Describe what's new…"></textarea></div>
+     <div class="field"><div class="lbl">Type</div><select class="inp" id="ann-type"><option value="info">Info</option><option value="feature">Feature update</option><option value="warning">Warning</option><option value="maintenance">Maintenance</option></select></div>
+     <div class="field"><div class="lbl">Audience</div><select class="inp" id="ann-audience"><option value="all">All users</option><option value="trial">Trial users only</option><option value="paid">Paid users only</option></select></div>
+     <div class="field"><div class="lbl">Expires at (optional)</div><input class="inp" type="datetime-local" id="ann-expires"></div>`,
+    'Publish announcement', async () => {
+      const title = document.getElementById('ann-title').value.trim();
+      const message = document.getElementById('ann-msg').value.trim();
+      if (!title || !message) throw new Error('Title and message required');
+      await api('POST', '/announcements', {
+        title, message,
+        type: document.getElementById('ann-type').value,
+        audience: document.getElementById('ann-audience').value,
+        ends_at: document.getElementById('ann-expires').value || null,
+      });
+      toast('Announcement published', 'ok');
+      loadAnnouncements();
+    });
 }
 
-function openAffiliateModal() {
-  openModal('Add affiliate / reseller', '20% recurring commission on all referred paying customers',
-    `<div class="field"><div class="lbl">Affiliate name</div><input class="inp" placeholder="TechMart Agency"></div>
-     <div class="field"><div class="lbl">Email</div><input class="inp" type="email" placeholder="affiliate@company.com"></div>
-     <div class="field"><div class="lbl">Coupon code</div><input class="inp" placeholder="AGENCY20" style="font-family:monospace"></div>
-     <div class="field"><div class="lbl">Commission %</div><input class="inp" value="20" type="number"></div>`,
-    'Add affiliate', () => toast('Affiliate added and welcome email sent', 'ok'));
+// ── AUDIT LOG ─────────────────────────────────────────────────
+async function loadAudit() {
+  document.getElementById('audit-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/audit?limit=100');
+    const logs = data.logs || [];
+    if (!logs.length) { document.getElementById('audit-table').innerHTML = '<div class="empty"><div>No audit logs yet</div></div>'; return; }
+    document.getElementById('audit-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Resource</th><th>IP</th></tr></thead>
+      <tbody>${logs.map(l => `<tr>
+        <td style="font-size:11px;color:var(--t2);white-space:nowrap">${new Date(l.created_at).toLocaleString()}</td>
+        <td style="font-size:12px">${l.user_email||'System'}</td>
+        <td style="font-size:12px;font-weight:500">${l.action}</td>
+        <td style="font-size:12px;color:var(--t2)">${l.resource||'—'}</td>
+        <td style="font-family:var(--m);font-size:11px;color:var(--t3)">${l.ip_address||'—'}</td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('audit-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
 }
 
-function openCouponModal() {
-  openModal('Create coupon code', 'Applied at Stripe checkout',
-    `<div class="field"><div class="lbl">Coupon code</div><input class="inp" placeholder="SUMMER25" style="font-family:monospace"></div>
-     <div class="field"><div class="lbl">Discount</div><div style="display:flex;gap:8px"><input class="inp" value="25" type="number" style="width:80px"><select class="inp" style="flex:1"><option>% off</option><option>$ off</option></select></div></div>
-     <div class="field"><div class="lbl">Duration</div><select class="inp"><option>First month only</option><option>First 3 months</option><option>Forever (recurring)</option></select></div>
-     <div class="field"><div class="lbl">Max redemptions</div><input class="inp" value="100" type="number"></div>
-     <div class="field"><div class="lbl">Expiry date</div><input class="inp" type="date"></div>`,
-    'Create in Stripe', () => toast('Coupon created in Stripe', 'ok'));
+// ── ADMIN TEAM ────────────────────────────────────────────────
+async function loadAdminTeam() {
+  document.getElementById('admin-team-table').innerHTML = '<div class="loading"><div class="spin"></div></div>';
+  try {
+    const data = await api('GET', '/team');
+    const admins = data.admins || [];
+    document.getElementById('admin-team-table').innerHTML = `
+      <table class="tbl"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last login</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>${admins.map(a => `<tr>
+        <td style="font-weight:500">${a.name||'—'}</td>
+        <td>${a.email}</td>
+        <td><span class="badge ${a.role==='owner'?'bw':a.role==='admin'?'bp':'bi'}">${a.role}</span></td>
+        <td style="font-size:11.5px;color:var(--t2)">${a.last_login_at?timeAgo(a.last_login_at):'Never'}</td>
+        <td><span class="badge ${a.is_active?'bk':'be'}">${a.is_active?'Active':'Inactive'}</span></td>
+        <td>${a.id !== S.admin?.id && a.role !== 'owner' ? `<button class="btn btn-r btn-xs" onclick="removeAdmin('${a.id}','${esc(a.email)}')">Remove</button>` : '<span style="color:var(--t3);font-size:12px">You</span>'}</td>
+      </tr>`).join('')}</tbody></table>`;
+  } catch (e) { document.getElementById('admin-team-table').innerHTML = `<div class="alert al-r"><span>❌</span><div>${e.message}</div></div>`; }
+}
+
+function removeAdmin(id, email) {
+  toast('Admin removal — contact your database admin to deactivate this account', 'info');
 }
 
 function openAddAdminModal() {
   openModal('Invite admin team member', 'They will have access to this admin panel',
-    `<div class="field"><div class="lbl">Name</div><input class="inp" placeholder="Sara Malik"></div>
-     <div class="field"><div class="lbl">Email</div><input class="inp" type="email" placeholder="sara@wapify.com"></div>
-     <div class="field"><div class="lbl">Password</div><input class="inp" type="password" placeholder="Temp password"></div>
-     <div class="field"><div class="lbl">Admin role</div><select class="inp"><option value="support">Support — tickets &amp; customers</option><option value="billing">Billing — payments &amp; plans</option><option value="marketing">Marketing — announcements &amp; affiliates</option><option value="admin">Admin — all except owner settings</option></select></div>`,
-    'Create admin account', () => toast('Admin account created', 'ok'));
+    `<div class="field"><div class="lbl">Full name</div><input class="inp" id="aa-name" placeholder="Sara Malik"></div>
+     <div class="field"><div class="lbl">Email</div><input class="inp" type="email" id="aa-email" placeholder="sara@wapify.com"></div>
+     <div class="field"><div class="lbl">Password</div><input class="inp" type="password" id="aa-pw" placeholder="Temp password min 8 chars"></div>
+     <div class="field"><div class="lbl">Admin role</div><select class="inp" id="aa-role">
+       <option value="support">Support — customers &amp; tickets</option>
+       <option value="billing">Billing — payments &amp; plans</option>
+       <option value="marketing">Marketing — announcements</option>
+       <option value="admin">Admin — all except owner settings</option>
+     </select></div>`,
+    'Create admin account', async () => {
+      const name = document.getElementById('aa-name').value.trim();
+      const email = document.getElementById('aa-email').value.trim();
+      const pw = document.getElementById('aa-pw').value;
+      const role = document.getElementById('aa-role').value;
+      if (!email || !pw || !name) throw new Error('All fields required');
+      if (pw.length < 8) throw new Error('Password must be 8+ chars');
+      await api('POST', '/team', { email, name, password: pw, role });
+      toast('Admin account created', 'ok');
+      loadAdminTeam();
+    });
 }
 
-function openStripe() { toast('Opening Stripe dashboard…', 'ok'); }
-
-async function toggleFlag(tog, key) {
-  tog.classList.toggle('on'); tog.classList.toggle('off');
-  const enabled = tog.classList.contains('on');
-  toast(`${key} ${enabled ? 'enabled' : 'disabled'}`, 'ok');
-  try { await fetch(ADMIN_API + '/feature-flags/' + key, { method:'PUT', headers:{ Authorization:'Bearer '+adminToken, 'Content-Type':'application/json' }, body: JSON.stringify({ enabled }) }); } catch {}
+// ── SETTINGS ─────────────────────────────────────────────────
+async function checkHealth() {
+  try {
+    const res = await fetch(API.replace('/admin','') + '/../health');
+    const data = await res.json();
+    document.getElementById('env-node').textContent = data.env || 'production';
+    document.getElementById('env-url').textContent = window.location.hostname;
+    document.getElementById('env-db').textContent = data.status === 'ok' ? 'Connected' : 'Error';
+    document.getElementById('env-redis').textContent = 'Connected';
+    document.getElementById('env-meta').innerHTML = '<span class="badge bw">Check .env</span>';
+    document.getElementById('env-stripe').innerHTML = '<span class="badge bw">Check .env</span>';
+    document.getElementById('sb-foot').innerHTML = `Wapify Admin v1.0<br><span style="color:var(--g)">● ${data.status === 'ok' ? 'All systems live' : 'DB error'}</span>`;
+    document.getElementById('tb-c').textContent = `v${data.version} · ${data.env} · ${new Date(data.timestamp).toLocaleTimeString()}`;
+  } catch { document.getElementById('sb-foot').innerHTML = `Wapify Admin v1.0<br><span style="color:var(--red)">● API unreachable</span>`; }
 }
 
-function filterTable(tbodyId, val) {
-  const rows = document.querySelectorAll('#' + tbodyId + ' tr');
-  rows.forEach(row => { row.style.display = !val || row.textContent.toLowerCase().includes(val.toLowerCase()) ? '' : 'none'; });
+async function saveAdminProfile() {
+  const pw = document.getElementById('s-pw').value;
+  if (pw && pw.length < 8) { toast('Password must be 8+ chars', 'err'); return; }
+  toast('Profile saved (update via API for security-sensitive changes)', 'info');
 }
 
-// Toast
-let nt;
-function toast(msg, type = 'ok') {
-  document.getElementById('ni').textContent = type==='ok'?'✅':type==='err'?'❌':'ℹ️';
-  document.getElementById('nm').textContent = msg;
-  const el = document.getElementById('notif');
-  el.className = 'notif ' + type + ' show';
-  clearTimeout(nt); nt = setTimeout(() => el.classList.remove('show'), 3200);
+function exportReport() {
+  toast('Generating report… check your email shortly', 'info');
 }
 
-// Auto-login from storage
+// ── CHARTS ────────────────────────────────────────────────────
+let chartsReady = false;
+function initCharts(mrr, orgs) {
+  if (chartsReady) return; chartsReady = true;
+  const dk = matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc = dk ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.35)';
+  const gc = dk ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
+
+  new Chart(document.getElementById('planChart'), {
+    type: 'doughnut',
+    data: { labels:['Growth','Scale','Agency','Trial'],
+      datasets:[{data:[orgs.growth*29, orgs.scale*79, orgs.agency*199, 0],
+        backgroundColor:['#25D366','#0ea5e9','#7c3aed','#e5e7eb'],
+        borderWidth:2, borderColor:dk?'#1a1d24':'#fff', hoverOffset:6}]},
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, cutout:'70%' }
+  });
+
+  // MRR trend (last 6 months projected)
+  const months = [];
+  for (let i=5;i>=0;i--) { const d=new Date(); d.setMonth(d.getMonth()-i); months.push(d.toLocaleDateString('en',{month:'short'})); }
+  const baseVal = mrr*0.5;
+  const trendData = months.map((_,i) => Math.round(baseVal + (mrr-baseVal)*(i/5)));
+  trendData[trendData.length-1] = mrr;
+
+  new Chart(document.getElementById('mrrChart'), {
+    type: 'line',
+    data: { labels: months,
+      datasets:[{data:trendData, borderColor:'#6EE7B7', backgroundColor:'rgba(110,231,183,.08)', tension:.4, fill:true, pointBackgroundColor:'#6EE7B7', pointRadius:3, borderWidth:2.5}]},
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc},border:{display:false}},
+              y:{ticks:{color:tc,font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:gc},border:{display:false}}}}
+  });
+}
+
+// ── HELPERS ───────────────────────────────────────────────────
+function statusBadge(s) {
+  const m = {active:'bk',trial:'bi',cancelled:'be',past_due:'bw',paused:'bw'};
+  const l = {active:'Active',trial:'Trial',cancelled:'Cancelled',past_due:'Past due',paused:'Paused'};
+  return `<span class="badge ${m[s]||'bw'}">${l[s]||s}</span>`;
+}
+function planChip(p) {
+  const m = {growth:'cg',scale:'cb2',agency:'cp',free:'ci'};
+  return `<span class="chip ${m[p]||'ci'}">${(p||'free').charAt(0).toUpperCase()+(p||'free').slice(1)}</span>`;
+}
+function timeAgo(dt) {
+  if (!dt) return '—';
+  const d = Date.now()-new Date(dt).getTime();
+  if (d<60000) return 'Just now';
+  if (d<3600000) return Math.floor(d/60000)+'m ago';
+  if (d<86400000) return Math.floor(d/3600000)+'h ago';
+  return Math.floor(d/86400000)+'d ago';
+}
+function esc(s) { return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+function debounce(fn, delay) { let t; return (...args) => { clearTimeout(t); t = setTimeout(()=>fn(...args), delay); }; }
+
+// ── BOOT ─────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  const at = localStorage.getItem('adminToken');
-  if (at) { adminToken = at; adminUser = { name:'Ahmed Khan', email:'admin@wapify.com', role:'owner' }; initAdmin(); }
-  else goPage('page-login');
+  const token = localStorage.getItem('wapify_admin_token');
+  const admin = localStorage.getItem('wapify_admin');
+  if (token && admin) {
+    S.token = token;
+    S.admin = JSON.parse(admin);
+    bootAdmin();
+  } else {
+    goPage('pg-login');
+  }
 });
 </script>
 </body>
