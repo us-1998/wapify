@@ -36,7 +36,7 @@ async function seed() {
     }
 
     // Admin user (CEO)
-    const adminPass = await bcrypt.hash(process.env.ADMIN_INITIAL_PASSWORD || 'AdminWapify@2026', 12);
+    const adminPass = await bcrypt.hash(process.env.ADMIN_INITIAL_PASSWORD || 'AdminPass@123', 12);
     await client.query(`INSERT INTO admin_users (email,password_hash,name,role) VALUES ($1,$2,'CEO','owner') ON CONFLICT (email) DO NOTHING`,
       [process.env.ADMIN_EMAIL || 'admin@wapify.com', adminPass]);
 
@@ -69,7 +69,7 @@ async function seed() {
     await client.query('COMMIT');
     console.log('✅ Seed complete');
     console.log('   Demo:  demo@wapify.com / Demo@123456');
-    console.log('   Admin: admin@wapify.com / AdminWapify@2026');
+    console.log('   Admin: admin@wapify.com / AdminPass@123');
   } catch (err) {
     await client.query('ROLLBACK');
     console.error('❌ Seed failed:', err.message);
