@@ -1,7 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
-CREATE TABLE organizations (
+CREATE TABLE IF NOT EXISTS organizations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name VARCHAR(255) NOT NULL,
   slug VARCHAR(100) UNIQUE NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE organizations (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE roles (
+CREATE TABLE IF NOT EXISTS roles (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   name VARCHAR(100) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE roles (
   UNIQUE(org_id, slug)
 );
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   role_id UUID REFERENCES roles(id) ON DELETE SET NULL,
@@ -57,7 +57,7 @@ CREATE TABLE users (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE refresh_tokens (
+CREATE TABLE IF NOT EXISTS refresh_tokens (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
   token TEXT UNIQUE NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE refresh_tokens (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE stores (
+CREATE TABLE IF NOT EXISTS stores (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE stores (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE whatsapp_numbers (
+CREATE TABLE IF NOT EXISTS whatsapp_numbers (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   display_name VARCHAR(255),
@@ -110,7 +110,7 @@ CREATE TABLE whatsapp_numbers (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE customers (
+CREATE TABLE IF NOT EXISTS customers (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   store_id UUID REFERENCES stores(id) ON DELETE SET NULL,
@@ -129,7 +129,7 @@ CREATE TABLE customers (
   UNIQUE(org_id, phone)
 );
 
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   store_id UUID REFERENCES stores(id) ON DELETE SET NULL,
@@ -157,7 +157,7 @@ CREATE TABLE orders (
   UNIQUE(store_id, external_id)
 );
 
-CREATE TABLE conversations (
+CREATE TABLE IF NOT EXISTS conversations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   customer_id UUID REFERENCES customers(id) ON DELETE SET NULL,
@@ -173,7 +173,7 @@ CREATE TABLE conversations (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   conversation_id UUID REFERENCES conversations(id) ON DELETE CASCADE,
@@ -192,7 +192,7 @@ CREATE TABLE messages (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE flows (
+CREATE TABLE IF NOT EXISTS flows (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   store_id UUID REFERENCES stores(id) ON DELETE SET NULL,
@@ -208,7 +208,7 @@ CREATE TABLE flows (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE templates (
+CREATE TABLE IF NOT EXISTS templates (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
@@ -226,7 +226,7 @@ CREATE TABLE templates (
   UNIQUE(org_id, name, language)
 );
 
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   store_id UUID REFERENCES stores(id) ON DELETE SET NULL,
@@ -245,7 +245,7 @@ CREATE TABLE products (
   UNIQUE(org_id, store_id, external_id)
 );
 
-CREATE TABLE broadcasts (
+CREATE TABLE IF NOT EXISTS broadcasts (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
@@ -266,7 +266,7 @@ CREATE TABLE broadcasts (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE audit_logs (
+CREATE TABLE IF NOT EXISTS audit_logs (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
   user_id UUID REFERENCES users(id) ON DELETE SET NULL,
@@ -278,7 +278,7 @@ CREATE TABLE audit_logs (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE admin_users (
+CREATE TABLE IF NOT EXISTS admin_users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   email VARCHAR(255) UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
@@ -289,7 +289,7 @@ CREATE TABLE admin_users (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE feature_flags (
+CREATE TABLE IF NOT EXISTS feature_flags (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   key VARCHAR(100) UNIQUE NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -301,7 +301,7 @@ CREATE TABLE feature_flags (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE announcements (
+CREATE TABLE IF NOT EXISTS announcements (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   title VARCHAR(500) NOT NULL,
   message TEXT NOT NULL,
@@ -316,16 +316,16 @@ CREATE TABLE announcements (
 );
 
 -- Indexes
-CREATE INDEX idx_users_org ON users(org_id);
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_stores_org ON stores(org_id);
-CREATE INDEX idx_orders_org ON orders(org_id);
-CREATE INDEX idx_orders_store ON orders(store_id);
-CREATE INDEX idx_orders_customer ON orders(customer_id);
-CREATE INDEX idx_orders_status ON orders(status);
-CREATE INDEX idx_orders_created ON orders(created_at DESC);
-CREATE INDEX idx_conversations_org ON conversations(org_id);
-CREATE INDEX idx_messages_conv ON messages(conversation_id);
-CREATE INDEX idx_customers_org_phone ON customers(org_id, phone);
-CREATE INDEX idx_audit_org ON audit_logs(org_id);
-CREATE INDEX idx_products_org_store ON products(org_id, store_id);
+CREATE INDEX IF NOT EXISTS idx_users_org ON users(org_id);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_stores_org ON stores(org_id);
+CREATE INDEX IF NOT EXISTS idx_orders_org ON orders(org_id);
+CREATE INDEX IF NOT EXISTS idx_orders_store ON orders(store_id);
+CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id);
+CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
+CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_conversations_org ON conversations(org_id);
+CREATE INDEX IF NOT EXISTS idx_messages_conv ON messages(conversation_id);
+CREATE INDEX IF NOT EXISTS idx_customers_org_phone ON customers(org_id, phone);
+CREATE INDEX IF NOT EXISTS idx_audit_org ON audit_logs(org_id);
+CREATE INDEX IF NOT EXISTS idx_products_org_store ON products(org_id, store_id);
